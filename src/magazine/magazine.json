@@ -1,0 +1,6 @@
+{
+  "tags": "magazine",
+  "layout": "layouts/entry.njk",
+  "type": "magazine",
+  "permalink": "/magazine/{{ page.fileSlug }}/"
+}
