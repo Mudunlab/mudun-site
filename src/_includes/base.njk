@@ -11,9 +11,6 @@
 
 <!-- Canonical + language alternates (bilingual signal to Google) -->
 <link rel="canonical" href="{{ site.url }}{{ page.url }}" />
-<link rel="alternate" hreflang="en" href="{{ site.url }}{{ page.url }}" />
-<link rel="alternate" hreflang="ar" href="{{ site.url }}{{ page.url }}" />
-<link rel="alternate" hreflang="x-default" href="{{ site.url }}{{ page.url }}" />
 
 <!-- Favicon set -->
 <link rel="icon" href="/uploads/site/favicon.ico" sizes="any">
@@ -111,8 +108,8 @@
 
   <div class="rail" aria-hidden="true">
     <div class="wrap">
-      <span data-en="Mudun — urban planning &amp; cities" data-ar="مدن — تخطيط حضري ومدن"></span>
-      <span><b>AMMAN</b> · 31.95°N 35.93°E · <span data-en="Jordan &amp; the region" data-ar="الأردن والمنطقة"></span></span>
+      <span data-en="Mudun — urban planning & cities" data-ar="مدن — تخطيط حضري ومدن"></span>
+      <span><b>AMMAN</b> · 31.95°N 35.93°E · <span data-en="Jordan & the region" data-ar="الأردن والمنطقة"></span></span>
     </div>
   </div>
 
@@ -185,7 +182,7 @@
 
   function applyLang(){
     htmlEl.lang=lang; htmlEl.dir=(lang==='ar')?'rtl':'ltr'; body.dataset.lang=lang;
-    document.querySelectorAll('[data-en]').forEach(function(el){var v=el.getAttribute('data-'+lang); if(v!==null) el.innerHTML=v;});
+    document.querySelectorAll('[data-en]').forEach(function(el){var v=el.getAttribute('data-'+lang); if(v!==null) el.textContent=v;});
     document.querySelectorAll('[data-en-ph]').forEach(function(el){var v=el.getAttribute('data-'+lang+'-ph'); if(v!==null) el.setAttribute('placeholder',v);});
     var lb=document.getElementById('langBtn'); if(lb) lb.textContent=(lang==='en')?'العربية':'English';
   }

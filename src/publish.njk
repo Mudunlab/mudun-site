@@ -15,18 +15,18 @@ description: "Research studies, essays, opinion, photography — if it's about c
 
       <form class="form-wrap" id="publishForm" action="https://formspree.io/f/xqevoaew" method="POST" novalidate>
         <div class="field">
-          <label data-en="What are you publishing?" data-ar="ماذا تنشر؟"></label>
-          <select name="type">
+          <label for="p-type" data-en="What are you publishing?" data-ar="ماذا تنشر؟"></label>
+          <select id="p-type" name="type">
             <option data-en="Research study" data-ar="دراسة بحثية"></option>
             <option data-en="Magazine piece (essay, opinion, photography)" data-ar="مادّة للمجلّة (مقال، رأي، تصوير)"></option>
           </select>
         </div>
-        <div class="field"><label data-en="Your name" data-ar="اسمك"></label><input type="text" name="name" required data-en-ph="Author name" data-ar-ph="اسم الكاتب"></div>
-        <div class="field"><label data-en="Email" data-ar="البريد الإلكتروني"></label><input type="email" name="email" required data-en-ph="you@example.com" data-ar-ph="you@example.com"></div>
-        <div class="field"><label data-en="Title" data-ar="العنوان"></label><input type="text" name="title" required data-en-ph="The title of your work" data-ar-ph="عنوان عملك"></div>
+        <div class="field"><label for="p-name" data-en="Your name" data-ar="اسمك"></label><input id="p-name" type="text" name="name" required data-en-ph="Author name" data-ar-ph="اسم الكاتب"></div>
+        <div class="field"><label for="p-email" data-en="Email" data-ar="البريد الإلكتروني"></label><input id="p-email" type="email" name="email" required data-en-ph="you@example.com" data-ar-ph="you@example.com"></div>
+        <div class="field"><label for="p-title" data-en="Title" data-ar="العنوان"></label><input id="p-title" type="text" name="title" required data-en-ph="The title of your work" data-ar-ph="عنوان عملك"></div>
         <div class="field">
-          <label data-en="Category" data-ar="التصنيف"></label>
-          <select name="category">
+          <label for="p-cat" data-en="Category" data-ar="التصنيف"></label>
+          <select id="p-cat" name="category">
             <option data-en="Mobility" data-ar="التنقّل"></option>
             <option data-en="Walkability" data-ar="المشي"></option>
             <option data-en="Public space" data-ar="الفضاء العام"></option>
@@ -36,8 +36,8 @@ description: "Research studies, essays, opinion, photography — if it's about c
             <option data-en="Other" data-ar="أخرى"></option>
           </select>
         </div>
-        <div class="field"><label data-en="Plain-language brief" data-ar="ملخّصٌ بلغة واضحة"></label><textarea name="brief" data-en-ph="Why it matters, and the key points, in words anyone can follow." data-ar-ph="لماذا يهمّ، والنقاط الأساسية، بكلماتٍ يفهمها الجميع."></textarea></div>
-        <div class="field"><label data-en="Link to the full work (optional for magazine pieces)" data-ar="رابط العمل الكامل (اختياري لموادّ المجلّة)"></label><input type="text" name="link" data-en-ph="A link to the PDF or images (Google Drive, repository, etc.)" data-ar-ph="رابط ملف PDF أو الصور (جوجل درايف، مستودع، إلخ)"></div>
+        <div class="field"><label for="p-brief" data-en="Plain-language brief" data-ar="ملخّصٌ بلغة واضحة"></label><textarea id="p-brief" name="brief" data-en-ph="Why it matters, and the key points, in words anyone can follow." data-ar-ph="لماذا يهمّ، والنقاط الأساسية، بكلماتٍ يفهمها الجميع."></textarea></div>
+        <div class="field"><label for="p-link" data-en="Link to the full work (optional for magazine pieces)" data-ar="رابط العمل الكامل (اختياري لموادّ المجلّة)"></label><input id="p-link" type="text" name="link" data-en-ph="A link to the PDF or images (Google Drive, repository, etc.)" data-ar-ph="رابط ملف PDF أو الصور (جوجل درايف، مستودع، إلخ)"></div>
 
         <div class="consent">
           <div class="label" data-en="Before you publish" data-ar="قبل النشر"></div>

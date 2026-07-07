@@ -60,18 +60,6 @@ files for you; you never edit them by hand.
 
 ---
 
-## One line to set before it works
-
-In `src/admin/config.yml`, change:
-
-```
-repo: YOUR-GITHUB-USERNAME/mudun-site
-```
-
-to your actual GitHub username and repository name.
-
----
-
 ## Running it on your own computer (optional — not needed to publish)
 
 ```
@@ -111,6 +99,5 @@ at formspree.io — the two forms are named "Mudun — Join" and "Mudun — Publ
   switches the whole site and remembers your choice.
 - **Big files** (video, large datasets): link them from Google Drive or YouTube
   rather than uploading them here.
-- **The forms** (Join, Publish) currently show a success message only. They get
-  connected to a real inbox (Formspree) as a separate setup step.
+- **The forms** (Join, Publish) submit to Formspree and arrive at hello@mudunlab.org.
 ```

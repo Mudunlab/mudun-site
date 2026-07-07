@@ -19,22 +19,22 @@ description: "Membership in Mudun is free and always will be. Add your name to h
       </div>
 
       <form class="form-wrap" id="joinForm" action="https://formspree.io/f/maqgznql" method="POST" novalidate>
-        <div class="field"><label data-en="Full name" data-ar="الاسم الكامل"></label><input type="text" name="name" required data-en-ph="Your name" data-ar-ph="اسمك"></div>
-        <div class="field"><label data-en="Email" data-ar="البريد الإلكتروني"></label><input type="email" name="email" required data-en-ph="you@example.com" data-ar-ph="you@example.com"></div>
-        <div class="field"><label data-en="City" data-ar="المدينة"></label><input type="text" name="city" data-en-ph="Amman" data-ar-ph="عمّان"></div>
-        <div class="field"><label data-en="Profession / field of study" data-ar="المهنة / مجال الدراسة"></label><input type="text" name="profession" data-en-ph="e.g. urban planning, architecture, engineering, student" data-ar-ph="مثلاً: التخطيط الحضري، العمارة، الهندسة، طالب"></div>
+        <div class="field"><label for="j-name" data-en="Full name" data-ar="الاسم الكامل"></label><input id="j-name" type="text" name="name" required data-en-ph="Your name" data-ar-ph="اسمك"></div>
+        <div class="field"><label for="j-email" data-en="Email" data-ar="البريد الإلكتروني"></label><input id="j-email" type="email" name="email" required data-en-ph="you@example.com" data-ar-ph="you@example.com"></div>
+        <div class="field"><label for="j-city" data-en="City" data-ar="المدينة"></label><input id="j-city" type="text" name="city" data-en-ph="Amman" data-ar-ph="عمّان"></div>
+        <div class="field"><label for="j-prof" data-en="Profession / field of study" data-ar="المهنة / مجال الدراسة"></label><input id="j-prof" type="text" name="profession" data-en-ph="e.g. urban planning, architecture, engineering, student" data-ar-ph="مثلاً: التخطيط الحضري، العمارة، الهندسة، طالب"></div>
         <div class="field">
-          <label data-en="How would you like to be involved?" data-ar="كيف تودّ أن تشارك؟"></label>
-          <div class="checks">
-            <label class="check"><input type="checkbox" name="involvement" value="Writing & research"><span data-en="Writing &amp; research" data-ar="الكتابة والبحث"></span></label>
+          <label id="j-involvement-label" data-en="How would you like to be involved?" data-ar="كيف تودّ أن تشارك؟"></label>
+          <div class="checks" role="group" aria-labelledby="j-involvement-label">
+            <label class="check"><input type="checkbox" name="involvement" value="Writing & research"><span data-en="Writing & research" data-ar="الكتابة والبحث"></span></label>
             <label class="check"><input type="checkbox" name="involvement" value="Volunteering"><span data-en="Volunteering" data-ar="التطوّع"></span></label>
             <label class="check"><input type="checkbox" name="involvement" value="Data collection"><span data-en="Data collection" data-ar="جمع البيانات"></span></label>
-            <label class="check"><input type="checkbox" name="involvement" value="Photography & mapping"><span data-en="Photography &amp; mapping" data-ar="التصوير ورسم الخرائط"></span></label>
+            <label class="check"><input type="checkbox" name="involvement" value="Photography & mapping"><span data-en="Photography & mapping" data-ar="التصوير ورسم الخرائط"></span></label>
             <label class="check"><input type="checkbox" name="involvement" value="Events"><span data-en="Events" data-ar="الفعاليات"></span></label>
             <label class="check"><input type="checkbox" name="involvement" value="Just here to support"><span data-en="Just here to support" data-ar="هنا للدعم فقط"></span></label>
           </div>
         </div>
-        <div class="field"><label data-en="Why do you want to join? (optional)" data-ar="لماذا تودّ الانضمام؟ (اختياري)"></label><textarea name="why" data-en-ph="A sentence or two, if you'd like." data-ar-ph="جملة أو جملتان، إن أحببت."></textarea></div>
+        <div class="field"><label for="j-why" data-en="Why do you want to join? (optional)" data-ar="لماذا تودّ الانضمام؟ (اختياري)"></label><textarea id="j-why" name="why" data-en-ph="A sentence or two, if you'd like." data-ar-ph="جملة أو جملتان، إن أحببت."></textarea></div>
         <button type="submit" class="btn btn-primary" data-en="Join Mudun (free)" data-ar="انضمّ إلى مدن (مجّانًا)"></button>
         <p class="privacy" data-en="We'll only use your details to send occasional updates when new work is published. We won't share them." data-ar="سنستخدم بياناتك فقط لإرسال تحديثاتٍ من حينٍ لآخر عند نشر أعمالٍ جديدة. ولن نشاركها."></p>
       </form>
