@@ -2,5 +2,10 @@
   "tags": "research",
   "layout": "layouts/entry.njk",
   "type": "research",
-  "permalink": "/research/{{ page.fileSlug }}/"
+  "permalink": "/research/{{ page.fileSlug }}/",
+  "eleventyComputed": {
+    "title": "{{ title_en }} — Research · Mudun",
+    "description": "{{ why_en }}",
+    "og_type": "article"
+  }
 }

@@ -85,6 +85,20 @@ automatically on every change, so you normally never do this yourself.
 
 ---
 
+## SEO, social sharing, and favicon
+
+- `src/_data/site.json` — the domain name and social media links, in one place.
+  Update this file to add/change a social link (LinkedIn, Instagram, Facebook)
+  and it updates everywhere on the site automatically. Leave a link blank
+  (`""`) to hide that icon entirely — that's why Instagram/Facebook aren't
+  showing yet.
+- `src/uploads/site/og-image.png` — the image shown when the site is shared on
+  LinkedIn, WhatsApp, etc. Replace this file (same name) to change it.
+- `src/uploads/site/favicon.ico` and friends — the small icon shown in browser
+  tabs and phone home screens.
+- `src/sitemap.njk` and `src/robots.txt` — tell Google what pages exist. These
+  are automatic; you never need to touch them.
+
 ## Notes
 
 - **Language:** every page is fully Arabic + English. The toggle in the header

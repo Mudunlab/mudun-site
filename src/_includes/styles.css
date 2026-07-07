@@ -38,6 +38,10 @@
   html[lang="ar"] h1,html[lang="ar"] h2,html[lang="ar"] h3{letter-spacing:0;line-height:1.25}
   p{margin:0 0 1rem}
   :focus-visible{outline:2px solid var(--green-deep);outline-offset:3px;border-radius:2px}
+  .skip-link{position:absolute;left:-9999px;top:0;background:var(--asphalt);color:#fff;padding:12px 18px;text-decoration:none;font-family:var(--font-body);font-weight:600;z-index:200;border-radius:0 0 6px 0}
+  html[lang="ar"] .skip-link{font-family:'IBM Plex Sans Arabic',sans-serif;left:auto;right:-9999px;border-radius:0 0 0 6px}
+  .skip-link:focus{left:0}
+  html[lang="ar"] .skip-link:focus{left:auto;right:0}
   img{max-width:100%;display:block}
 
   .wrap{max-width:var(--maxw);margin:0 auto;padding-inline:var(--gutter)}

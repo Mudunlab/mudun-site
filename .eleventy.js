@@ -2,6 +2,9 @@ module.exports = function (eleventyConfig) {
   // Copy the CMS admin panel and uploaded media straight through to the built site
   eleventyConfig.addPassthroughCopy({ "src/admin": "admin" });
   eleventyConfig.addPassthroughCopy({ "src/uploads": "uploads" });
+  eleventyConfig.addPassthroughCopy({ "src/robots.txt": "robots.txt" });
+  eleventyConfig.addPassthroughCopy({ "src/humans.txt": "humans.txt" });
+  eleventyConfig.addPassthroughCopy({ "src/_headers": "_headers" });
 
   // Research collection — newest first
   eleventyConfig.addCollection("research", function (collectionApi) {
