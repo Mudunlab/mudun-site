@@ -1,0 +1,15 @@
+{
+  "research": {
+    "mobility": { "en": "Mobility",     "ar": "التنقّل" },
+    "walk":     { "en": "Walkability",  "ar": "المشي" },
+    "public":   { "en": "Public space", "ar": "الفضاء العام" },
+    "housing":  { "en": "Housing",      "ar": "السكن" },
+    "transit":  { "en": "Transit",      "ar": "النقل العام" }
+  },
+  "magazine": {
+    "photo":   { "en": "Photography", "ar": "تصوير" },
+    "essay":   { "en": "Essays",      "ar": "مقالات" },
+    "opinion": { "en": "Opinion",     "ar": "رأي" },
+    "life":    { "en": "City life",   "ar": "حياة المدينة" }
+  }
+}

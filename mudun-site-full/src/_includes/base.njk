@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>{{ title }}</title>
+<meta name="description" content="{{ description or 'Mudun is an urban planning and cities platform for Jordan and the region — raising awareness, producing accessible research, and bringing people together to advocate for better-designed, people-centered cities.' }}" />
+<meta name="author" content="Mudun" />
+<meta name="theme-color" content="#27B38D" />
+<meta name="format-detection" content="telephone=no" />
+
+<!-- Canonical + language alternates (bilingual signal to Google) -->
+<link rel="canonical" href="{{ site.url }}{{ page.url }}" />
+<link rel="alternate" hreflang="en" href="{{ site.url }}{{ page.url }}" />
+<link rel="alternate" hreflang="ar" href="{{ site.url }}{{ page.url }}" />
+<link rel="alternate" hreflang="x-default" href="{{ site.url }}{{ page.url }}" />
+
+<!-- Favicon set -->
+<link rel="icon" href="/uploads/site/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/uploads/site/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/uploads/site/favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/uploads/site/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/uploads/site/icon-192.png">
+<link rel="manifest" href="/uploads/site/manifest.webmanifest">
+
+<!-- Open Graph (LinkedIn, WhatsApp, Facebook link previews) -->
+<meta property="og:type" content="{{ og_type or 'website' }}" />
+<meta property="og:site_name" content="Mudun" />
+<meta property="og:title" content="{{ title }}" />
+<meta property="og:description" content="{{ description or 'Mudun is an urban planning and cities platform for Jordan and the region — raising awareness, producing accessible research, and bringing people together to advocate for better-designed, people-centered cities.' }}" />
+<meta property="og:url" content="{{ site.url }}{{ page.url }}" />
+<meta property="og:image" content="{{ site.url }}/uploads/site/og-image.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="Mudun — urban planning and cities platform for Jordan" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:locale:alternate" content="ar_JO" />
+
+<!-- Twitter/X card -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="{{ title }}" />
+<meta name="twitter:description" content="{{ description or 'Mudun is an urban planning and cities platform for Jordan and the region.' }}" />
+<meta name="twitter:image" content="{{ site.url }}/uploads/site/og-image.png" />
+<meta name="twitter:image:alt" content="Mudun — urban planning and cities platform for Jordan" />
+
+<!-- Structured data: identity of the site (Organization + WebSite) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "{{ site.url }}/#organization",
+      "name": "Mudun",
+      "alternateName": "مدن",
+      "url": "{{ site.url }}",
+      "logo": "{{ site.url }}/uploads/site/icon-512.png",
+      "email": "{{ site.email }}",
+      "description": "An independent, research-anchored urban planning platform for Jordan and the region.",
+      "foundingLocation": {
+        "@type": "Place",
+        "name": "Amman, Jordan"
+      },
+      "areaServed": [
+        { "@type": "Country", "name": "Jordan" },
+        { "@type": "Place", "name": "Middle East and North Africa" }
+      ],
+      "sameAs": [
+        {%- set links = [] -%}
+        {%- if site.social.linkedin %}{% set links = (links.push(site.social.linkedin), links) %}{% endif -%}
+        {%- if site.social.instagram %}{% set links = (links.push(site.social.instagram), links) %}{% endif -%}
+        {%- if site.social.facebook %}{% set links = (links.push(site.social.facebook), links) %}{% endif -%}
+        {%- for l in links %}"{{ l }}"{% if not loop.last %},{% endif %}{% endfor %}
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "{{ site.url }}/#website",
+      "url": "{{ site.url }}",
+      "name": "Mudun",
+      "publisher": { "@id": "{{ site.url }}/#organization" },
+      "inLanguage": ["en", "ar"]
+    }
+    {%- if og_type == "article" -%}
+    ,
+    {
+      "@type": "Article",
+      "headline": "{{ title }}",
+      "description": "{{ description }}",
+      "image": "{{ site.url }}/uploads/site/og-image.png",
+      "author": { "@id": "{{ site.url }}/#organization" },
+      "publisher": { "@id": "{{ site.url }}/#organization" },
+      "url": "{{ site.url }}{{ page.url }}",
+      "inLanguage": ["en", "ar"]
+    }
+    {%- endif %}
+  ]
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+{% include "styles.css" %}
+</style>
+</head>
+<body data-lang="en">
+
+  <a href="#main" class="skip-link" data-en="Skip to content" data-ar="تخطّ إلى المحتوى"></a>
+
+  <div class="rail" aria-hidden="true">
+    <div class="wrap">
+      <span data-en="Mudun — urban planning &amp; cities" data-ar="مدن — تخطيط حضري ومدن"></span>
+      <span><b>AMMAN</b> · 31.95°N 35.93°E · <span data-en="Jordan &amp; the region" data-ar="الأردن والمنطقة"></span></span>
+    </div>
+  </div>
+
+  <header>
+    <div class="wrap bar">
+      <a class="brand" href="/" aria-label="Mudun — home">
+        <img src="{{ brand.logo_green }}" alt="Mudun مدن logo">
+        <span class="en">Mudun</span>
+      </a>
+
+      <div class="right-cluster">
+        <nav id="nav" aria-label="Primary">
+          <a class="nav-link" href="/"          {% if page.url == "/" %}aria-current="page"{% endif %} data-en="Home" data-ar="الرئيسية"></a>
+          <a class="nav-link" href="/about/"     {% if "/about/" in page.url %}aria-current="page"{% endif %} data-en="About" data-ar="عن مدن"></a>
+          <a class="nav-link" href="/research/"  {% if "/research/" in page.url %}aria-current="page"{% endif %} data-en="Research" data-ar="الأبحاث"></a>
+          <a class="nav-link" href="/magazine/"  {% if "/magazine/" in page.url %}aria-current="page"{% endif %} data-en="Magazine" data-ar="المجلّة"></a>
+          <a class="nav-link" href="/contact/"   {% if "/contact/" in page.url %}aria-current="page"{% endif %} data-en="Contact" data-ar="تواصل"></a>
+          <a class="btn btn-primary btn-sm join-btn" href="/join/" data-en="Join — free" data-ar="انضمّ — مجّانًا"></a>
+        </nav>
+        <button class="lang" id="langBtn">العربية</button>
+        <button class="menu-btn" id="menuBtn" aria-label="Menu" aria-expanded="false"><span></span></button>
+      </div>
+    </div>
+  </header>
+  <div class="nav-overlay" id="navOverlay"></div>
+
+  <main id="main" tabindex="-1">
+{{ content | safe }}
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div class="foot-grid">
+        <div class="foot-brand">
+          <img src="{{ brand.logo_white }}" alt="Mudun مدن">
+          <p data-en="An independent, research-anchored platform for understanding cities in Jordan — starting with Amman."
+             data-ar="منصّةٌ مستقلّة قائمة على البحث لفهم مدن الأردن — بدءًا من عمّان."></p>
+          <a class="btn btn-primary foot-cta" href="/join/" data-en="Become a member — free" data-ar="كن عضوًا — مجّانًا"></a>
+        </div>
+        <div>
+          <h4 data-en="Explore" data-ar="تصفّح"></h4>
+          <a class="flink" href="/about/" data-en="About" data-ar="عن مدن"></a>
+          <a class="flink" href="/research/" data-en="Research" data-ar="الأبحاث"></a>
+          <a class="flink" href="/magazine/" data-en="Magazine" data-ar="المجلّة"></a>
+          <a class="flink" href="/publish/" data-en="Publish your work" data-ar="انشُر عملك"></a>
+        </div>
+        <div>
+          <h4 data-en="Connect" data-ar="تواصل"></h4>
+          <a class="flink" href="mailto:hello@mudunlab.org" data-en="Email us" data-ar="راسلنا"></a>
+          <a class="flink" href="/contact/" data-en="Contact" data-ar="تواصل"></a>
+          <div class="foot-social">
+            {% if site.social.linkedin %}<a href="{{ site.social.linkedin }}" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5M3 9h4v12H3zM10 9h3.8v1.7h.05c.53-1 1.83-2.05 3.76-2.05C21.4 8.65 22 11 22 14.1V21h-4v-6c0-1.43-.03-3.27-2-3.27-2 0-2.3 1.56-2.3 3.17V21h-4z"/></svg></a>{% endif %}
+            {% if site.social.instagram %}<a href="{{ site.social.instagram }}" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>{% endif %}
+            {% if site.social.facebook %}<a href="{{ site.social.facebook }}" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12a10 10 0 1 0-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.77-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.89h-2.34v6.99A10 10 0 0 0 22 12"/></svg></a>{% endif %}
+          </div>
+        </div>
+      </div>
+      <div class="colophon">
+        <span>© <span id="yr"></span> Mudun · مدن</span>
+        <span data-en="Independent · non-commercial · Amman" data-ar="مستقلّ · غير ربحي · عمّان"></span>
+      </div>
+    </div>
+  </footer>
+
+<script>
+(function(){
+  var htmlEl=document.documentElement, body=document.body;
+  var lang='en';
+  try{ var saved=localStorage.getItem('mudun-lang'); if(saved==='ar'||saved==='en') lang=saved; }catch(e){}
+
+  function applyLang(){
+    htmlEl.lang=lang; htmlEl.dir=(lang==='ar')?'rtl':'ltr'; body.dataset.lang=lang;
+    document.querySelectorAll('[data-en]').forEach(function(el){var v=el.getAttribute('data-'+lang); if(v!==null) el.innerHTML=v;});
+    document.querySelectorAll('[data-en-ph]').forEach(function(el){var v=el.getAttribute('data-'+lang+'-ph'); if(v!==null) el.setAttribute('placeholder',v);});
+    var lb=document.getElementById('langBtn'); if(lb) lb.textContent=(lang==='en')?'العربية':'English';
+  }
+  var langBtn=document.getElementById('langBtn');
+  if(langBtn) langBtn.addEventListener('click',function(){
+    lang=(lang==='en')?'ar':'en';
+    try{ localStorage.setItem('mudun-lang',lang); }catch(e){}
+    applyLang();
+  });
+
+  // expandable detail toggles (research/magazine cards + entry pages)
+  document.querySelectorAll('[data-toggle]').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      var d=btn.parentElement.querySelector('.detail'); if(!d) return;
+      var open=d.classList.toggle('open');
+      var p=btn.querySelector('.plus'); if(p)p.textContent=open?'–':'+';
+    });
+  });
+
+  // category filters (scoped per view)
+  document.querySelectorAll('[data-filter-group]').forEach(function(group){
+    var entries=group.parentElement.querySelector('.entries'); if(!entries) return;
+    group.querySelectorAll('.chip').forEach(function(chip){
+      chip.addEventListener('click',function(){
+        group.querySelectorAll('.chip').forEach(function(c){c.classList.remove('active');});
+        chip.classList.add('active');
+        var f=chip.dataset.filter;
+        entries.querySelectorAll('.entry').forEach(function(e){
+          e.classList.toggle('hide', !(f==='all'||e.dataset.cat===f));
+        });
+      });
+    });
+  });
+
+  // mobile menu
+  var nav=document.getElementById('nav'), menuBtn=document.getElementById('menuBtn'), overlay=document.getElementById('navOverlay');
+  function closeMenu(){ if(!nav) return; nav.classList.remove('open'); if(overlay)overlay.classList.remove('show'); if(menuBtn)menuBtn.setAttribute('aria-expanded','false'); }
+  if(menuBtn) menuBtn.addEventListener('click',function(){var o=nav.classList.toggle('open'); if(overlay)overlay.classList.toggle('show',o); menuBtn.setAttribute('aria-expanded',o?'true':'false');});
+  if(overlay) overlay.addEventListener('click',closeMenu);
+
+  var yr=document.getElementById('yr'); if(yr) yr.textContent=new Date().getFullYear();
+  applyLang();
+})();
+</script>
+</body>
+</html>

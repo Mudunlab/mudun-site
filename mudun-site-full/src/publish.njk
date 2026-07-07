@@ -1,0 +1,60 @@
+---
+layout: base.njk
+title: "Publish with Mudun — Share your urban research or story"
+description: "Research studies, essays, opinion, photography — if it's about cities in Jordan, it belongs here. Free to publish. You keep ownership of your work."
+---
+  <section class="view active" id="view-publish">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="label" data-en="Publish with Mudun" data-ar="انشُر مع مدن"></span>
+        <h2 data-en="Publish your work" data-ar="انشُر عملك"></h2>
+        <p class="lede" style="margin-top:1rem"
+           data-en="Research studies, a magazine essay, photographs, a mapping project — if it's about cities in Jordan, it belongs here. You keep ownership of everything you share."
+           data-ar="دراساتٌ بحثية، مقالٌ للمجلّة، صور، مشروع خرائط — إن كان عن مدن الأردن، فمكانه هنا. وتحتفظ أنت بملكية كلّ ما تشاركه."></p>
+      </div>
+
+      <form class="form-wrap" id="publishForm" novalidate>
+        <div class="field">
+          <label data-en="What are you publishing?" data-ar="ماذا تنشر؟"></label>
+          <select name="type">
+            <option data-en="Research study" data-ar="دراسة بحثية"></option>
+            <option data-en="Magazine piece (essay, opinion, photography)" data-ar="مادّة للمجلّة (مقال، رأي، تصوير)"></option>
+          </select>
+        </div>
+        <div class="field"><label data-en="Your name" data-ar="اسمك"></label><input type="text" name="name" required data-en-ph="Author name" data-ar-ph="اسم الكاتب"></div>
+        <div class="field"><label data-en="Email" data-ar="البريد الإلكتروني"></label><input type="email" name="email" required data-en-ph="you@example.com" data-ar-ph="you@example.com"></div>
+        <div class="field"><label data-en="Title" data-ar="العنوان"></label><input type="text" name="title" required data-en-ph="The title of your work" data-ar-ph="عنوان عملك"></div>
+        <div class="field">
+          <label data-en="Category" data-ar="التصنيف"></label>
+          <select name="category">
+            <option data-en="Mobility" data-ar="التنقّل"></option>
+            <option data-en="Walkability" data-ar="المشي"></option>
+            <option data-en="Public space" data-ar="الفضاء العام"></option>
+            <option data-en="Housing" data-ar="السكن"></option>
+            <option data-en="Transit" data-ar="النقل العام"></option>
+            <option data-en="Photography / essay / opinion" data-ar="تصوير / مقال / رأي"></option>
+            <option data-en="Other" data-ar="أخرى"></option>
+          </select>
+        </div>
+        <div class="field"><label data-en="Plain-language brief" data-ar="ملخّصٌ بلغة واضحة"></label><textarea name="brief" data-en-ph="Why it matters, and the key points, in words anyone can follow." data-ar-ph="لماذا يهمّ، والنقاط الأساسية، بكلماتٍ يفهمها الجميع."></textarea></div>
+        <div class="field"><label data-en="Link to the full work (optional for magazine pieces)" data-ar="رابط العمل الكامل (اختياري لموادّ المجلّة)"></label><input type="text" name="link" data-en-ph="A link to the PDF or images (Google Drive, repository, etc.)" data-ar-ph="رابط ملف PDF أو الصور (جوجل درايف، مستودع، إلخ)"></div>
+
+        <div class="consent">
+          <div class="label" data-en="Before you publish" data-ar="قبل النشر"></div>
+          <div class="checks">
+            <label class="check"><input type="checkbox" name="consent_own" required><span data-en="This is my own work and I have the right to share it." data-ar="هذا عملي الخاص ولديّ الحقّ في مشاركته."></span></label>
+            <label class="check"><input type="checkbox" name="consent_permission" required><span data-en="I give Mudun permission to publish it." data-ar="أمنح مدن الإذن بنشره."></span></label>
+            <label class="check"><input type="checkbox" name="consent_ownership" required><span data-en="I understand I keep ownership of my work." data-ar="أدرك أنني أحتفظ بملكية عملي."></span></label>
+            <label class="check"><input type="checkbox" name="consent_photos"><span data-en="Any photos not taken by me have their photographer's permission." data-ar="أيّ صورٍ لم ألتقطها لديها إذن مصوّرها."></span></label>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="margin-top:20px" data-en="Send for review" data-ar="أرسِل للمراجعة"></button>
+        <p class="privacy" data-en="We read every submission and reply by email. What gets published is at Mudun's editorial discretion." data-ar="نقرأ كلّ ما يُرسَل ونردّ عبر البريد. وما يُنشَر يخضع لتقدير هيئة تحرير مدن."></p>
+      </form>
+      <div class="form-ok" id="publishOk">
+        <h3 data-en="Received — thank you." data-ar="تمّ الاستلام — شكرًا لك."></h3>
+        <p data-en="We'll read your work and get back to you by email." data-ar="سنقرأ عملك ونعود إليك عبر البريد."></p>
+      </div>
+    </div>
+  </section>

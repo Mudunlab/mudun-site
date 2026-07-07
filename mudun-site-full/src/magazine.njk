@@ -1,0 +1,34 @@
+---
+layout: base.njk
+title: "Magazine — Mudun · Stories about the city"
+description: "Essays, opinion, and photography on cities in Jordan — the human, everyday side of urban life. Open to writers, photographers, and researchers."
+---
+{% import "entry-card.njk" as cardlib %}
+  <section class="view active" id="view-magazine">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="label" data-en="Magazine" data-ar="المجلّة"></span>
+        <h2 data-en="Stories about the city" data-ar="حكاياتٌ عن المدينة"></h2>
+        <p class="lede" style="margin-top:1rem"
+           data-en="Essays, opinion, and photography about cities in Jordan — the human, everyday side of urban life. Lighter than the research, and open to anyone who sees the city clearly."
+           data-ar="مقالاتٌ وآراءٌ وتصوير عن مدن الأردن — الجانب الإنسانيّ اليوميّ من الحياة الحضرية. أخفّ من الأبحاث، ومفتوحة لكلّ من يرى المدينة بوضوح."></p>
+      </div>
+
+      <div class="filters" data-filter-group aria-label="Categories">
+        <button class="chip active" data-filter="all" data-en="All" data-ar="الكل"></button>
+        <button class="chip" data-filter="photo" data-en="Photography" data-ar="تصوير"></button>
+        <button class="chip" data-filter="essay" data-en="Essays" data-ar="مقالات"></button>
+        <button class="chip" data-filter="opinion" data-en="Opinion" data-ar="رأي"></button>
+        <button class="chip" data-filter="life" data-en="City life" data-ar="حياة المدينة"></button>
+      </div>
+
+      <div class="entries">
+{% for entry in collections.magazine %}{{ cardlib.card(entry, "magazine", categories) }}{% endfor %}
+      </div>
+
+      <p style="margin-top:26px;color:var(--asphalt-soft);max-width:60ch"
+         data-en="Have a story, an essay, or photographs of the city? The magazine is open —"
+         data-ar="ألديك حكاية أو مقال أو صورٌ للمدينة؟ المجلّة مفتوحة —"></p>
+      <a class="btn btn-ghost" href="/publish/" style="margin-top:6px" data-en="Contribute to the magazine" data-ar="شارك في المجلّة"></a>
+    </div>
+  </section>
