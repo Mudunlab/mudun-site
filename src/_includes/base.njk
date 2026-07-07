@@ -234,6 +234,16 @@
       e.preventDefault();
       if(!form.checkValidity()){ form.reportValidity(); return; }
 
+      // Explicit belt-and-suspenders check: every required checkbox must be ticked.
+      // (Doesn't rely solely on browser-native validation, which has known quirks
+      // on some mobile browsers when a form has novalidate.)
+      var uncheckedRequired = form.querySelector('input[type="checkbox"][required]:not(:checked)');
+      if(uncheckedRequired){
+        alert('Please check all required boxes before sending — each one confirms something we need in order to publish your work.');
+        uncheckedRequired.focus();
+        return;
+      }
+
       var submitBtn = form.querySelector('button[type="submit"]');
       var originalText = submitBtn ? submitBtn.textContent : '';
       if(submitBtn){ submitBtn.disabled = true; }
