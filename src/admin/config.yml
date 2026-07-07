@@ -6,9 +6,8 @@
 backend:
   name: github
   # >>> EDIT THIS ONE LINE in Stage B: replace with  your-github-username/mudun-site
-  repo: Mudunlab/mudun-site
+  repo: YOUR-GITHUB-USERNAME/mudun-site
   branch: main
-  base_url: https://sveltia-cms-auth.ahmad-a-kawaldeh.workers.dev
 
 # Where uploaded PDFs and images are stored in the repo, and their URL on the site
 media_folder: "src/uploads"
