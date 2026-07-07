@@ -99,6 +99,12 @@ automatically on every change, so you normally never do this yourself.
 - `src/sitemap.njk` and `src/robots.txt` — tell Google what pages exist. These
   are automatic; you never need to touch them.
 
+## Forms
+
+The Join and Publish forms submit to Formspree and email `hello@mudunlab.org`
+directly. To change where submissions go, or to see past submissions, log in
+at formspree.io — the two forms are named "Mudun — Join" and "Mudun — Publish."
+
 ## Notes
 
 - **Language:** every page is fully Arabic + English. The toggle in the header

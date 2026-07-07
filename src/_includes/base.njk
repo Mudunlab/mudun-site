@@ -226,6 +226,45 @@
   if(menuBtn) menuBtn.addEventListener('click',function(){var o=nav.classList.toggle('open'); if(overlay)overlay.classList.toggle('show',o); menuBtn.setAttribute('aria-expanded',o?'true':'false');});
   if(overlay) overlay.addEventListener('click',closeMenu);
 
+  // real form submission to Formspree, with success/error messaging
+  function wireForm(formId, okId){
+    var form = document.getElementById(formId);
+    if(!form) return;
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      if(!form.checkValidity()){ form.reportValidity(); return; }
+
+      var submitBtn = form.querySelector('button[type="submit"]');
+      var originalText = submitBtn ? submitBtn.textContent : '';
+      if(submitBtn){ submitBtn.disabled = true; }
+
+      fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      }).then(function(response){
+        if(response.ok){
+          form.style.display = 'none';
+          var ok = document.getElementById(okId);
+          if(ok) ok.classList.add('show');
+        } else {
+          response.json().then(function(data){
+            var msg = (data && data.errors && data.errors.length) ? data.errors.map(function(er){return er.message;}).join(', ') : 'Something went wrong. Please try again or email hello@mudunlab.org directly.';
+            alert(msg);
+          }).catch(function(){
+            alert('Something went wrong. Please try again or email hello@mudunlab.org directly.');
+          });
+          if(submitBtn){ submitBtn.disabled = false; submitBtn.textContent = originalText; }
+        }
+      }).catch(function(){
+        alert('Network error — please check your connection and try again, or email hello@mudunlab.org directly.');
+        if(submitBtn){ submitBtn.disabled = false; submitBtn.textContent = originalText; }
+      });
+    });
+  }
+  wireForm('joinForm', 'joinOk');
+  wireForm('publishForm', 'publishOk');
+
   var yr=document.getElementById('yr'); if(yr) yr.textContent=new Date().getFullYear();
   applyLang();
 })();
