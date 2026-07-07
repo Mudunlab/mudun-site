@@ -6,7 +6,7 @@
 backend:
   name: github
   # >>> EDIT THIS ONE LINE in Stage B: replace with  your-github-username/mudun-site
-  repo: YOUR-GITHUB-USERNAME/mudun-site
+  repo: Mudunlab/mudun-site
   branch: main
 
 # Where uploaded PDFs and images are stored in the repo, and their URL on the site
