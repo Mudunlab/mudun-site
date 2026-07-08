@@ -8,6 +8,9 @@ eleventyExcludeFromCollections: true
 {%- if "/admin/" not in entry.url %}
   <url>
     <loc>{{ site.url }}{{ entry.url }}</loc>
+    {%- if entry.date %}
+    <lastmod>{{ entry.date.toISOString() }}</lastmod>
+    {%- endif %}
   </url>
 {%- endif %}
 {%- endfor %}

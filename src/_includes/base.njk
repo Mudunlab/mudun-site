@@ -3,8 +3,13 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<script>
+// Set the reader's saved language on <html> BEFORE the page paints, so a
+// returning Arabic reader never sees a flash of English / LTR layout.
+(function(){try{var l=localStorage.getItem('mudun-lang');if(l==='ar'){var h=document.documentElement;h.lang='ar';h.dir='rtl';}}catch(e){}})();
+</script>
 <title>{{ title }}</title>
-<meta name="description" content="{{ description or 'Mudun is an urban planning and cities platform for Jordan and the region — raising awareness, producing accessible research, and bringing people together to advocate for better-designed, people-centered cities.' }}" />
+<meta name="description" content="{{ description or site.default_description }}" />
 <meta name="author" content="Mudun" />
 <meta name="theme-color" content="#27B38D" />
 <meta name="format-detection" content="telephone=no" />
@@ -24,7 +29,7 @@
 <meta property="og:type" content="{{ og_type or 'website' }}" />
 <meta property="og:site_name" content="Mudun" />
 <meta property="og:title" content="{{ title }}" />
-<meta property="og:description" content="{{ description or 'Mudun is an urban planning and cities platform for Jordan and the region — raising awareness, producing accessible research, and bringing people together to advocate for better-designed, people-centered cities.' }}" />
+<meta property="og:description" content="{{ description or site.default_description }}" />
 <meta property="og:url" content="{{ site.url }}{{ page.url }}" />
 <meta property="og:image" content="{{ site.url }}/uploads/site/og-image.png" />
 <meta property="og:image:width" content="1200" />
@@ -36,7 +41,7 @@
 <!-- Twitter/X card -->
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="{{ title }}" />
-<meta name="twitter:description" content="{{ description or 'Mudun is an urban planning and cities platform for Jordan and the region.' }}" />
+<meta name="twitter:description" content="{{ description or site.default_description }}" />
 <meta name="twitter:image" content="{{ site.url }}/uploads/site/og-image.png" />
 <meta name="twitter:image:alt" content="Mudun — urban planning and cities platform for Jordan" />
 
@@ -82,8 +87,8 @@
     ,
     {
       "@type": "Article",
-      "headline": "{{ title }}",
-      "description": "{{ description }}",
+      "headline": {{ title | dump | safe }},
+      "description": {{ (description or site.default_description) | dump | safe }},
       "image": "{{ site.url }}/uploads/site/og-image.png",
       "author": { "@id": "{{ site.url }}/#organization" },
       "publisher": { "@id": "{{ site.url }}/#organization" },
@@ -222,6 +227,12 @@
   function closeMenu(){ if(!nav) return; nav.classList.remove('open'); if(overlay)overlay.classList.remove('show'); if(menuBtn)menuBtn.setAttribute('aria-expanded','false'); }
   if(menuBtn) menuBtn.addEventListener('click',function(){var o=nav.classList.toggle('open'); if(overlay)overlay.classList.toggle('show',o); menuBtn.setAttribute('aria-expanded',o?'true':'false');});
   if(overlay) overlay.addEventListener('click',closeMenu);
+  document.addEventListener('keydown',function(e){
+    if((e.key==='Escape'||e.key==='Esc') && nav && nav.classList.contains('open')){
+      closeMenu();
+      if(menuBtn) menuBtn.focus();
+    }
+  });
 
   // real form submission to Formspree, with success/error messaging
   function wireForm(formId, okId){
