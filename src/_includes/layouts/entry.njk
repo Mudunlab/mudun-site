@@ -57,12 +57,59 @@ layout: base.njk
         </ul>
       {% endif %}
 
+      {# ---- Presentation slides (self-hosted, bilingual) ---- #}
+      {% if type == "research" and (slides_en.length or slides_ar.length) %}
+        <h4 style="font-family:var(--label-font);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--green-deep);margin:28px 0 8px"
+            data-en="Presentation" data-ar="العرض التقديمي"></h4>
+
+        {% if slides_en.length %}
+        <div data-only="en">
+          <div class="slide-viewer" id="slides-en">
+            {% for s in slides_en %}<img src="{{ s.slide }}" alt="Slide {{ loop.index }} of {{ slides_en.length }}" loading="lazy">{% endfor %}
+          </div>
+          <div class="slide-nav">
+            <button type="button" aria-label="Previous slide" onclick="document.getElementById('slides-en').scrollBy({left:-320,behavior:'smooth'})">‹</button>
+            <button type="button" aria-label="Next slide" onclick="document.getElementById('slides-en').scrollBy({left:320,behavior:'smooth'})">›</button>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if slides_ar.length %}
+        <div data-only="ar">
+          <div class="slide-viewer" id="slides-ar" dir="rtl">
+            {% for s in slides_ar %}<img src="{{ s.slide }}" alt="الشريحة {{ loop.index }} من {{ slides_ar.length }}" loading="lazy">{% endfor %}
+          </div>
+          <div class="slide-nav">
+            <button type="button" aria-label="الشريحة السابقة" onclick="document.getElementById('slides-ar').scrollBy({left:320,behavior:'smooth'})">›</button>
+            <button type="button" aria-label="الشريحة التالية" onclick="document.getElementById('slides-ar').scrollBy({left:-320,behavior:'smooth'})">‹</button>
+          </div>
+        </div>
+        {% endif %}
+      {% endif %}
+
       {# ---- Layer 2: the full study PDF ---- #}
       {% if type == "research" %}
         {% if pdf %}
-          <a class="btn btn-primary" href="{{ pdf }}" target="_blank" rel="noopener" style="margin-top:8px">
-            <span data-en="Read the full research (PDF)" data-ar="اقرأ البحث الكامل (PDF)"></span><span class="arrow">↓</span>
-          </a>
+          <div class="pdf-actions">
+            <a class="btn btn-primary" href="{{ pdf }}" download>
+              <span data-en="Download full PDF" data-ar="تحميل الدراسة (PDF)"></span><span class="arrow">↓</span>
+            </a>
+            <a class="btn btn-ghost" href="{{ pdf }}" target="_blank" rel="noopener">
+              <span data-en="View in browser" data-ar="عرض في المتصفح"></span>
+            </a>
+          </div>
+
+          {% set fullText = pdfText[pdf] %}
+          {% if fullText %}
+            <div class="full-text-block">
+              <h4 style="font-family:var(--label-font);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--green-deep);margin:0 0 12px"
+                  data-en="Full text of the research" data-ar="النص الكامل للبحث"></h4>
+              <p class="privacy" style="margin-bottom:14px"
+                 data-en="A plain-text version of the PDF above, provided for accessibility and search."
+                 data-ar="نسخة نصّية من ملف PDF أعلاه، مقدَّمة لتيسير الوصول والبحث."></p>
+              <div class="body-text" {% if pdf_lang == "ar" %}lang="ar" dir="rtl"{% else %}lang="en" dir="ltr"{% endif %}>{{ fullText }}</div>
+            </div>
+          {% endif %}
         {% else %}
           <p class="privacy" data-en="The full study PDF will be attached here soon." data-ar="سيُرفَق ملف الدراسة الكامل هنا قريبًا."></p>
         {% endif %}

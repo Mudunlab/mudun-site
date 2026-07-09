@@ -38,6 +38,24 @@
   html[lang="ar"] h1,html[lang="ar"] h2,html[lang="ar"] h3{letter-spacing:0;line-height:1.25}
   p{margin:0 0 1rem}
   :focus-visible{outline:2px solid var(--green-deep);outline-offset:3px;border-radius:2px}
+
+  /* Show/hide a whole block by language (used for the presentation slides,
+     which exist as two separate image sets rather than swappable text) */
+  body[data-lang="en"] [data-only="ar"]{display:none}
+  body[data-lang="ar"] [data-only="en"]{display:none}
+
+  .slide-viewer{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;padding-bottom:6px;margin:14px 0}
+  .slide-viewer img{scroll-snap-align:start;width:min(88%,560px);flex-shrink:0;border-radius:6px;border:1px solid var(--sand-line)}
+  .slide-viewer::-webkit-scrollbar{height:6px}
+  .slide-viewer::-webkit-scrollbar-thumb{background:var(--sand-line);border-radius:3px}
+  .slide-nav{display:flex;justify-content:flex-end;gap:8px;margin-top:6px}
+  .slide-nav button{width:34px;height:34px;border-radius:50%;border:1px solid var(--sand-line);background:#fff;cursor:pointer;font-size:16px;color:var(--asphalt)}
+  .slide-nav button:hover{background:var(--concrete)}
+
+  .pdf-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px}
+  .full-text-block{margin-top:clamp(30px,4vw,44px);padding-top:clamp(20px,3vw,28px);border-top:1px solid var(--sand-line)}
+  .full-text-block .body-text{white-space:pre-wrap;line-height:1.7;color:var(--asphalt-soft)}
+  .full-text-block .body-text[dir="rtl"]{font-family:'IBM Plex Sans Arabic',sans-serif}
   .skip-link{position:absolute;left:-9999px;top:0;background:var(--asphalt);color:#fff;padding:12px 18px;text-decoration:none;font-family:var(--font-body);font-weight:600;z-index:200;border-radius:0 0 6px 0}
   html[lang="ar"] .skip-link{font-family:'IBM Plex Sans Arabic',sans-serif;left:auto;right:-9999px;border-radius:0 0 0 6px}
   .skip-link:focus{left:0}

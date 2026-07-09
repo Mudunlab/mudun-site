@@ -3,6 +3,11 @@
 #  This file controls what you see and edit at  mudunlab.org/admin
 # ============================================================================
 
+app_title: "Mudun — Admin"
+logo:
+  src: "/uploads/site/icon-192.png"
+  show_in_header: true
+
 backend:
   name: github
   repo: Mudunlab/mudun-site
@@ -57,7 +62,28 @@ collections:
       - { label: "What this study examines (English)", name: "examines_en", widget: "list", required: false, hint: "Add one point per line." }
       - { label: "What this study examines (Arabic)", name: "examines_ar", widget: "list", required: false }
       - { label: "Cover image", name: "cover", widget: "image", required: false, hint: "Optional. Replaces the placeholder figure." }
-      - { label: "Full study (PDF)", name: "pdf", widget: "file", required: false, hint: "The complete study — Layer 2." }
+      - { label: "Full study (PDF)", name: "pdf", widget: "file", required: false, hint: "The complete study — Layer 2. Upload it exactly as received; nothing about it is edited." }
+      - label: "What language is the PDF written in?"
+        name: "pdf_lang"
+        widget: "select"
+        default: "en"
+        required: false
+        hint: "Used to display the extracted full text correctly (English or Arabic)."
+        options:
+          - { label: "English", value: "en" }
+          - { label: "Arabic", value: "ar" }
+      - label: "Presentation slides (English)"
+        name: "slides_en"
+        widget: "list"
+        required: false
+        hint: "Export your presentation as images (one per slide) and upload them here, in order."
+        field: { label: "Slide", name: "slide", widget: "image" }
+      - label: "Presentation slides (Arabic)"
+        name: "slides_ar"
+        widget: "list"
+        required: false
+        hint: "The Arabic version of the same presentation, exported as images."
+        field: { label: "Slide", name: "slide", widget: "image" }
 
   # --------------------------------------------------------------------------
   #  MAGAZINE  —  the lighter essays, opinion, and photography

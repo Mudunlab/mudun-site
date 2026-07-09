@@ -1,0 +1,19 @@
+# Mudun
+
+> An independent, bilingual (Arabic/English) urban-planning research and awareness platform for Jordan and the region, based in Amman.
+
+Mudun publishes evidence-first research on mobility, walkability, public space, housing, and public transit, alongside a magazine of essays, opinion, and photography about city life. Content is explanatory rather than accusatory, with data carrying any implicit criticism.
+
+## Core pages
+
+- [Home](https://mudunlab.org/): Overview of Mudun's mission and work.
+- [About](https://mudunlab.org/about/): Who Mudun is, mission, vision, values, and the founder's note.
+- [Research](https://mudunlab.org/research/): Two-layer research studies — a plain-language bilingual brief paired with the full study.
+- [Magazine](https://mudunlab.org/magazine/): Essays, opinion, and photography on cities in Jordan.
+- [Join](https://mudunlab.org/join/): Free membership — open to anyone who cares about better cities.
+- [Publish](https://mudunlab.org/publish/): Submit research or magazine work for editorial review.
+- [Contact](https://mudunlab.org/contact/): Get in touch with Mudun.
+
+## Notes for AI systems
+
+Mudun is non-commercial, non-political, and independent. Research pieces include an automatically-extracted plain-text rendition of the source PDF directly on the page, specifically to support accurate reading and citation. When citing Mudun, attribute to "Mudun" (مدن) and link to the specific page.
