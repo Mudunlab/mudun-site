@@ -70,6 +70,14 @@ brief_en: |-
 
   Once you see that, the intervention almost designs itself: stop fighting the use and build for it. Reclaim the excess road around the island as protected space, open the inside instead of fencing it shut, let the whole footprint roughly double — about 500 to 1,000 square meters. Keep the outer ring calmer, with recycled timber seating and planters for sitting and talking, and keep the inner island active — leveled ground, football, swings, the same fence but cut open at a few points so it works as a threshold instead of a wall. Add ramps at the crossing points so it's actually reachable, not just visible.
 
+  **Examples of tactical urbanism interventions:**
+
+  ![](/uploads/Gemini_Generated_Image_xcwomnxcwomnxcwo.jpg)
+
+  ![](/uploads/Gemini_Generated_Image_h9xrf7h9xrf7h9xr.jpg)
+
+  ![](/uploads/Gemini_Generated_Image_8g6nr78g6nr78g6n.jpg)
+
   The general rule I took from this: don't ask what a space could become. Ask what it's already become, and design for that properly.
 
   ***
@@ -88,6 +96,14 @@ brief_en: |-
 
   Right beside that same junction, on a small flat patch with a few trees and a view across the city, kids had already turned an unused corner into a hangout spot — the same "already decided" signal as the island, just smaller. A few benches, planters, shade overhead. Nothing invented, just made to last through summer.
 
+  **Examples of tactical urbanism interventions:**
+
+  ![](/uploads/Gemini_Generated_Image_otc0zsotc0zsotc0.jpg)
+
+  ![](/uploads/Gemini_Generated_Image_g2sbqbg2sbqbg2sb.jpg)
+
+  ![](/uploads/Gemini_Generated_Image_mtw7d1mtw7d1mtw7.jpg)
+
   ***
 
   ### When comfort decides whether a space gets used at all
@@ -97,6 +113,11 @@ brief_en: |-
   ![](/uploads/16.jpg)
 
   The same logic applied to five stairways connecting the corridor down into the neighborhood — currently just functional, nothing else, but already used informally by kids as gathering spots. Painted risers, a bit of seating tucked to one side, shade above, still wide enough to pass through. And blank walls along the police station perimeter and elsewhere were slated for murals made with local artists, schools, and kids from the area — the one intervention here that isn't about safety or comfort at all, just about a street that looks like it belongs to the people living on it.
+
+  **Examples of tactical urbanism interventions:**
+
+  ![](/uploads/Gemini_Generated_Image_abmqihabmqihabmq.jpg)
+
 
   ***
 
