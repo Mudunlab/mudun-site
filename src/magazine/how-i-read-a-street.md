@@ -4,7 +4,7 @@ title_ar: كيف أقرأ الشارع
 category: essay
 status: published
 featured: true
-date: 2026-07-11
+date: 2026-06-01
 why_en: A firsthand account of how one Amman street gets diagnosed — and redesigned — through a real tactical urbanism proposal.
 why_ar: روايةٌ مباشرة عن كيفية تشخيص شارعٍ في عمّان — وإعادة تصميمه — من خلال مقترح حقيقي للتخطيط الحضري التكتيكي.
 brief_en: |-
