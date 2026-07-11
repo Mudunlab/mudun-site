@@ -1,5 +1,8 @@
 {% macro card(entry, type, cats) %}
         <article class="entry" data-cat="{{ entry.data.category }}">
+          {% if entry.data.cover %}
+          <img class="entry-cover" src="{{ entry.data.cover }}" alt="" loading="lazy">
+          {% endif %}
           <div class="meta">
             <span class="tag" data-en="{{ cats[type][entry.data.category].en }}" data-ar="{{ cats[type][entry.data.category].ar }}"></span>
             {% if entry.data.featured %}<span class="tag sky" data-en="Featured" data-ar="مميّز"></span>{% endif %}

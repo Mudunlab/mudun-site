@@ -185,6 +185,7 @@
   .chip.active{background:var(--asphalt);color:#fff;border-color:var(--asphalt)}
   .entries{display:grid;gap:1px;background:var(--sand-line);border:1px solid var(--sand-line)}
   .entry{background:var(--paper);padding:clamp(20px,3vw,30px)}
+  .entry-cover{width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:6px;margin-bottom:16px}
   .entry.hide{display:none}
   .entry .meta{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-bottom:12px}
   .tag{font-family:var(--label-font);font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:#fff;background:var(--green-deep);padding:3px 9px;border-radius:4px}
