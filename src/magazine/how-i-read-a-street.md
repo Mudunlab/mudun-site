@@ -86,7 +86,7 @@ brief_en: |-
 
   If there's one habit worth taking from this, it's the one underneath every example above: before designing anything, go and look at what a street has already become. Half the intervention is usually already there, waiting to be made official.
 brief_ar: ''
-cover: ''
+cover: /uploads/WhatsApp Image 2026-07-11 at 23.47.37.jpeg
 topics:
   - tactical urbanism
   - streets
