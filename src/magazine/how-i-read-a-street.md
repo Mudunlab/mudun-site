@@ -46,11 +46,23 @@ brief_en: |-
 
   The clearest case on this corridor was a triangular traffic island partway up — fenced off, raised half a meter above the street, technically off-limits. And yet kids were playing football on the dirt inside the fence. People were sitting around its edges. The street had already decided what this space was for; the design just hadn't caught up.
 
-  **[INSERT PHOTO: the fenced island, as found]**
+  ![](/uploads/8.jpg)
+
+  ![](/uploads/7.jpg)
+
+  ![](/uploads/6.jpg)
+
+  ![](/uploads/5.jpg)
+
+  ![](/uploads/9.jpg)
+
+  ![](/uploads/10.jpg)
+
+  ![](/uploads/11.jpg)
+
+  ![](/uploads/12.jpg)
 
   Once you see that, the intervention almost designs itself: stop fighting the use and build for it. Reclaim the excess road around the island as protected space, open the inside instead of fencing it shut, let the whole footprint roughly double — about 500 to 1,000 square meters. Keep the outer ring calmer, with recycled timber seating and planters for sitting and talking, and keep the inner island active — leveled ground, football, swings, the same fence but cut open at a few points so it works as a threshold instead of a wall. Add ramps at the crossing points so it's actually reachable, not just visible.
-
-  **[INSERT PHOTO/RENDER: proposed plaza layout]**
 
   The general rule I took from this: don't ask what a space could become. Ask what it's already become, and design for that properly.
 
@@ -60,7 +72,11 @@ brief_en: |-
 
   The third check is on junctions specifically, and it's less about how fast people are driving than about the shape of the space they're driving through. Further up the corridor, one junction stood out as the single most dangerous point I documented: a twenty-meter crossing, cars parked on both sides killing sightlines, an entry angle shaped to encourage a fast turn rather than a slow one, and no marked crossing at all on a two-way street.
 
-  **[INSERT PHOTO: the descending junction]**
+  ![](/uploads/13.jpg)
+
+  ![](/uploads/14.jpg)
+
+  ![](/uploads/15.jpg)
 
   A speed limit sign does nothing about geometry like that. What does something is changing the geometry itself: curb extensions to shorten the crossing and remove the parking that was blocking sightlines, a painted crosswalk, a refuge median so a pedestrian only has to read one direction of traffic at a time.
 
@@ -72,7 +88,7 @@ brief_en: |-
 
   The last thing I check, especially in Amman, is heat. A technically safe street that's unshaded for long stretches still won't get used the way it should — people will take a car instead of a five-minute walk if that walk means direct sun with nowhere to stop. Near the mosque at the top of the corridor, and along the exposed stretch leading to it, the fix was almost entirely about comfort: lean-rails against the property walls, shade sails at intervals, a marked crossing at the mosque frontage itself where people already gather before and after prayers.
 
-  **[INSERT PHOTO: mosque frontage / shaded stretch]**
+  ![](/uploads/16.jpg)
 
   The same logic applied to five stairways connecting the corridor down into the neighborhood — currently just functional, nothing else, but already used informally by kids as gathering spots. Painted risers, a bit of seating tucked to one side, shade above, still wide enough to pass through. And blank walls along the police station perimeter and elsewhere were slated for murals made with local artists, schools, and kids from the area — the one intervention here that isn't about safety or comfort at all, just about a street that looks like it belongs to the people living on it.
 
