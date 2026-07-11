@@ -92,7 +92,13 @@ brief_en: |-
 
   The same logic applied to five stairways connecting the corridor down into the neighborhood — currently just functional, nothing else, but already used informally by kids as gathering spots. Painted risers, a bit of seating tucked to one side, shade above, still wide enough to pass through. And blank walls along the police station perimeter and elsewhere were slated for murals made with local artists, schools, and kids from the area — the one intervention here that isn't about safety or comfort at all, just about a street that looks like it belongs to the people living on it.
 
-  **[INSERT PHOTO: stairs / mural wall]**
+  **Examples of tactical urbanism intervention:**
+
+  ![](/uploads/Gemini_Generated_Image_gmrofigmrofigmro.png)
+
+  ![](/uploads/Gemini_Generated_Image_awu677awu677awu6.png)
+
+  ![](/uploads/Gemini_Generated_Image_8g6nr78g6nr78g6n.png)
 
   ***
 
