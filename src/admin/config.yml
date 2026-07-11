@@ -55,6 +55,8 @@ collections:
           - { label: "In preparation", value: "preparation" }
       - { label: "Featured", name: "featured", widget: "boolean", default: false, hint: "Adds a ‘Featured’ tag." }
       - { label: "Date", name: "date", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false }
+      - { label: "Author (English)", name: "author_en", widget: "string", required: false, hint: "Leave blank to credit Mudun instead of a named author." }
+      - { label: "Author (Arabic)", name: "author_ar", widget: "string", required: false }
       - { label: "One-line summary (English)", name: "why_en", widget: "string", hint: "The teaser shown on the card." }
       - { label: "One-line summary (Arabic)", name: "why_ar", widget: "string" }
       - { label: "Brief — why it matters (English)", name: "brief_en", widget: "text", required: false }
@@ -116,6 +118,8 @@ collections:
           - { label: "In preparation", value: "preparation" }
       - { label: "Featured", name: "featured", widget: "boolean", default: false }
       - { label: "Date", name: "date", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false }
+      - { label: "Author (English)", name: "author_en", widget: "string", required: false, hint: "Leave blank to credit Mudun instead of a named author." }
+      - { label: "Author (Arabic)", name: "author_ar", widget: "string", required: false }
       - { label: "One-line summary (English)", name: "why_en", widget: "string" }
       - { label: "One-line summary (Arabic)", name: "why_ar", widget: "string" }
       - label: "The piece (English)"

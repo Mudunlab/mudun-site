@@ -17,6 +17,10 @@ layout: base.njk
     <h2 style="font-size:clamp(1.8rem,3.6vw,2.7rem)" data-en="{{ title_en }}" data-ar="{{ title_ar }}"></h2>
     <p class="lede" style="margin-top:1rem" data-en="{{ why_en }}" data-ar="{{ why_ar }}"></p>
 
+    <p class="byline" style="margin-top:.6rem;color:var(--asphalt-soft);font-size:.92rem"
+       data-en="{{ author_en or 'Mudun' }} · {{ date | formatDate('en') }}"
+       data-ar="{{ author_ar or 'مدن' }} · {{ date | formatDate('ar') }}"></p>
+
     {% if status == "preparation" %}
       <div class="note" style="margin-top:clamp(30px,4vw,44px)">
         <div class="label" data-en="In preparation" data-ar="قيد الإعداد"></div>

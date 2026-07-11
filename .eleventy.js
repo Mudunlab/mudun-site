@@ -55,6 +55,18 @@ module.exports = function (eleventyConfig) {
     return groupConsecutiveImages(md.render(str || ""));
   });
 
+  // Formats a date correctly for either language, e.g. "July 11, 2026" or "١١ يوليو ٢٠٢٦"
+  eleventyConfig.addFilter("formatDate", function (date, lang) {
+    if (!date) return "";
+    const locale = lang === "ar" ? "ar" : "en";
+    return new Intl.DateTimeFormat(locale, {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      timeZone: "UTC",
+    }).format(new Date(date));
+  });
+
   // Copy the CMS admin panel and uploaded media straight through to the built site
   eleventyConfig.addPassthroughCopy({ "src/admin": "admin" });
   eleventyConfig.addPassthroughCopy({ "src/uploads": "uploads" });
