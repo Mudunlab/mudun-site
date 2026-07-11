@@ -5,6 +5,8 @@ category: essay
 status: published
 featured: true
 date: 2026-06-01
+author_en: Ahmad A Alkhawaldeh
+author_ar: ''
 why_en: A firsthand account of how one Amman street gets diagnosed — and redesigned — through a real tactical urbanism proposal.
 why_ar: روايةٌ مباشرة عن كيفية تشخيص شارعٍ في عمّان — وإعادة تصميمه — من خلال مقترح حقيقي للتخطيط الحضري التكتيكي.
 brief_en: |-
