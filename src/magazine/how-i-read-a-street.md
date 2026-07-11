@@ -36,7 +36,8 @@ brief_en: |-
 
   This kind of mismatch matters because width is one of the few things drivers read instinctively. Nobody needs a sign to know a road is wide enough to speed up in. So the fix wasn't signage — it was taking the width away. Narrow the carriageway to a single lane, reclaim a meter and a half to two meters on the pedestrian side, and at the school itself, remove parking entirely and turn that space into a real waiting zone: a marked crossing, bench seating, shade sails over where people already stand. At the smaller junctions along the same stretch, painted curb extensions and planters brought crossing distances down from about fifteen meters to seven or nine — the difference between a crossing you glance at and one you have to commit to.
 
-  **[INSERT DIAGRAM/RENDER: curb extension example]**
+  **Examples of tactical urbanism interventions:**
+
 
   ***
 
@@ -92,13 +93,6 @@ brief_en: |-
 
   The same logic applied to five stairways connecting the corridor down into the neighborhood — currently just functional, nothing else, but already used informally by kids as gathering spots. Painted risers, a bit of seating tucked to one side, shade above, still wide enough to pass through. And blank walls along the police station perimeter and elsewhere were slated for murals made with local artists, schools, and kids from the area — the one intervention here that isn't about safety or comfort at all, just about a street that looks like it belongs to the people living on it.
 
-  **Examples of tactical urbanism intervention:**
-
-  ![](/uploads/Gemini_Generated_Image_gmrofigmrofigmro.png)
-
-  ![](/uploads/Gemini_Generated_Image_awu677awu677awu6.png)
-
-  ![](/uploads/Gemini_Generated_Image_8g6nr78g6nr78g6n.png)
 
   ***
 
