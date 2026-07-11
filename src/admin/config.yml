@@ -118,6 +118,19 @@ collections:
       - { label: "Date", name: "date", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false }
       - { label: "One-line summary (English)", name: "why_en", widget: "string" }
       - { label: "One-line summary (Arabic)", name: "why_ar", widget: "string" }
-      - { label: "The piece (English)", name: "brief_en", widget: "text", required: false }
-      - { label: "The piece (Arabic)", name: "brief_ar", widget: "text", required: false }
+      - label: "The piece (English)"
+        name: "brief_en"
+        widget: "markdown"
+        required: false
+        hint: "Write normally. To add a photo between paragraphs, just paste or drag it in at that point in the text."
+      - label: "The piece (Arabic)"
+        name: "brief_ar"
+        widget: "markdown"
+        required: false
+        hint: "نفس النص بالعربية. يمكنك لصق أو سحب الصور مباشرة بين الفقرات."
       - { label: "Cover image", name: "cover", widget: "image", required: false }
+      - label: "Tags"
+        name: "topics"
+        widget: "list"
+        required: false
+        hint: "Type a tag and press enter to add it. Add as many as you like."

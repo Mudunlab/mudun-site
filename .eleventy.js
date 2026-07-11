@@ -1,6 +1,14 @@
 const cheerio = require("cheerio");
+const MarkdownIt = require("markdown-it");
+const md = new MarkdownIt({ html: false, linkify: true });
 
 module.exports = function (eleventyConfig) {
+  // Renders the rich-text/markdown magazine content (headings, bold, inline
+  // images pasted or dropped into the CMS editor) as real HTML on the page.
+  eleventyConfig.addFilter("markdownify", function (str) {
+    return md.render(str || "");
+  });
+
   // Copy the CMS admin panel and uploaded media straight through to the built site
   eleventyConfig.addPassthroughCopy({ "src/admin": "admin" });
   eleventyConfig.addPassthroughCopy({ "src/uploads": "uploads" });

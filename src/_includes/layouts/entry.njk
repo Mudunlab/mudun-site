@@ -36,8 +36,20 @@ layout: base.njk
         <h4 style="font-family:var(--label-font);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--green-deep);margin:0 0 8px"
             data-en="{% if type == 'research' %}Why it matters{% else %}The piece{% endif %}"
             data-ar="{% if type == 'research' %}لماذا يهمّ{% else %}المادة{% endif %}"></h4>
-        <p style="color:var(--asphalt-soft)" data-en="{{ brief_en }}" data-ar="{{ brief_ar }}"></p>
+
+        {% if type == "magazine" %}
+          <div class="prose" data-only="en">{{ brief_en | markdownify | safe }}</div>
+          <div class="prose" data-only="ar" dir="rtl">{{ brief_ar | markdownify | safe }}</div>
+        {% else %}
+          <p style="color:var(--asphalt-soft)" data-en="{{ brief_en }}" data-ar="{{ brief_ar }}"></p>
+        {% endif %}
       </div>
+
+      {% if type == "magazine" and topics and topics.length %}
+        <div style="margin-top:14px;display:flex;flex-wrap:wrap;gap:6px">
+          {% for t in topics %}<span class="tag">{{ t }}</span>{% endfor %}
+        </div>
+      {% endif %}
 
       {% if not cover %}
         <div class="figure">
