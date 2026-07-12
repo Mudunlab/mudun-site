@@ -53,7 +53,7 @@
   .slide-nav button{width:42px;height:42px;border-radius:50%;border:1px solid var(--sand-line);background:#fff;cursor:pointer;font-size:19px;color:var(--asphalt);box-shadow:0 2px 6px rgba(0,0,0,.08)}
   .slide-nav .btn{width:auto;height:auto;border-radius:8px}
 
-  .lightbox{display:none;position:fixed;inset:0;background:rgba(20,18,15,.94);z-index:200;align-items:center;justify-content:center}
+  .lightbox{display:none;position:fixed;inset:0;width:100vw;height:100vh;height:100dvh;background:rgba(20,18,15,.94);z-index:200;align-items:center;justify-content:center}
   .lightbox.open{display:flex}
   .lightbox img{max-width:90vw;max-height:88vh;border-radius:4px}
   .lightbox-close{position:absolute;top:18px;right:22px;width:44px;height:44px;border-radius:50%;border:none;background:rgba(255,255,255,.12);color:#fff;font-size:20px;cursor:pointer}
