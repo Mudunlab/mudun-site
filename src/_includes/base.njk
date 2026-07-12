@@ -285,6 +285,47 @@
 
   var yr=document.getElementById('yr'); if(yr) yr.textContent=new Date().getFullYear();
   applyLang();
+
+  // Fullscreen presentation viewer — positioned in JS using the real, live
+  // scroll offset and viewport height at the moment it opens. This sidesteps
+  // known real-world inconsistencies with position:fixed and vh/dvh CSS units
+  // on some mobile browsers, by using values JS always reports correctly.
+  window.lightboxImages = [];
+  window.lightboxIndex = 0;
+  window.openLightbox = function(galleryId){
+    var gallery = document.getElementById(galleryId);
+    if(!gallery) return;
+    window.lightboxImages = Array.prototype.map.call(gallery.querySelectorAll('img'), function(img){ return img.src; });
+    window.lightboxIndex = 0;
+    var lb = document.getElementById('lightbox');
+    document.getElementById('lightbox-img').src = window.lightboxImages[0];
+    var scrollY = window.pageYOffset || document.documentElement.scrollTop || 0;
+    lb.style.top = scrollY + 'px';
+    lb.style.height = window.innerHeight + 'px';
+    lb.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  };
+  window.closeLightbox = function(){
+    document.getElementById('lightbox').classList.remove('open');
+    document.body.style.overflow = '';
+  };
+  window.lightboxNav = function(dir){
+    var n = window.lightboxImages.length;
+    if(!n) return;
+    window.lightboxIndex = (window.lightboxIndex + dir + n) % n;
+    document.getElementById('lightbox-img').src = window.lightboxImages[window.lightboxIndex];
+  };
+  window.addEventListener('resize', function(){
+    var lb = document.getElementById('lightbox');
+    if(lb && lb.classList.contains('open')) lb.style.height = window.innerHeight + 'px';
+  });
+  document.addEventListener('keydown', function(e){
+    var lb = document.getElementById('lightbox');
+    if(!lb || !lb.classList.contains('open')) return;
+    if(e.key==='Escape') closeLightbox();
+    if(e.key==='ArrowRight') lightboxNav(1);
+    if(e.key==='ArrowLeft') lightboxNav(-1);
+  });
 })();
 </script>
 </body>
