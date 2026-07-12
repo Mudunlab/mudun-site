@@ -38,7 +38,7 @@ examines_en:
   - Operating speed and crowding — how fast buses actually move, and how full they get, once real traffic is accounted for
   - A combined performance grade for the corridor — and why that single grade can be misleading on its own
 examines_ar: []
-cover: /uploads/route99-cover-preview.png
+cover: /uploads/route99-cover-preview1.png
 pdf: /uploads/Evaluating the Operational Performance of Amman BRT Route 99 (1).pdf
 pdf_lang: en
 slides_en:
