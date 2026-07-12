@@ -2,7 +2,7 @@
 title_en: Is Amman's BRT Living Up to Its Promise? An Operational Performance Evaluation of Route 99
 title_ar: هل يفي الباص السريع في عمّان بوعوده؟ تقييم الأداء التشغيلي للخط 99
 category: transit
-status: preparation
+status: published
 featured: true
 date: 2026-03-18
 author_en: Ahmad A Alkhawaldeh
