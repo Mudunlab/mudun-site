@@ -35,11 +35,14 @@ function groupConsecutiveImages(html) {
       j++;
     }
     if (run.length >= 2) {
+      const galleryId = "gallery-" + Math.random().toString(36).slice(2, 9);
       const imgsHtml = run
         .map((node) => $.html($(node).children("img")))
         .join("");
-      const gridHtml = `<div class="photo-grid photo-grid-${run.length >= 5 ? "3col" : "2col"}">${imgsHtml}</div>`;
-      $(run[0]).before(gridHtml);
+      const countLabelEn = `${run.length} photos — swipe or use the arrows to see them all`;
+      const countLabelAr = `${run.length} صور — مرّر أو استخدم الأسهم لرؤيتها جميعًا`;
+      const galleryHtml = `<p class="photo-count" data-en="${countLabelEn}" data-ar="${countLabelAr}"></p><div class="slide-viewer" id="${galleryId}">${imgsHtml}</div><div class="slide-nav"><button type="button" aria-label="Previous photo" onclick="document.getElementById('${galleryId}').scrollBy({left:-320,behavior:'smooth'})">‹</button><button type="button" aria-label="Next photo" onclick="document.getElementById('${galleryId}').scrollBy({left:320,behavior:'smooth'})">›</button></div>`;
+      $(run[0]).before(galleryHtml);
       run.forEach((node) => $(node).remove());
     }
     i = j; // move past this whole run (grouped or not) and continue scanning
