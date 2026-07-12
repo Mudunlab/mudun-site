@@ -12,23 +12,23 @@ why_ar: أسبوع من بيانات التشغيل الفعلية للخط 99 �
 brief_en: |-
   Route 99 is one of the busiest corridors in Amman's Bus Rapid Transit network — about 17 kilometers between Swaileh and the Jordan Museum. This study used one full week of real operational data, pulled directly from the buses through the city's Intelligent Transportation System, to check whether the service actually delivers on what its frequency promises.
 
-  Why this study matters
+  **Why this study matters**
 
   Route 99 gets an overall grade of C on the standard international scale used to evaluate BRT service (TCQSM) — "acceptable," on paper. But that single letter hides something worth knowing: the corridor has plenty of buses, graded at the very top of the scale for frequency, and still delivers an unpredictable ride. Buses don't stay evenly spaced as they move down the route — some bunch together, others fall behind — so a service that looks strong in the numbers can leave a rider waiting far longer than expected, especially the further they are from the start of the line.
 
   This matters beyond Route 99 itself. The same TCQSM diagnostic approach used here applies to any BRT or bus corridor in the network, and the central finding — that a schedule can look fine on paper while failing badly in practice — is exactly the kind of gap that's easy to miss without stop-level data like this.
 
-  The core finding
+  **The core finding**
 
   Route 99 doesn't have one problem — it has two, and they show up in opposite directions. Heading toward the Jordan Museum, buses tend to run early: the schedule gives drivers more time at each stop than they use, and that unused time piles up the further the bus travels. Heading toward Swaileh, the opposite happens during the evening peak — traffic eats into the running time, and the schedule has no cushion to absorb it, so buses fall further behind as the trip goes on. Same root cause in both directions: a timetable that doesn't match how the corridor is actually driven.
 
   One stop stands out for a different reason: Sport City Terminal consistently has the longest dwell time on the route, in every time period. Some of that is simply high passenger turnover — but part of the delay there and elsewhere can't be explained by boarding at all, pointing to signal timing or driver procedure rather than demand.
 
-  What the study recommends
+  **What the study recommends**
 
   The single most effective fix, according to the analysis, is also the least expensive: rebuild the timetable so it matches how the corridor actually runs — tighter outbound, looser inbound during the evening peak. Alongside that, the study recommends moving fare payment off the bus, giving buses signal priority at key intersections, and standardizing the vehicle fleet so all buses carry the same number of passengers.
 
-  The full study — stop-by-stop data, methodology, and the complete reasoning behind each recommendation — is available below.
+  _The full study — stop-by-stop data, methodology, and the complete reasoning behind each recommendation — is available below._
 brief_ar: ''
 examines_en:
   - Schedule adherence — whether buses arrive on time, in both directions, across the full service day
