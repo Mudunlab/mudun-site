@@ -59,8 +59,16 @@ collections:
       - { label: "Author (Arabic)", name: "author_ar", widget: "string", required: false }
       - { label: "One-line summary (English)", name: "why_en", widget: "string", hint: "The teaser shown on the card." }
       - { label: "One-line summary (Arabic)", name: "why_ar", widget: "string" }
-      - { label: "Brief — why it matters (English)", name: "brief_en", widget: "text", required: false }
-      - { label: "Brief — why it matters (Arabic)", name: "brief_ar", widget: "text", required: false }
+      - label: "Brief — why it matters (English)"
+        name: "brief_en"
+        widget: "markdown"
+        required: false
+        hint: "Write normally. To add a photo between paragraphs, just paste or drag it in at that point in the text."
+      - label: "Brief — why it matters (Arabic)"
+        name: "brief_ar"
+        widget: "markdown"
+        required: false
+        hint: "نفس النص بالعربية. يمكنك لصق أو سحب الصور مباشرة بين الفقرات."
       - { label: "What this study examines (English)", name: "examines_en", widget: "list", required: false, hint: "Add one point per line." }
       - { label: "What this study examines (Arabic)", name: "examines_ar", widget: "list", required: false }
       - { label: "Cover image", name: "cover", widget: "image", required: false, hint: "Optional. Replaces the placeholder figure." }

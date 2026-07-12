@@ -41,12 +41,8 @@ layout: base.njk
             data-en="{% if type == 'research' %}Why it matters{% else %}The piece{% endif %}"
             data-ar="{% if type == 'research' %}لماذا يهمّ{% else %}المادة{% endif %}"></h4>
 
-        {% if type == "magazine" %}
-          <div class="prose" data-only="en">{{ brief_en | markdownify | safe }}</div>
-          <div class="prose" data-only="ar" dir="rtl">{{ brief_ar | markdownify | safe }}</div>
-        {% else %}
-          <p style="color:var(--asphalt-soft)" data-en="{{ brief_en }}" data-ar="{{ brief_ar }}"></p>
-        {% endif %}
+        <div class="prose" data-only="en">{{ brief_en | markdownify | safe }}</div>
+        <div class="prose" data-only="ar" dir="rtl">{{ brief_ar | markdownify | safe }}</div>
       </div>
 
       {% if type == "magazine" and topics and topics.length %}
@@ -84,6 +80,7 @@ layout: base.njk
             {% for s in slides_en %}<img src="{{ s | slideUrl }}" alt="Slide {{ loop.index }} of {{ slides_en.length }}" loading="lazy">{% endfor %}
           </div>
           <div class="slide-nav">
+            <button type="button" class="btn btn-ghost btn-sm" onclick="openLightbox('slides-en')" data-en="View fullscreen ⤢" data-ar="عرض ملء الشاشة ⤢" style="margin-inline-end:auto"></button>
             <button type="button" aria-label="Previous slide" onclick="document.getElementById('slides-en').scrollBy({left:-320,behavior:'smooth'})">‹</button>
             <button type="button" aria-label="Next slide" onclick="document.getElementById('slides-en').scrollBy({left:320,behavior:'smooth'})">›</button>
           </div>
@@ -96,11 +93,19 @@ layout: base.njk
             {% for s in slides_ar %}<img src="{{ s | slideUrl }}" alt="الشريحة {{ loop.index }} من {{ slides_ar.length }}" loading="lazy">{% endfor %}
           </div>
           <div class="slide-nav">
+            <button type="button" class="btn btn-ghost btn-sm" onclick="openLightbox('slides-ar')" data-en="View fullscreen ⤢" data-ar="عرض ملء الشاشة ⤢" style="margin-inline-end:auto"></button>
             <button type="button" aria-label="الشريحة السابقة" onclick="document.getElementById('slides-ar').scrollBy({left:320,behavior:'smooth'})">›</button>
             <button type="button" aria-label="الشريحة التالية" onclick="document.getElementById('slides-ar').scrollBy({left:-320,behavior:'smooth'})">‹</button>
           </div>
         </div>
         {% endif %}
+
+        <div id="lightbox" class="lightbox" onclick="if(event.target===this)closeLightbox()">
+          <button type="button" class="lightbox-close" aria-label="Close" onclick="closeLightbox()">✕</button>
+          <button type="button" class="lightbox-arrow lightbox-prev" aria-label="Previous" onclick="lightboxNav(-1)">‹</button>
+          <img id="lightbox-img" src="" alt="">
+          <button type="button" class="lightbox-arrow lightbox-next" aria-label="Next" onclick="lightboxNav(1)">›</button>
+        </div>
       {% endif %}
 
       {# ---- Layer 2: the full study PDF ---- #}
