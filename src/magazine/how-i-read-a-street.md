@@ -40,11 +40,13 @@ brief_en: |-
 
   **Examples of tactical urbanism interventions:**
 
-  ![](/uploads/Gemini_Generated_Image_gmrofigmrofigmro.jpg)
+  ![Dark modular seating and patterned paving extend the sidewalk into a former parking lane, giving people somewhere to sit at street level. (AI-generated concept)](/uploads/7.jpg "A parklet reclaiming curb space")
 
-  ![](/uploads/Gemini_Generated_Image_awu677awu677awu6.jpg)
+  ![Former parking spots converted into planted beds, softening the edge of the street ahead of a painted crossing. (AI-generated concept)](/uploads/8.jpg "Planters replacing curb parking")
 
-  ![](/uploads/Gemini_Generated_Image_1yjo0r1yjo0r1yjo.jpg)
+  ![A street corner tightened with a curb extension and a decorative painted crosswalk, shortening the crossing at the intersection. (AI-generated concept)](/uploads/1.jpg "Corner reclaimed with a painted crosswalk")
+
+
 
   ***
 
@@ -74,11 +76,13 @@ brief_en: |-
 
   **Examples of tactical urbanism interventions:**
 
-  ![](/uploads/Gemini_Generated_Image_xcwomnxcwomnxcwo.jpg)
+  ![A former traffic space converted into a circular playground with swings and a slide, set beside a protected bike lane and outdoor seating. (AI-generated concept)](/uploads/5.jpg "A reclaimed corner turned into a fenced play area")
 
-  ![](/uploads/Gemini_Generated_Image_h9xrf7h9xrf7h9xr.jpg)
+  ![A reclaimed lane hosting hula-hoop games and a craft table side by side, showing how a street can carry both play and small-scale activity at once. (AI-generated concept)](/uploads/6.jpg "A play street with room for kids")
 
-  ![](/uploads/Gemini_Generated_Image_8g6nr78g6nr78g6n.jpg)
+  ![Hopscotch and games marked directly on the pavement, alongside café seating and small stalls — a street doing double duty as both a thoroughfare and a gathering space. (AI-generated concept)](/uploads/10.jpg "A play street with market stalls and seating")
+
+
 
   The general rule I took from this: don't ask what a space could become. Ask what it's already become, and design for that properly.
 
@@ -100,11 +104,13 @@ brief_en: |-
 
   **Examples of tactical urbanism interventions:**
 
-  ![](/uploads/Gemini_Generated_Image_otc0zsotc0zsotc0.jpg)
+  ![Benches and planters built from repurposed wood pallets, set into a painted ground pattern that widens the usable sidewalk. (AI-generated concept)](/uploads/3.jpg "Pallet furniture along the sidewalk")
 
-  ![](/uploads/Gemini_Generated_Image_g2sbqbg2sbqbg2sb.jpg)
+  ![Recycled-wood seating wrapped around a planted tree pit, creating a shared gathering point where people can sit and read. (AI-generated concept)](/uploads/4.jpg "Modular seating built around a street tree")
 
-  ![](/uploads/Gemini_Generated_Image_mtw7d1mtw7d1mtw7.jpg)
+  ![Wavy benches cut from repurposed tire tread mark the edge of a reclaimed lane, doubling as seating and a low-cost buffer from traffic. (AI-generated concept)](/uploads/2.jpg " Recycled tire seating as a soft divider")
+
+
 
   ***
 
@@ -118,7 +124,7 @@ brief_en: |-
 
   **Examples of tactical urbanism interventions:**
 
-  ![](/uploads/Gemini_Generated_Image_abmqihabmqihabmq.jpg)
+  ![An overhead canopy providing continuous shade along a stretch shared with pedestrians, transit, and parked vehicles. (AI-generated concept)](/uploads/9.jpg "A shaded walkway through a busy corridor")
 
   ***
 
@@ -128,7 +134,7 @@ brief_en: |-
 
   If there's one habit worth taking from this, it's the one underneath every example above: before designing anything, go and look at what a street has already become. Half the intervention is usually already there, waiting to be made official.
 brief_ar: ''
-cover: /uploads/Gemini_Generated_Image_gmrofigmrofigmro.jpg
+cover: /uploads/7.jpg
 topics:
   - tactical urbanism
   - streets
