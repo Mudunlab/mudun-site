@@ -36,9 +36,6 @@ brief_en: |-
 
   ![](/uploads/3.jpg)
 
-
-
-
   This kind of mismatch matters because width is one of the few things drivers read instinctively. Nobody needs a sign to know a road is wide enough to speed up in. So the fix wasn't signage — it was taking the width away. Narrow the carriageway to a single lane, reclaim a meter and a half to two meters on the pedestrian side, and at the school itself, remove parking entirely and turn that space into a real waiting zone: a marked crossing, bench seating, shade sails over where people already stand. At the smaller junctions along the same stretch, painted curb extensions and planters brought crossing distances down from about fifteen meters to seven or nine — the difference between a crossing you glance at and one you have to commit to.
 
   **Examples of tactical urbanism interventions (AI-generated concept illustrations):**
@@ -48,8 +45,6 @@ brief_en: |-
   ![](/uploads/Planters%20replacing%20curb%20parking.jpg)
 
   ![](/uploads/Corner%20reclaimed%20with%20a%20painted%20crosswalk.jpg)
-
-
 
   ***
 
@@ -91,11 +86,23 @@ brief_en: |-
 
   The third check is on junctions specifically, and it's less about how fast people are driving than about the shape of the space they're driving through. Further up the corridor, one junction stood out as the single most dangerous point I documented: a twenty-meter crossing, cars parked on both sides killing sightlines, an entry angle shaped to encourage a fast turn rather than a slow one, and no marked crossing at all on a two-way street.
 
-  **[INSERT PHOTO: the descending junction]**
+  ![](/uploads/14.jpg)
+
+  ![](/uploads/13.jpg)
+
+  ![](/uploads/15.jpg)
 
   A speed limit sign does nothing about geometry like that. What does something is changing the geometry itself: curb extensions to shorten the crossing and remove the parking that was blocking sightlines, a painted crosswalk, a refuge median so a pedestrian only has to read one direction of traffic at a time.
 
   Right beside that same junction, on a small flat patch with a few trees and a view across the city, kids had already turned an unused corner into a hangout spot — the same "already decided" signal as the island, just smaller. A few benches, planters, shade overhead. Nothing invented, just made to last through summer.
+
+  **Examples of tactical urbanism interventions (AI-generated concept illustrations):**
+
+  ![](/uploads/Pallet%20furniture%20along%20the%20sidewalk.jpg)
+
+  ![](/uploads/Modular%20seating%20built%20around%20a%20street%20tree.jpg)
+
+  ![](/uploads/Recycled%20tire%20seating%20as%20a%20soft%20divider.jpg)
 
   ***
 
@@ -103,11 +110,13 @@ brief_en: |-
 
   The last thing I check, especially in Amman, is heat. A technically safe street that's unshaded for long stretches still won't get used the way it should — people will take a car instead of a five-minute walk if that walk means direct sun with nowhere to stop. Near the mosque at the top of the corridor, and along the exposed stretch leading to it, the fix was almost entirely about comfort: lean-rails against the property walls, shade sails at intervals, a marked crossing at the mosque frontage itself where people already gather before and after prayers.
 
-  **[INSERT PHOTO: mosque frontage / shaded stretch]**
+  ![](/uploads/16.jpg)
 
   The same logic applied to five stairways connecting the corridor down into the neighborhood — currently just functional, nothing else, but already used informally by kids as gathering spots. Painted risers, a bit of seating tucked to one side, shade above, still wide enough to pass through. And blank walls along the police station perimeter and elsewhere were slated for murals made with local artists, schools, and kids from the area — the one intervention here that isn't about safety or comfort at all, just about a street that looks like it belongs to the people living on it.
 
-  **[INSERT PHOTO: stairs / mural wall]**
+  **Examples of tactical urbanism interventions (AI-generated concept illustrations):**
+
+  ![](/uploads/A%20shaded%20walkway%20through%20a%20busy%20corridor.jpg)
 
   ***
 
