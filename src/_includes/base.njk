@@ -285,42 +285,6 @@
 
   var yr=document.getElementById('yr'); if(yr) yr.textContent=new Date().getFullYear();
   applyLang();
-
-  // Fullscreen presentation viewer
-  window.lightboxImages = [];
-  window.lightboxIndex = 0;
-  window.openLightbox = function(galleryId){
-    var gallery = document.getElementById(galleryId);
-    if(!gallery) return;
-    window.lightboxImages = Array.prototype.map.call(gallery.querySelectorAll('img'), function(img){ return img.src; });
-    window.lightboxIndex = 0;
-    document.getElementById('lightbox-img').src = window.lightboxImages[0];
-    document.getElementById('lightbox').classList.add('open');
-    window.lightboxScrollY = window.scrollY;
-    document.body.style.position = 'fixed';
-    document.body.style.top = (-window.lightboxScrollY) + 'px';
-    document.body.style.width = '100%';
-  };
-  window.closeLightbox = function(){
-    document.getElementById('lightbox').classList.remove('open');
-    document.body.style.position = '';
-    document.body.style.top = '';
-    document.body.style.width = '';
-    window.scrollTo(0, window.lightboxScrollY || 0);
-  };
-  window.lightboxNav = function(dir){
-    var n = window.lightboxImages.length;
-    if(!n) return;
-    window.lightboxIndex = (window.lightboxIndex + dir + n) % n;
-    document.getElementById('lightbox-img').src = window.lightboxImages[window.lightboxIndex];
-  };
-  document.addEventListener('keydown', function(e){
-    var lb = document.getElementById('lightbox');
-    if(!lb || !lb.classList.contains('open')) return;
-    if(e.key==='Escape') closeLightbox();
-    if(e.key==='ArrowRight') lightboxNav(1);
-    if(e.key==='ArrowLeft') lightboxNav(-1);
-  });
 })();
 </script>
 </body>

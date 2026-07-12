@@ -46,23 +46,13 @@
 
   .photo-count{font-family:var(--label-font);font-size:.72rem;letter-spacing:.06em;color:var(--asphalt-soft);margin:1.2em 0 8px}
   .slide-viewer{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;padding-bottom:6px;margin:0 0 14px}
-  .slide-viewer img{scroll-snap-align:start;width:min(82%,640px);flex-shrink:0;border-radius:6px;border:1px solid var(--sand-line)}
+  .slide-viewer > img,.slide-viewer > a{scroll-snap-align:start;width:min(82%,640px);flex-shrink:0;display:block}
+  .slide-viewer > img,.slide-viewer > a img{border-radius:6px;border:1px solid var(--sand-line)}
+  .slide-viewer > a img{width:100%;display:block}
   .slide-viewer::-webkit-scrollbar{height:6px}
   .slide-viewer::-webkit-scrollbar-thumb{background:var(--sand-line);border-radius:3px}
   .slide-nav{display:flex;justify-content:flex-end;gap:10px;margin-top:6px}
   .slide-nav button{width:42px;height:42px;border-radius:50%;border:1px solid var(--sand-line);background:#fff;cursor:pointer;font-size:19px;color:var(--asphalt);box-shadow:0 2px 6px rgba(0,0,0,.08)}
-  .slide-nav .btn{width:auto;height:auto;border-radius:8px}
-
-  .lightbox{display:none;position:fixed;inset:0;width:100vw;height:100vh;height:100dvh;background:rgba(20,18,15,.94);z-index:200;align-items:center;justify-content:center}
-  .lightbox.open{display:flex}
-  .lightbox img{max-width:90vw;max-height:88vh;border-radius:4px}
-  .lightbox-close{position:absolute;top:18px;right:22px;width:44px;height:44px;border-radius:50%;border:none;background:rgba(255,255,255,.12);color:#fff;font-size:20px;cursor:pointer}
-  .lightbox-close:hover{background:rgba(255,255,255,.22)}
-  .lightbox-arrow{position:absolute;top:50%;transform:translateY(-50%);width:52px;height:52px;border-radius:50%;border:none;background:rgba(255,255,255,.12);color:#fff;font-size:26px;cursor:pointer}
-  .lightbox-arrow:hover{background:rgba(255,255,255,.22)}
-  .lightbox-prev{left:18px}
-  .lightbox-next{right:18px}
-  @media (max-width:640px){.lightbox-arrow{width:42px;height:42px;font-size:20px}.lightbox-close{width:38px;height:38px;font-size:17px}}
   .slide-nav button:hover{background:var(--concrete);border-color:var(--green-deep);color:var(--green-deep)}
 
   .pdf-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px}

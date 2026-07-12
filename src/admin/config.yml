@@ -54,7 +54,8 @@ collections:
           - { label: "Published", value: "published" }
           - { label: "In preparation", value: "preparation" }
       - { label: "Featured", name: "featured", widget: "boolean", default: false, hint: "Adds a ‘Featured’ tag." }
-      - { label: "Date", name: "date", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false }
+      - { label: "Date published on Mudun", name: "date", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false }
+      - { label: "Date originally produced (optional)", name: "date_created", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false, required: false, hint: "Only fill this in if the work was actually made earlier — e.g. publishing an older 2023 study now. Leave blank if it was produced and published around the same time." }
       - { label: "Author (English)", name: "author_en", widget: "string", required: false, hint: "Leave blank to credit Mudun instead of a named author." }
       - { label: "Author (Arabic)", name: "author_ar", widget: "string", required: false }
       - { label: "One-line summary (English)", name: "why_en", widget: "string", hint: "The teaser shown on the card." }
@@ -125,7 +126,8 @@ collections:
           - { label: "Published", value: "published" }
           - { label: "In preparation", value: "preparation" }
       - { label: "Featured", name: "featured", widget: "boolean", default: false }
-      - { label: "Date", name: "date", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false }
+      - { label: "Date published on Mudun", name: "date", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false }
+      - { label: "Date originally produced (optional)", name: "date_created", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false, required: false, hint: "Only fill this in if the piece was actually made earlier. Leave blank if it was produced and published around the same time." }
       - { label: "Author (English)", name: "author_en", widget: "string", required: false, hint: "Leave blank to credit Mudun instead of a named author." }
       - { label: "Author (Arabic)", name: "author_ar", widget: "string", required: false }
       - { label: "One-line summary (English)", name: "why_en", widget: "string" }

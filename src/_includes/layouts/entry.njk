@@ -17,9 +17,16 @@ layout: base.njk
     <h2 style="font-size:clamp(1.8rem,3.6vw,2.7rem)" data-en="{{ title_en }}" data-ar="{{ title_ar }}"></h2>
     <p class="lede" style="margin-top:1rem" data-en="{{ why_en }}" data-ar="{{ why_ar }}"></p>
 
+    {% if date_created %}
+      {% set bylineEn = (author_en or 'Mudun') + ' · Produced ' + (date_created | formatDate('en')) + ' · Published on Mudun ' + (date | formatDate('en')) %}
+      {% set bylineAr = (author_ar or 'مدن') + ' · أُنتج في ' + (date_created | formatDate('ar')) + ' · نُشر على مدن في ' + (date | formatDate('ar')) %}
+    {% else %}
+      {% set bylineEn = (author_en or 'Mudun') + ' · ' + (date | formatDate('en')) %}
+      {% set bylineAr = (author_ar or 'مدن') + ' · ' + (date | formatDate('ar')) %}
+    {% endif %}
     <p class="byline" style="margin-top:.6rem;color:var(--asphalt-soft);font-size:.92rem"
-       data-en="{{ author_en or 'Mudun' }} · {{ date | formatDate('en') }}"
-       data-ar="{{ author_ar or 'مدن' }} · {{ date | formatDate('ar') }}"></p>
+       data-en="{{ bylineEn }}"
+       data-ar="{{ bylineAr }}"></p>
 
     {% if status == "preparation" %}
       <div class="note" style="margin-top:clamp(30px,4vw,44px)">
@@ -73,14 +80,14 @@ layout: base.njk
       {% if type == "research" and (slides_en.length or slides_ar.length) %}
         <h4 style="font-family:var(--label-font);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--green-deep);margin:28px 0 8px"
             data-en="Presentation" data-ar="العرض التقديمي"></h4>
+        <p class="privacy" style="margin-bottom:10px" data-en="Tap or click any slide to view it full size." data-ar="اضغط على أي شريحة لعرضها بالحجم الكامل."></p>
 
         {% if slides_en.length %}
         <div data-only="en">
           <div class="slide-viewer" id="slides-en">
-            {% for s in slides_en %}<img src="{{ s | slideUrl }}" alt="Slide {{ loop.index }} of {{ slides_en.length }}" loading="lazy">{% endfor %}
+            {% for s in slides_en %}<a href="{{ s | slideUrl }}" target="_blank" rel="noopener"><img src="{{ s | slideUrl }}" alt="Slide {{ loop.index }} of {{ slides_en.length }}" loading="lazy"></a>{% endfor %}
           </div>
           <div class="slide-nav">
-            <button type="button" class="btn btn-ghost btn-sm" onclick="openLightbox('slides-en')" data-en="View presentation full screen ⤢" data-ar="مشاهدة العرض التقديمي بملء الشاشة ⤢" style="margin-inline-end:auto"></button>
             <button type="button" aria-label="Previous slide" onclick="document.getElementById('slides-en').scrollBy({left:-320,behavior:'smooth'})">‹</button>
             <button type="button" aria-label="Next slide" onclick="document.getElementById('slides-en').scrollBy({left:320,behavior:'smooth'})">›</button>
           </div>
@@ -90,22 +97,14 @@ layout: base.njk
         {% if slides_ar.length %}
         <div data-only="ar">
           <div class="slide-viewer" id="slides-ar" dir="rtl">
-            {% for s in slides_ar %}<img src="{{ s | slideUrl }}" alt="الشريحة {{ loop.index }} من {{ slides_ar.length }}" loading="lazy">{% endfor %}
+            {% for s in slides_ar %}<a href="{{ s | slideUrl }}" target="_blank" rel="noopener"><img src="{{ s | slideUrl }}" alt="الشريحة {{ loop.index }} من {{ slides_ar.length }}" loading="lazy"></a>{% endfor %}
           </div>
           <div class="slide-nav">
-            <button type="button" class="btn btn-ghost btn-sm" onclick="openLightbox('slides-ar')" data-en="View presentation full screen ⤢" data-ar="مشاهدة العرض التقديمي بملء الشاشة ⤢" style="margin-inline-end:auto"></button>
             <button type="button" aria-label="الشريحة السابقة" onclick="document.getElementById('slides-ar').scrollBy({left:320,behavior:'smooth'})">›</button>
             <button type="button" aria-label="الشريحة التالية" onclick="document.getElementById('slides-ar').scrollBy({left:-320,behavior:'smooth'})">‹</button>
           </div>
         </div>
         {% endif %}
-
-        <div id="lightbox" class="lightbox" onclick="if(event.target===this)closeLightbox()">
-          <button type="button" class="lightbox-close" aria-label="Close" onclick="closeLightbox()">✕</button>
-          <button type="button" class="lightbox-arrow lightbox-prev" aria-label="Previous" onclick="lightboxNav(-1)">‹</button>
-          <img id="lightbox-img" src="" alt="">
-          <button type="button" class="lightbox-arrow lightbox-next" aria-label="Next" onclick="lightboxNav(1)">›</button>
-        </div>
       {% endif %}
 
       {# ---- Layer 2: the full study PDF ---- #}

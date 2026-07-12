@@ -10,8 +10,8 @@
           </div>
           <h3><a href="{{ entry.url }}" style="color:inherit;text-decoration:none" data-en="{{ entry.data.title_en }}" data-ar="{{ entry.data.title_ar }}"></a></h3>
           <p class="byline" style="color:var(--asphalt-soft);font-size:.85rem;margin-bottom:8px"
-             data-en="{{ entry.data.author_en or 'Mudun' }} · {{ entry.data.date | formatDate('en') }}"
-             data-ar="{{ entry.data.author_ar or 'مدن' }} · {{ entry.data.date | formatDate('ar') }}"></p>
+             data-en="{{ entry.data.author_en or 'Mudun' }} · {{ (entry.data.date_created or entry.data.date) | formatDate('en') }}"
+             data-ar="{{ entry.data.author_ar or 'مدن' }} · {{ (entry.data.date_created or entry.data.date) | formatDate('ar') }}"></p>
           <p class="why"{% if entry.data.status == "preparation" %} style="margin:0"{% endif %} data-en="{{ entry.data.why_en }}" data-ar="{{ entry.data.why_ar }}"></p>
           {% if entry.data.status != "preparation" %}
           <a class="entry-toggle" href="{{ entry.url }}" style="text-decoration:none">
