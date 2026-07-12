@@ -64,6 +64,12 @@
   .prose h2{font-size:1.25rem}
   .prose h3{font-size:1.08rem}
   .prose img{width:100%;border-radius:6px;margin:1.2em 0}
+
+  .photo-grid{display:grid;gap:10px;margin:1.2em 0}
+  .photo-grid img{width:100%;height:100%;aspect-ratio:4/3;object-fit:cover;border-radius:6px;margin:0}
+  .photo-grid-2col{grid-template-columns:repeat(2,1fr)}
+  .photo-grid-3col{grid-template-columns:repeat(3,1fr)}
+  @media (max-width:560px){.photo-grid-3col{grid-template-columns:repeat(2,1fr)}}
   .prose a{color:var(--green-deep)}
   .prose ul,.prose ol{padding-inline-start:1.2em;margin:0 0 1.1em}
   .prose[dir="rtl"]{font-family:'IBM Plex Sans Arabic',sans-serif}
