@@ -38,13 +38,15 @@ brief_en: |-
 
   This kind of mismatch matters because width is one of the few things drivers read instinctively. Nobody needs a sign to know a road is wide enough to speed up in. So the fix wasn't signage — it was taking the width away. Narrow the carriageway to a single lane, reclaim a meter and a half to two meters on the pedestrian side, and at the school itself, remove parking entirely and turn that space into a real waiting zone: a marked crossing, bench seating, shade sails over where people already stand. At the smaller junctions along the same stretch, painted curb extensions and planters brought crossing distances down from about fifteen meters to seven or nine — the difference between a crossing you glance at and one you have to commit to.
 
-  Examples of tactical urbanism interventions (AI-generated concept illustrations):
+  **Examples of tactical urbanism interventions (AI-generated concept illustrations):**
 
-  ![Dark modular seating and patterned paving extend the sidewalk into a former parking lane, giving people somewhere to sit at street level. (AI-generated concept)](/uploads/7.jpg "A parklet reclaiming curb space")
+  ![](/uploads/7.jpg)
 
-  ![Former parking spots converted into planted beds, softening the edge of the street ahead of a painted crossing. (AI-generated concept)](/uploads/8.jpg "Planters replacing curb parking")
+  ![](/uploads/7.jpg)
 
-  ![A street corner tightened with a curb extension and a decorative painted crosswalk, shortening the crossing at the intersection. (AI-generated concept)](/uploads/1.jpg "Corner reclaimed with a painted crosswalk")
+  ![](/uploads/Gemini_Generated_Image_1yjo0r1yjo0r1yjo.jpg)
+
+
 
   ***
 
