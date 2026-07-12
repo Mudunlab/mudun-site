@@ -28,7 +28,7 @@ brief_en: |-
 
   The single most effective fix, according to the analysis, is also the least expensive: rebuild the timetable so it matches how the corridor actually runs — tighter outbound, looser inbound during the evening peak. Alongside that, the study recommends moving fare payment off the bus, giving buses signal priority at key intersections, and standardizing the vehicle fleet so all buses carry the same number of passengers.
 
-  _The full study — stop-by-stop data, methodology, and the complete reasoning behind each recommendation — is available below._
+  > _The full study — stop-by-stop data, methodology, and the complete reasoning behind each recommendation — is available below._
 brief_ar: ''
 examines_en:
   - Schedule adherence — whether buses arrive on time, in both directions, across the full service day
