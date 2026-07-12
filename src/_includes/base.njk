@@ -296,9 +296,11 @@
     window.lightboxIndex = 0;
     document.getElementById('lightbox-img').src = window.lightboxImages[0];
     document.getElementById('lightbox').classList.add('open');
+    document.body.style.overflow = 'hidden';
   };
   window.closeLightbox = function(){
     document.getElementById('lightbox').classList.remove('open');
+    document.body.style.overflow = '';
   };
   window.lightboxNav = function(dir){
     var n = window.lightboxImages.length;

@@ -80,7 +80,7 @@ layout: base.njk
             {% for s in slides_en %}<img src="{{ s | slideUrl }}" alt="Slide {{ loop.index }} of {{ slides_en.length }}" loading="lazy">{% endfor %}
           </div>
           <div class="slide-nav">
-            <button type="button" class="btn btn-ghost btn-sm" onclick="openLightbox('slides-en')" data-en="View fullscreen ⤢" data-ar="عرض ملء الشاشة ⤢" style="margin-inline-end:auto"></button>
+            <button type="button" class="btn btn-ghost btn-sm" onclick="openLightbox('slides-en')" data-en="View presentation full screen ⤢" data-ar="مشاهدة العرض التقديمي بملء الشاشة ⤢" style="margin-inline-end:auto"></button>
             <button type="button" aria-label="Previous slide" onclick="document.getElementById('slides-en').scrollBy({left:-320,behavior:'smooth'})">‹</button>
             <button type="button" aria-label="Next slide" onclick="document.getElementById('slides-en').scrollBy({left:320,behavior:'smooth'})">›</button>
           </div>
@@ -93,7 +93,7 @@ layout: base.njk
             {% for s in slides_ar %}<img src="{{ s | slideUrl }}" alt="الشريحة {{ loop.index }} من {{ slides_ar.length }}" loading="lazy">{% endfor %}
           </div>
           <div class="slide-nav">
-            <button type="button" class="btn btn-ghost btn-sm" onclick="openLightbox('slides-ar')" data-en="View fullscreen ⤢" data-ar="عرض ملء الشاشة ⤢" style="margin-inline-end:auto"></button>
+            <button type="button" class="btn btn-ghost btn-sm" onclick="openLightbox('slides-ar')" data-en="View presentation full screen ⤢" data-ar="مشاهدة العرض التقديمي بملء الشاشة ⤢" style="margin-inline-end:auto"></button>
             <button type="button" aria-label="الشريحة السابقة" onclick="document.getElementById('slides-ar').scrollBy({left:320,behavior:'smooth'})">›</button>
             <button type="button" aria-label="الشريحة التالية" onclick="document.getElementById('slides-ar').scrollBy({left:-320,behavior:'smooth'})">‹</button>
           </div>
@@ -110,6 +110,9 @@ layout: base.njk
 
       {# ---- Layer 2: the full study PDF ---- #}
       {% if type == "research" %}
+        <div style="margin-top:clamp(28px,4vw,40px);padding-top:clamp(20px,3vw,28px);border-top:1px solid var(--sand-line)">
+        <h4 style="font-family:var(--label-font);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--green-deep);margin:0 0 8px"
+            data-en="Full study" data-ar="الدراسة الكاملة"></h4>
         {% if pdf %}
           <div class="pdf-actions">
             <a class="btn btn-primary" href="{{ pdf }}" download>
@@ -122,6 +125,7 @@ layout: base.njk
         {% else %}
           <p class="privacy" data-en="The full study PDF will be attached here soon." data-ar="سيُرفَق ملف الدراسة الكامل هنا قريبًا."></p>
         {% endif %}
+        </div>
       {% endif %}
 
     {% endif %}
