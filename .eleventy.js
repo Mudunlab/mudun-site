@@ -57,6 +57,15 @@ module.exports = function (eleventyConfig) {
     return groupConsecutiveImages(md.render(str || ""));
   });
 
+  // Some slide list items are saved as plain strings, others as {slide: "..."}
+  // objects, depending on how they were added in the CMS — handle both safely
+  // so a piece never silently shows broken/empty images either way.
+  eleventyConfig.addFilter("slideUrl", function (item) {
+    if (typeof item === "string") return item;
+    if (item && typeof item === "object" && item.slide) return item.slide;
+    return "";
+  });
+
   // Formats a date correctly for either language, e.g. "July 11, 2026" or "١١ يوليو ٢٠٢٦"
   eleventyConfig.addFilter("formatDate", function (date, lang) {
     if (!date) return "";

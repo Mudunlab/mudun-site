@@ -54,9 +54,6 @@
   .slide-nav button:hover{background:var(--concrete);border-color:var(--green-deep);color:var(--green-deep)}
 
   .pdf-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px}
-  .full-text-block{margin-top:clamp(30px,4vw,44px);padding-top:clamp(20px,3vw,28px);border-top:1px solid var(--sand-line)}
-  .full-text-block .body-text{white-space:pre-wrap;line-height:1.7;color:var(--asphalt-soft)}
-  .full-text-block .body-text[dir="rtl"]{font-family:'IBM Plex Sans Arabic',sans-serif}
 
   .prose{color:var(--asphalt-soft);line-height:1.75}
   .prose p{margin:0 0 1.1em}

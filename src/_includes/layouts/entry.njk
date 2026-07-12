@@ -81,7 +81,7 @@ layout: base.njk
         {% if slides_en.length %}
         <div data-only="en">
           <div class="slide-viewer" id="slides-en">
-            {% for s in slides_en %}<img src="{{ s.slide }}" alt="Slide {{ loop.index }} of {{ slides_en.length }}" loading="lazy">{% endfor %}
+            {% for s in slides_en %}<img src="{{ s | slideUrl }}" alt="Slide {{ loop.index }} of {{ slides_en.length }}" loading="lazy">{% endfor %}
           </div>
           <div class="slide-nav">
             <button type="button" aria-label="Previous slide" onclick="document.getElementById('slides-en').scrollBy({left:-320,behavior:'smooth'})">‹</button>
@@ -93,7 +93,7 @@ layout: base.njk
         {% if slides_ar.length %}
         <div data-only="ar">
           <div class="slide-viewer" id="slides-ar" dir="rtl">
-            {% for s in slides_ar %}<img src="{{ s.slide }}" alt="الشريحة {{ loop.index }} من {{ slides_ar.length }}" loading="lazy">{% endfor %}
+            {% for s in slides_ar %}<img src="{{ s | slideUrl }}" alt="الشريحة {{ loop.index }} من {{ slides_ar.length }}" loading="lazy">{% endfor %}
           </div>
           <div class="slide-nav">
             <button type="button" aria-label="الشريحة السابقة" onclick="document.getElementById('slides-ar').scrollBy({left:320,behavior:'smooth'})">›</button>
@@ -114,18 +114,6 @@ layout: base.njk
               <span data-en="View in browser" data-ar="عرض في المتصفح"></span>
             </a>
           </div>
-
-          {% set fullText = pdfText[pdf] %}
-          {% if fullText %}
-            <div class="full-text-block">
-              <h4 style="font-family:var(--label-font);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--green-deep);margin:0 0 12px"
-                  data-en="Full text of the research" data-ar="النص الكامل للبحث"></h4>
-              <p class="privacy" style="margin-bottom:14px"
-                 data-en="A plain-text version of the PDF above, provided for accessibility and search."
-                 data-ar="نسخة نصّية من ملف PDF أعلاه، مقدَّمة لتيسير الوصول والبحث."></p>
-              <div class="body-text" {% if pdf_lang == "ar" %}lang="ar" dir="rtl"{% else %}lang="en" dir="ltr"{% endif %}>{{ fullText }}</div>
-            </div>
-          {% endif %}
         {% else %}
           <p class="privacy" data-en="The full study PDF will be attached here soon." data-ar="سيُرفَق ملف الدراسة الكامل هنا قريبًا."></p>
         {% endif %}
