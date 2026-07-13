@@ -299,9 +299,12 @@
     window.lightboxIndex = 0;
     var lb = document.getElementById('lightbox');
     document.getElementById('lightbox-img').src = window.lightboxImages[0];
+    var vv = window.visualViewport;
     var scrollY = window.pageYOffset || document.documentElement.scrollTop || 0;
-    lb.style.top = scrollY + 'px';
-    lb.style.height = window.innerHeight + 'px';
+    var viewportHeight = vv ? vv.height : window.innerHeight;
+    var viewportOffset = vv ? vv.offsetTop : 0;
+    lb.style.top = (scrollY + viewportOffset) + 'px';
+    lb.style.height = viewportHeight + 'px';
     lb.classList.add('open');
     document.body.style.overflow = 'hidden';
   };
@@ -317,7 +320,10 @@
   };
   window.addEventListener('resize', function(){
     var lb = document.getElementById('lightbox');
-    if(lb && lb.classList.contains('open')) lb.style.height = window.innerHeight + 'px';
+    if(lb && lb.classList.contains('open')){
+      var vv = window.visualViewport;
+      lb.style.height = (vv ? vv.height : window.innerHeight) + 'px';
+    }
   });
   document.addEventListener('keydown', function(e){
     var lb = document.getElementById('lightbox');

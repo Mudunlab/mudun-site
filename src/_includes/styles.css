@@ -60,7 +60,7 @@
      have inconsistent real-world behavior on some mobile browsers. */
   .lightbox{display:none;position:absolute;left:0;width:100%;background:rgba(20,18,15,.96);z-index:200;align-items:center;justify-content:center}
   .lightbox.open{display:flex}
-  .lightbox img{max-width:92vw;max-height:92%;border-radius:4px}
+  .lightbox img{max-width:90vw;max-height:86%;border-radius:4px}
   .lightbox-close{position:absolute;top:18px;right:22px;width:44px;height:44px;border-radius:50%;border:none;background:rgba(255,255,255,.15);color:#fff;font-size:20px;cursor:pointer}
   .lightbox-close:hover{background:rgba(255,255,255,.25)}
   .lightbox-arrow{position:absolute;top:50%;transform:translateY(-50%);width:52px;height:52px;border-radius:50%;border:none;background:rgba(255,255,255,.15);color:#fff;font-size:26px;cursor:pointer}
@@ -142,11 +142,12 @@
   .view.active{display:block}
   @keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
   section{padding-block:clamp(48px,7vw,90px)}
+  #view-home{padding-top:0}
   .eyebrow{margin-bottom:1.1rem}
   .lede{font-size:clamp(1.05rem,1.6vw,1.22rem);color:var(--asphalt-soft);max-width:62ch}
 
   /* hero */
-  .hero{position:relative;padding-top:clamp(60px,8vw,100px);padding-bottom:clamp(60px,8vw,100px);background-image:linear-gradient(180deg,rgba(20,18,15,.45) 0%,rgba(20,18,15,.8) 100%),url('/uploads/site/amman-aerial-hero.jpg');background-size:cover;background-position:center;color:#fff}
+  .hero{position:relative;padding-top:clamp(44px,6vw,72px);padding-bottom:clamp(44px,6vw,72px);background-image:linear-gradient(180deg,rgba(20,18,15,.45) 0%,rgba(20,18,15,.8) 100%),url('/uploads/site/amman-aerial-hero.jpg');background-size:cover;background-position:center;color:#fff}
   .hero-grid{max-width:640px}
   .hero h1{font-size:clamp(2.2rem,5.2vw,4rem);font-weight:800;color:#fff;max-width:16ch}
   .hero .eyebrow{color:var(--green)}
@@ -200,7 +201,7 @@
   html[lang="ar"] .chip{letter-spacing:.02em;text-transform:none;font-size:.82rem}
   .chip:hover{border-color:var(--green-deep);color:var(--green-deep)}
   .chip.active{background:var(--asphalt);color:#fff;border-color:var(--asphalt)}
-  .entries{display:grid;gap:1px;background:var(--sand-line);border:1px solid var(--sand-line)}
+  .entries{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1px;background:var(--sand-line);border:1px solid var(--sand-line)}
   .entry{background:var(--paper);padding:clamp(20px,3vw,30px)}
   .entry-cover{width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:6px;margin-bottom:16px}
   .entry.hide{display:none}
