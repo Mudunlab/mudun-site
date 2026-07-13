@@ -4,7 +4,8 @@ title_ar: كيف أقرأ الشارع
 category: essay
 status: published
 featured: true
-date: 2026-06-01
+date: 2026-06-10
+date_created: ''
 author_en: Ahmad A Alkhawaldeh
 author_ar: احمد عبدالله الخوالدة
 why_en: A firsthand account of how one Amman street gets diagnosed and redesigned through a real tactical urbanism proposal.
