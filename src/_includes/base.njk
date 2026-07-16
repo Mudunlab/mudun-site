@@ -283,6 +283,66 @@
   wireForm('joinForm', 'joinOk');
   wireForm('publishForm', 'publishOk');
 
+  // Publish page: reveal the right form once a type is chosen
+  var typeSelector = document.getElementById('p-type-selector');
+  if (typeSelector) {
+    typeSelector.addEventListener('change', function () {
+      var val = this.value;
+      var typeHidden = document.getElementById('p-type-hidden');
+      if (typeHidden) typeHidden.value = val;
+
+      document.querySelectorAll('[data-type-guidance]').forEach(function (el) {
+        el.hidden = el.dataset.typeGuidance !== val;
+      });
+      document.querySelectorAll('[data-fields-for]').forEach(function (el) {
+        el.hidden = el.dataset.fieldsFor !== val;
+      });
+
+      var form = document.getElementById('publishForm');
+      if (form) form.hidden = !val;
+    });
+  }
+
+  // Publish page: dynamic "+ Add another author" cards
+  var authorCounter = 1; // author_1 already exists in the markup
+  function updateTeammateConsent() {
+    var count = document.querySelectorAll('.author-card').length;
+    var wrap = document.getElementById('teammateConsentWrap');
+    if (!wrap) return;
+    wrap.hidden = count < 2;
+    var checkbox = wrap.querySelector('input[type="checkbox"]');
+    if (checkbox) checkbox.required = count >= 2;
+  }
+  var addAuthorBtn = document.getElementById('addAuthorBtn');
+  if (addAuthorBtn) {
+    addAuthorBtn.addEventListener('click', function () {
+      authorCounter++;
+      var n = authorCounter;
+      var card = document.createElement('div');
+      card.className = 'author-card';
+      card.setAttribute('data-author-index', n - 1);
+      card.innerHTML =
+        '<button type="button" class="author-remove" aria-label="Remove this author" data-en="✕" data-ar="✕">✕</button>' +
+        '<div class="field"><label data-en="Name" data-ar="الاسم"></label><input type="text" name="author_' + n + '_name" data-en-ph="Full name" data-ar-ph="الاسم الكامل"></div>' +
+        '<div class="field"><label data-en="Role (optional)" data-ar="الدور (اختياري)"></label><input type="text" name="author_' + n + '_role" data-en-ph="e.g. Lead researcher, student" data-ar-ph="مثال: باحث رئيسي، طالب"></div>' +
+        '<div class="field"><label data-en="University or organization (optional)" data-ar="الجامعة أو المؤسسة (اختياري)"></label><input type="text" name="author_' + n + '_org"></div>' +
+        '<div class="field"><label data-en="Email" data-ar="البريد الإلكتروني"></label><input type="email" name="author_' + n + '_email" data-en-ph="you@example.com" data-ar-ph="you@example.com"></div>' +
+        '<div class="field"><label data-en="LinkedIn or portfolio (optional)" data-ar="لينكدإن أو معرض أعمال (اختياري)"></label><input type="url" name="author_' + n + '_linkedin"></div>';
+      document.getElementById('authorsContainer').appendChild(card);
+      applyLang();
+      updateTeammateConsent();
+    });
+  }
+  var authorsContainer = document.getElementById('authorsContainer');
+  if (authorsContainer) {
+    authorsContainer.addEventListener('click', function (e) {
+      if (e.target.classList.contains('author-remove')) {
+        e.target.closest('.author-card').remove();
+        updateTeammateConsent();
+      }
+    });
+  }
+
   var yr=document.getElementById('yr'); if(yr) yr.textContent=new Date().getFullYear();
   applyLang();
 

@@ -9,52 +9,92 @@ description: "Research studies, essays, opinion, photography — if it's about c
         <span class="label" data-en="Publish with Mudun" data-ar="انشُر مع مدن"></span>
         <h2 data-en="Publish your work" data-ar="انشُر عملك"></h2>
         <p class="lede" style="margin-top:1rem"
-           data-en="Research studies, a magazine essay, photographs, a mapping project — if it's about cities in Jordan, it belongs here. You keep ownership of everything you share."
-           data-ar="دراساتٌ بحثية، مقالٌ للمجلّة، صور، مشروع خرائط — إن كان عن مدن الأردن، فمكانه هنا. وتحتفظ أنت بملكية كلّ ما تشاركه."></p>
+           data-en="Publishing with Mudun means sharing something real about how our cities work — a study, an essay, a set of photographs — with people who care. We read every submission ourselves, there's no cost, and you keep full ownership of your work. Pick what you're sharing to get started."
+           data-ar="النشر مع مدن يعني مشاركة شيءٍ حقيقي عن كيفية عمل مدننا — دراسة، مقال، مجموعة صور — مع أشخاص يهتمّون. نقرأ كلّ ما يُرسَل بأنفسنا، النشر مجّانيّ تمامًا، وتحتفظ أنت بملكية عملك كاملةً. اختر ما تريد مشاركته للبدء."></p>
       </div>
 
-      <form class="form-wrap" id="publishForm" action="https://formspree.io/f/xqevoaew" method="POST" novalidate>
+      <div class="form-wrap">
         <div class="field">
-          <label for="p-type" data-en="What are you publishing?" data-ar="ماذا تنشر؟"></label>
-          <select id="p-type" name="type">
-            <option data-en="Research study" data-ar="دراسة بحثية"></option>
-            <option data-en="Magazine piece (essay, opinion, photography)" data-ar="مادّة للمجلّة (مقال، رأي، تصوير)"></option>
+          <label for="p-type-selector" data-en="What are you sharing?" data-ar="ماذا تشارك؟"></label>
+          <select id="p-type-selector">
+            <option value="" data-en="Choose one" data-ar="اختر"></option>
+            <option value="research" data-en="Research" data-ar="بحث"></option>
+            <option value="magazine" data-en="Magazine piece" data-ar="مادّة للمجلّة"></option>
           </select>
         </div>
-        <div class="field"><label for="p-name" data-en="Your name" data-ar="اسمك"></label><input id="p-name" type="text" name="name" required data-en-ph="Author name" data-ar-ph="اسم الكاتب"></div>
-        <div class="field"><label for="p-affil" data-en="Affiliation (university, firm, or organization)" data-ar="الجهة (جامعة، شركة، أو مؤسسة)"></label><input id="p-affil" type="text" name="affiliation" data-en-ph="Where you study or work — helps us know who you are" data-ar-ph="أين تدرس أو تعمل — يساعدنا على معرفتك"></div>
-        <div class="field"><label for="p-linkedin" data-en="LinkedIn profile" data-ar="ملف لينكدإن"></label><input id="p-linkedin" type="url" name="linkedin" data-en-ph="https://linkedin.com/in/your-profile" data-ar-ph="https://linkedin.com/in/your-profile"></div>
-        <div class="field"><label for="p-portfolio" data-en="Website or portfolio (optional)" data-ar="موقع أو معرض أعمال (اختياري)"></label><input id="p-portfolio" type="url" name="portfolio" data-en-ph="A personal site, portfolio, or published work" data-ar-ph="موقع شخصي، أو معرض أعمال، أو عمل منشور"></div>
-        <div class="field"><label for="p-email" data-en="Email" data-ar="البريد الإلكتروني"></label><input id="p-email" type="email" name="email" required data-en-ph="you@example.com" data-ar-ph="you@example.com"></div>
-        <div class="field"><label for="p-title" data-en="Title" data-ar="العنوان"></label><input id="p-title" type="text" name="title" required data-en-ph="The title of your work" data-ar-ph="عنوان عملك"></div>
-        <div class="field">
-          <label for="p-cat" data-en="Category" data-ar="التصنيف"></label>
-          <select id="p-cat" name="category">
-            <option data-en="Mobility" data-ar="التنقّل"></option>
-            <option data-en="Walkability" data-ar="المشي"></option>
-            <option data-en="Public space" data-ar="الفضاء العام"></option>
-            <option data-en="Housing" data-ar="السكن"></option>
-            <option data-en="Transit" data-ar="النقل العام"></option>
-            <option data-en="Photography / essay / opinion" data-ar="تصوير / مقال / رأي"></option>
-            <option data-en="Other" data-ar="أخرى"></option>
-          </select>
-        </div>
-        <div class="field"><label for="p-brief" data-en="Plain-language brief" data-ar="ملخّصٌ بلغة واضحة"></label><textarea id="p-brief" name="brief" data-en-ph="Why it matters, and the key points, in words anyone can follow." data-ar-ph="لماذا يهمّ، والنقاط الأساسية، بكلماتٍ يفهمها الجميع."></textarea></div>
-        <div class="field"><label for="p-link" data-en="Link to the full work (optional for magazine pieces)" data-ar="رابط العمل الكامل (اختياري لموادّ المجلّة)"></label><input id="p-link" type="text" name="link" data-en-ph="A link to the PDF or images (Google Drive, repository, etc.)" data-ar-ph="رابط ملف PDF أو الصور (جوجل درايف، مستودع، إلخ)"></div>
 
-        <div class="consent">
-          <div class="label" data-en="Before you publish" data-ar="قبل النشر"></div>
-          <div class="checks">
-            <label class="check"><input type="checkbox" name="consent_own" required><span data-en="This is my own work and I have the right to share it." data-ar="هذا عملي الخاص ولديّ الحقّ في مشاركته."></span></label>
-            <label class="check"><input type="checkbox" name="consent_permission" required><span data-en="I give Mudun permission to publish it." data-ar="أمنح مدن الإذن بنشره."></span></label>
-            <label class="check"><input type="checkbox" name="consent_ownership" required><span data-en="I understand I keep ownership of my work." data-ar="أدرك أنني أحتفظ بملكية عملي."></span></label>
-            <label class="check"><input type="checkbox" name="consent_photos"><span data-en="Any photos not taken by me have their photographer's permission." data-ar="أيّ صورٍ لم ألتقطها لديها إذن مصوّرها."></span></label>
+        <div class="type-hints">
+          <p><strong data-en="Research:" data-ar="بحث:"></strong> <span data-en="A study, big or small, that helps us understand how the city works." data-ar="دراسة، كبيرة أو صغيرة، تساعدنا على فهم كيف تعمل المدينة."></span></p>
+          <p><strong data-en="Magazine:" data-ar="مجلّة:"></strong> <span data-en="An essay, a set of photos, an opinion piece — the human side of city life." data-ar="مقال، مجموعة صور، رأي — الجانب الإنساني من حياة المدينة."></span></p>
+        </div>
+
+        <div class="type-guidance" data-type-guidance="research" hidden>
+          <h4 data-en="What makes a good Mudun research piece" data-ar="ما الذي يجعل دراسة مناسبة لمدن"></h4>
+          <ul>
+            <li data-en="The brief matters most — write it for a smart neighbor, not a reviewer. What did you find, and why does it matter for how people move through or use the city?" data-ar="الملخّص هو الأهمّ — اكتبه لجارٍ ذكي، لا لمحكّم. ماذا وجدت، ولماذا يهمّ ذلك لكيفية تنقّل الناس أو استخدامهم للمدينة؟"></li>
+            <li data-en="Show, don't just tell. A few slides or images do more than a page of description — include them if you have them." data-ar="أرِ، لا تكتفِ بالوصف. بضع شرائح أو صور تقول أكثر من صفحة كاملة من الشرح — أرفقها إن وُجدت."></li>
+            <li data-en="Say what should change. Even a small recommendation gives your work a purpose beyond the page." data-ar="قل ما الذي يجب أن يتغيّر. حتى توصية بسيطة تمنح عملك هدفًا يتجاوز الصفحة."></li>
+          </ul>
+        </div>
+        <div class="type-guidance" data-type-guidance="magazine" hidden>
+          <h4 data-en="What makes a good Mudun magazine piece" data-ar="ما الذي يجعل مادّة مناسبة لمجلّة مدن"></h4>
+          <ul>
+            <li data-en="Write like you're telling a friend what you noticed — not filing a report." data-ar="اكتب كأنك تخبر صديقًا بما لاحظته — لا كأنك تكتب تقريرًا."></li>
+            <li data-en="A specific street or moment beats a general opinion. Ground it in something real you saw." data-ar="شارعٌ أو لحظة محدّدة أقوى من رأيٍ عام. اربطه بشيءٍ حقيقي رأيته."></li>
+            <li data-en="If you have photos, they're often the whole point — include as many as tell the story." data-ar="إن كانت لديك صور، فهي غالبًا صلب الموضوع — أرفق ما يكفي منها لسرد القصة."></li>
+          </ul>
+        </div>
+
+        <form id="publishForm" action="https://formspree.io/f/xqevoaew" method="POST" novalidate hidden>
+          <input type="hidden" name="type" id="p-type-hidden">
+
+          <div class="field"><label for="p-title-en" data-en="Title (English)" data-ar="العنوان (بالإنجليزية)"></label><input id="p-title-en" type="text" name="title_en" required data-en-ph="The title of your work" data-ar-ph="عنوان عملك"></div>
+          <div class="field"><label for="p-title-ar" data-en="Title (Arabic)" data-ar="العنوان (بالعربية)"></label><input id="p-title-ar" type="text" name="title_ar" data-en-ph="العنوان بالعربية" data-ar-ph="العنوان بالعربية"></div>
+
+          <div data-fields-for="research" hidden>
+            <div class="field"><label for="p-brief-en" data-en="Brief — why it matters (English)" data-ar="الملخّص — لماذا يهمّ (بالإنجليزية)"></label><textarea id="p-brief-en" name="brief_en" data-en-ph="Why it matters, and the key points, in words anyone can follow." data-ar-ph="لماذا يهمّ، والنقاط الأساسية، بكلماتٍ يفهمها الجميع."></textarea></div>
+            <div class="field"><label for="p-brief-ar" data-en="Brief — why it matters (Arabic)" data-ar="الملخّص — لماذا يهمّ (بالعربية)"></label><textarea id="p-brief-ar" name="brief_ar" data-en-ph="نفس الملخّص، بالعربية." data-ar-ph="نفس الملخّص، بالعربية."></textarea></div>
+            <div class="field"><label for="p-pdf-link" data-en="Link to the full study (PDF)" data-ar="رابط الدراسة الكاملة (PDF)"></label><input id="p-pdf-link" type="url" name="pdf_link" data-en-ph="Google Drive, Dropbox, etc. — set to 'anyone with the link can view'" data-ar-ph="جوجل درايف أو دروبوكس — اجعل الإعداد 'يمكن لأي شخص لديه الرابط المشاهدة'"></div>
+            <div class="field"><label for="p-slides-link" data-en="Link to presentation slides (optional)" data-ar="رابط شرائح العرض التقديمي (اختياري)"></label><input id="p-slides-link" type="url" name="slides_link" data-en-ph="If you have a slide deck" data-ar-ph="إن كان لديك عرض تقديمي"></div>
           </div>
-        </div>
 
-        <button type="submit" class="btn btn-primary" style="margin-top:20px" data-en="Send for review" data-ar="أرسِل للمراجعة"></button>
-        <p class="privacy" data-en="We personally read every submission and reply by email within a few days. Not every piece is the right fit for Mudun right now — if yours isn't, we'll tell you why. What gets published is at Mudun's editorial discretion." data-ar="نقرأ كلّ ما يُرسَل بأنفسنا ونردّ عبر البريد في غضون أيام قليلة. ليست كلّ مادّة مناسبة لمدن في الوقت الحالي — وإن لم تكن مادّتك كذلك، سنخبرك بالسبب. وما يُنشَر يخضع لتقدير هيئة تحرير مدن."></p>
-      </form>
+          <div data-fields-for="magazine" hidden>
+            <div class="field"><label for="p-piece-en" data-en="Your piece (English)" data-ar="مادّتك (بالإنجليزية)"></label><textarea id="p-piece-en" name="piece_en" style="min-height:200px" data-en-ph="Write the full piece here, in English." data-ar-ph="اكتب المادّة كاملةً هنا، بالإنجليزية."></textarea></div>
+            <div class="field"><label for="p-piece-ar" data-en="Your piece (Arabic)" data-ar="مادّتك (بالعربية)"></label><textarea id="p-piece-ar" name="piece_ar" style="min-height:200px" data-en-ph="Write the full piece here, in Arabic." data-ar-ph="اكتب المادّة كاملةً هنا، بالعربية."></textarea></div>
+            <div class="field"><label for="p-photos-link" data-en="Link to photos, if any (optional)" data-ar="رابط الصور، إن وُجدت (اختياري)"></label><input id="p-photos-link" type="url" name="photos_link" data-en-ph="Google Drive, Dropbox, etc." data-ar-ph="جوجل درايف أو دروبوكس"></div>
+          </div>
+
+          <div class="authors-block">
+            <div class="label" data-en="Who worked on this?" data-ar="من عمل على هذا؟"></div>
+            <div id="authorsContainer">
+              <div class="author-card" data-author-index="0">
+                <div class="field"><label data-en="Name" data-ar="الاسم"></label><input type="text" name="author_1_name" required data-en-ph="Full name" data-ar-ph="الاسم الكامل"></div>
+                <div class="field"><label data-en="Role (optional)" data-ar="الدور (اختياري)"></label><input type="text" name="author_1_role" data-en-ph="e.g. Lead researcher, student" data-ar-ph="مثال: باحث رئيسي، طالب"></div>
+                <div class="field"><label data-en="University or organization (optional)" data-ar="الجامعة أو المؤسسة (اختياري)"></label><input type="text" name="author_1_org"></div>
+                <div class="field"><label data-en="Email" data-ar="البريد الإلكتروني"></label><input type="email" name="author_1_email" required data-en-ph="you@example.com" data-ar-ph="you@example.com"></div>
+                <div class="field"><label data-en="LinkedIn or portfolio (optional)" data-ar="لينكدإن أو معرض أعمال (اختياري)"></label><input type="url" name="author_1_linkedin"></div>
+              </div>
+            </div>
+            <button type="button" class="btn btn-ghost btn-sm" id="addAuthorBtn" data-en="+ Add another author" data-ar="+ أضف مؤلّفًا آخر"></button>
+          </div>
+
+          <div class="field"><label for="p-notes" data-en="Anything else you'd like us to know (optional)" data-ar="أي شيء آخر تودّ إخبارنا به (اختياري)"></label><textarea id="p-notes" name="notes"></textarea></div>
+
+          <div class="consent">
+            <div class="label" data-en="Before you publish" data-ar="قبل النشر"></div>
+            <div class="checks">
+              <label class="check"><input type="checkbox" name="consent_own" required><span data-en="This is my own work and I have the right to share it." data-ar="هذا عملي الخاص ولديّ الحقّ في مشاركته."></span></label>
+              <label class="check"><input type="checkbox" name="consent_permission" required><span data-en="I give Mudun permission to publish it." data-ar="أمنح مدن الإذن بنشره."></span></label>
+              <label class="check"><input type="checkbox" name="consent_ownership" required><span data-en="I understand I keep ownership of my work." data-ar="أدرك أنني أحتفظ بملكية عملي."></span></label>
+              <label class="check" data-fields-for="magazine" hidden><input type="checkbox" name="consent_photos"><span data-en="Any photos not taken by me have their photographer's permission." data-ar="أيّ صورٍ لم ألتقطها لديها إذن مصوّرها."></span></label>
+              <label class="check" id="teammateConsentWrap" hidden><input type="checkbox" name="consent_teammates"><span data-en="I'm submitting this on behalf of my co-authors listed above, and they are aware of and agree to this submission." data-ar="أُقدّم هذا نيابةً عن زملائي المؤلّفين المذكورين أعلاه، وهم على علمٍ بهذا التقديم وموافقون عليه."></span></label>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary" style="margin-top:20px" data-en="Send for review" data-ar="أرسِل للمراجعة"></button>
+          <p class="privacy" data-en="We personally read every submission and reply by email within a few days. Not every piece is the right fit for Mudun right now — if yours isn't, we'll tell you why. What gets published is at Mudun's editorial discretion." data-ar="نقرأ كلّ ما يُرسَل بأنفسنا ونردّ عبر البريد في غضون أيام قليلة. ليست كلّ مادّة مناسبة لمدن في الوقت الحالي — وإن لم تكن مادّتك كذلك، سنخبرك بالسبب. وما يُنشَر يخضع لتقدير هيئة تحرير مدن."></p>
+        </form>
+      </div>
       <div class="form-ok" id="publishOk">
         <h3 data-en="Received — thank you." data-ar="تمّ الاستلام — شكرًا لك."></h3>
         <p data-en="We'll read your work and get back to you by email." data-ar="سنقرأ عملك ونعود إليك عبر البريد."></p>
