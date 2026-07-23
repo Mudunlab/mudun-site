@@ -113,7 +113,7 @@
 
   <div class="rail" aria-hidden="true">
     <div class="wrap">
-      <span data-en="Mudun — urban planning & cities" data-ar="مدن — تخطيط حضري ومدن"></span>
+      <span data-en="Mudun · urban planning & cities" data-ar="مدن · تخطيط حضري ومدن"></span>
       <span><b>AMMAN</b> · 31.95°N 35.93°E · <span data-en="Jordan & the region" data-ar="الأردن والمنطقة"></span></span>
     </div>
   </div>
@@ -132,7 +132,7 @@
           <a class="nav-link" href="/research/"  {% if "/research/" in page.url %}aria-current="page"{% endif %} data-en="Research" data-ar="الأبحاث"></a>
           <a class="nav-link" href="/magazine/"  {% if "/magazine/" in page.url %}aria-current="page"{% endif %} data-en="Magazine" data-ar="المجلّة"></a>
           <a class="nav-link" href="/contact/"   {% if "/contact/" in page.url %}aria-current="page"{% endif %} data-en="Contact" data-ar="تواصل"></a>
-          <a class="btn btn-primary btn-sm join-btn" href="/join/" data-en="Join — free" data-ar="انضمّ — مجّانًا"></a>
+          <a class="btn btn-primary btn-sm join-btn" href="/join/" data-en="Join · free" data-ar="انضمّ · مجّانًا"></a>
         </nav>
         <button class="lang" id="langBtn">العربية</button>
         <button class="menu-btn" id="menuBtn" aria-label="Menu" aria-expanded="false"><span></span></button>
@@ -150,9 +150,9 @@
       <div class="foot-grid">
         <div class="foot-brand">
           <img src="{{ brand.logo_white }}" alt="Mudun مدن">
-          <p data-en="An independent, research-anchored platform for understanding cities in Jordan — starting with Amman."
-             data-ar="منصّةٌ مستقلّة قائمة على البحث لفهم مدن الأردن — بدءًا من عمّان."></p>
-          <a class="btn btn-primary foot-cta" href="/join/" data-en="Become a member — free" data-ar="كن عضوًا — مجّانًا"></a>
+          <p data-en="An independent, research-anchored platform for understanding cities in Jordan, starting with Amman."
+             data-ar="منصّةٌ مستقلّة قائمة على البحث لفهم مدن الأردن، بدءًا من عمّان."></p>
+          <a class="btn btn-primary foot-cta" href="/join/" data-en="Become a member · free" data-ar="كن عضوًا · مجّانًا"></a>
         </div>
         <div>
           <h4 data-en="Explore" data-ar="تصفّح"></h4>
@@ -247,7 +247,7 @@
       // on some mobile browsers when a form has novalidate.)
       var uncheckedRequired = form.querySelector('input[type="checkbox"][required]:not(:checked)');
       if(uncheckedRequired){
-        alert('Please check all required boxes before sending — each one confirms something we need in order to publish your work.');
+        alert('Please check all required boxes before sending. Each one confirms something we need in order to publish your work.');
         uncheckedRequired.focus();
         return;
       }
@@ -275,7 +275,7 @@
           if(submitBtn){ submitBtn.disabled = false; submitBtn.textContent = originalText; }
         }
       }).catch(function(){
-        alert('Network error — please check your connection and try again, or email hello@mudunlab.org directly.');
+        alert('Network error. Please check your connection and try again, or email hello@mudunlab.org directly.');
         if(submitBtn){ submitBtn.disabled = false; submitBtn.textContent = originalText; }
       });
     });

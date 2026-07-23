@@ -8,7 +8,7 @@ date: 2026-07-02
 date_created: 2025-12-15
 author_en: Ahmad A Alkhawaldeh
 author_ar: احمد عبدالله الخوالدة
-why_en: A week of real operational data on Route 99 shows strong bus frequency undermined by irregular spacing — and pinpoints exactly where and why.
+why_en: A week of real operational data on Route 99 shows strong bus frequency undermined by irregular spacing, and pinpoints exactly where and why.
 why_ar: أسبوع من بيانات التشغيل الفعلية للخط 99 يكشف أن تكرار الحافلات جيد، لكن عدم انتظام تباعدها يقوّضه — ويحدد بدقة أين ولماذا.
 brief_en: |-
   Route 99 is one of the busiest corridors in Amman's Bus Rapid Transit network — about 17 kilometers between Swaileh and the Jordan Museum. This study used one full week of real operational data, pulled directly from the buses through the city's Intelligent Transportation System, to check whether the service actually delivers on what its frequency promises.
