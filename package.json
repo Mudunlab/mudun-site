@@ -4,12 +4,15 @@
   "description": "Mudun — urban planning & cities platform for Jordan",
   "scripts": {
     "start": "eleventy --serve",
-    "build": "eleventy"
+    "build": "eleventy",
+    "deploy": "npm run build && wrangler deploy",
+    "preview": "npm run build && wrangler dev"
   },
   "license": "MIT",
   "devDependencies": {
     "@11ty/eleventy": "^3.0.0",
-    "cheerio": "^1.0.0"
+    "cheerio": "^1.0.0",
+    "wrangler": "^4.114.0"
   },
   "dependencies": {
     "markdown-it": "^14.3.0"
