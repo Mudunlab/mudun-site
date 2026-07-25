@@ -29,8 +29,6 @@
   body{
     margin:0;font-family:var(--font-body);color:var(--asphalt);background:var(--limestone);overflow-x:hidden;
     line-height:1.6;-webkit-font-smoothing:antialiased;text-underline-offset:.18em;
-    background-image:linear-gradient(var(--sand-line) 1px,transparent 1px),linear-gradient(90deg,var(--sand-line) 1px,transparent 1px);
-    background-size:64px 64px;background-position:-1px -1px;
   }
   a{color:var(--green-deep);text-decoration:none}
   a:hover{text-decoration:underline}
