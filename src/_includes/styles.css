@@ -145,7 +145,7 @@
   .lede{font-size:clamp(1.05rem,1.6vw,1.22rem);color:var(--asphalt-soft);max-width:62ch}
 
   /* hero */
-  .hero{padding-top:clamp(40px,6vw,68px);padding-bottom:clamp(20px,3vw,32px)}
+  .hero{position:relative;padding-top:clamp(40px,6vw,68px);padding-bottom:clamp(20px,3vw,32px);background-image:linear-gradient(rgba(243,238,228,.93),rgba(243,238,228,.93)),url('/uploads/site/hero-bg-v2.jpg');background-size:cover;background-position:center}
   .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;grid-template-areas:"text visual";gap:clamp(28px,4vw,60px);align-items:center}
   .hero-text{grid-area:text}
   .hero-visual{grid-area:visual}
