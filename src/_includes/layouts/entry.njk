@@ -8,34 +8,30 @@ layout: base.njk
        data-en="{% if type == 'research' %}← Research{% else %}← Magazine{% endif %}"
        data-ar="{% if type == 'research' %}← الأبحاث{% else %}← المجلّة{% endif %}"></a>
 
-    <div class="entry-header">
-      <div class="entry-header-text">
-        <div class="meta" style="margin-bottom:14px">
-          <span class="tag" data-en="{{ categories[type][category].en }}" data-ar="{{ categories[type][category].ar }}"></span>
-          {% if featured %}<span class="tag sky" data-en="Featured" data-ar="مميّز"></span>{% endif %}
-          {% if status == "preparation" %}<span class="tag soft" data-en="In preparation" data-ar="قيد الإعداد"></span>{% endif %}
-        </div>
-
-        <h2 style="font-size:clamp(1.8rem,3.6vw,2.7rem)" data-en="{{ title_en }}" data-ar="{{ title_ar }}"></h2>
-        <p class="lede" style="margin-top:1rem" data-en="{{ why_en }}" data-ar="{{ why_ar }}"></p>
-
-        {% if date_created %}
-          {% set bylineEn = (author_en or 'Mudun') + ' · Produced ' + (date_created | formatDate('en')) + ' · Published on Mudun ' + (date | formatDate('en')) %}
-          {% set bylineAr = (author_ar or 'مدن') + ' · أُنتج في ' + (date_created | formatDate('ar')) + ' · نُشر على مدن في ' + (date | formatDate('ar')) %}
-        {% else %}
-          {% set bylineEn = (author_en or 'Mudun') + ' · ' + (date | formatDate('en')) %}
-          {% set bylineAr = (author_ar or 'مدن') + ' · ' + (date | formatDate('ar')) %}
-        {% endif %}
-        <p class="byline" style="margin-top:.6rem;color:var(--asphalt-soft);font-size:.92rem"
-           data-en="{{ bylineEn }}"
-           data-ar="{{ bylineAr }}"></p>
-      </div>
-      {% if cover and status != "preparation" %}
-        <div class="entry-header-cover">
-          <img src="{{ cover }}" alt="">
-        </div>
-      {% endif %}
+    <div class="entry-card">
+    <div class="meta" style="margin-bottom:14px">
+      <span class="tag" data-en="{{ categories[type][category].en }}" data-ar="{{ categories[type][category].ar }}"></span>
+      {% if featured %}<span class="tag sky" data-en="Featured" data-ar="مميّز"></span>{% endif %}
+      {% if status == "preparation" %}<span class="tag soft" data-en="In preparation" data-ar="قيد الإعداد"></span>{% endif %}
     </div>
+
+    <h2 style="font-size:clamp(1.8rem,3.6vw,2.7rem)" data-en="{{ title_en }}" data-ar="{{ title_ar }}"></h2>
+    <p class="lede" style="margin-top:1rem" data-en="{{ why_en }}" data-ar="{{ why_ar }}"></p>
+
+    {% if date_created %}
+      {% set bylineEn = (author_en or 'Mudun') + ' · Produced ' + (date_created | formatDate('en')) + ' · Published on Mudun ' + (date | formatDate('en')) %}
+      {% set bylineAr = (author_ar or 'مدن') + ' · أُنتج في ' + (date_created | formatDate('ar')) + ' · نُشر على مدن في ' + (date | formatDate('ar')) %}
+    {% else %}
+      {% set bylineEn = (author_en or 'Mudun') + ' · ' + (date | formatDate('en')) %}
+      {% set bylineAr = (author_ar or 'مدن') + ' · ' + (date | formatDate('ar')) %}
+    {% endif %}
+    <p class="byline" style="margin-top:.6rem;color:var(--asphalt-soft);font-size:.92rem"
+       data-en="{{ bylineEn }}"
+       data-ar="{{ bylineAr }}"></p>
+
+    {% if cover and status != "preparation" %}
+      <img src="{{ cover }}" alt="" style="width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:8px;margin-top:clamp(20px,3vw,30px)">
+    {% endif %}
 
     {% if status == "preparation" %}
       <div class="note" style="margin-top:clamp(30px,4vw,44px)">
@@ -141,6 +137,7 @@ layout: base.njk
       {% endif %}
 
     {% endif %}
+    </div>
 
   </div>
 </section>
