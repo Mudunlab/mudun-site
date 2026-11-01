@@ -1,0 +1,611 @@
+---
+permalink: /survey/index.html
+eleventyExcludeFromCollections: true
+---
+{#- ============================================================
+    UJ commute survey · Mobility with Confidence (تنقّل بثقة)
+    Booth at the University of Jordan, Tuesday 3 Nov 2026.
+    Reached by QR code only: not linked in the nav, noindex,
+    excluded from the sitemap. No cookies, no storage, no tracking.
+    Answer VALUES are always stored in Arabic, whatever the display
+    language, so the Google Sheet stays consistent.
+    ============================================================ -#}
+{%- set modes = [
+  {v:"باص عمّان أو الباص السريع", en:"Amman Bus or BRT", transit:true},
+  {v:"باص المتكاملة", en:"Al-Mutakamela bus", transit:true},
+  {v:"باص من محافظة أخرى", en:"Bus from another governorate", transit:true},
+  {v:"كوستر", en:"Coaster", transit:true},
+  {v:"سرفيس", en:"Service taxi", transit:true},
+  {v:"تاكسي أو تطبيق (كريم، أوبر…)", en:"Taxi or ride-hailing app (Careem, Uber…)", transit:false},
+  {v:"سيارة أقودها", en:"I drive", transit:false},
+  {v:"يوصلني أحد", en:"Someone drops me off", transit:false},
+  {v:"مشياً", en:"Walk", transit:false}
+] -%}
+{%- set governorates = [
+  {v:"عمّان", en:"Amman"}, {v:"إربد", en:"Irbid"}, {v:"الزرقاء", en:"Zarqa"},
+  {v:"البلقاء", en:"Balqa"}, {v:"مادبا", en:"Madaba"}, {v:"جرش", en:"Jerash"},
+  {v:"عجلون", en:"Ajloun"}, {v:"المفرق", en:"Mafraq"}, {v:"الكرك", en:"Karak"},
+  {v:"الطفيلة", en:"Tafilah"}, {v:"معان", en:"Ma'an"}, {v:"العقبة", en:"Aqaba"}
+] -%}
+{%- macro radios(name, options) -%}
+  <div class="opts">
+  {%- for o in options %}
+    <label class="opt"><input type="radio" name="{{ name }}" value="{{ o.v }}"{% if o.transit %} data-transit{% endif %}><span class="opt-txt" data-ar="{{ o.ar or o.v }}" data-en="{{ o.en }}">{{ o.ar or o.v }}</span></label>
+  {%- endfor %}
+  </div>
+{%- endmacro -%}
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>كيف تصل إلى الجامعة؟ · تنقّل بثقة | مدن</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="استبيان قصير ومجهول الهوية عن المواصلات إلى الجامعة الأردنية، من مبادرة تنقّل بثقة ومنصة مدن.">
+<meta name="theme-color" content="#17795c">
+<meta name="format-detection" content="telephone=no">
+<meta name="referrer" content="no-referrer">
+<link rel="icon" href="/uploads/site/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/uploads/site/favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/uploads/site/apple-touch-icon.png">
+<link rel="preload" href="/uploads/fonts/ibm-plex-sans-arabic-arabic-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+  /* Fonts are self-hosted so the page makes no third-party requests. */
+  @font-face{font-family:"Plex Arabic";font-style:normal;font-weight:400;font-display:swap;src:url(/uploads/fonts/ibm-plex-sans-arabic-arabic-400-normal.woff2) format("woff2");unicode-range:U+0600-06FF,U+0750-077F,U+0870-088E,U+0890-0891,U+0897-08E1,U+08E3-08FF,U+200C-200E,U+2010-2011,U+204F,U+2E41,U+FB50-FDFF,U+FE70-FE74,U+FE76-FEFC}
+  @font-face{font-family:"Plex Arabic";font-style:normal;font-weight:600;font-display:swap;src:url(/uploads/fonts/ibm-plex-sans-arabic-arabic-600-normal.woff2) format("woff2");unicode-range:U+0600-06FF,U+0750-077F,U+0870-088E,U+0890-0891,U+0897-08E1,U+08E3-08FF,U+200C-200E,U+2010-2011,U+204F,U+2E41,U+FB50-FDFF,U+FE70-FE74,U+FE76-FEFC}
+  @font-face{font-family:"Plex Arabic";font-style:normal;font-weight:700;font-display:swap;src:url(/uploads/fonts/ibm-plex-sans-arabic-arabic-700-normal.woff2) format("woff2");unicode-range:U+0600-06FF,U+0750-077F,U+0870-088E,U+0890-0891,U+0897-08E1,U+08E3-08FF,U+200C-200E,U+2010-2011,U+204F,U+2E41,U+FB50-FDFF,U+FE70-FE74,U+FE76-FEFC}
+  @font-face{font-family:"Plex Arabic";font-style:normal;font-weight:400;font-display:swap;src:url(/uploads/fonts/ibm-plex-sans-arabic-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+  @font-face{font-family:"Plex Arabic";font-style:normal;font-weight:600;font-display:swap;src:url(/uploads/fonts/ibm-plex-sans-arabic-latin-600-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+  @font-face{font-family:"Plex Arabic";font-style:normal;font-weight:700;font-display:swap;src:url(/uploads/fonts/ibm-plex-sans-arabic-latin-700-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+  @font-face{font-family:"Archivo";font-style:normal;font-weight:500;font-display:swap;src:url(/uploads/fonts/archivo-latin-500-normal.woff2) format("woff2")}
+  @font-face{font-family:"Archivo";font-style:normal;font-weight:700;font-display:swap;src:url(/uploads/fonts/archivo-latin-700-normal.woff2) format("woff2")}
+  @font-face{font-family:"Archivo";font-style:normal;font-weight:800;font-display:swap;src:url(/uploads/fonts/archivo-latin-800-normal.woff2) format("woff2")}
+
+  :root{
+    --asphalt:#232323; --asphalt-soft:#55524c; --green:#27B38D; --green-deep:#17795c;
+    --limestone:#f3eee4; --sand:#d9c7a6; --sand-line:rgba(180,158,120,.38);
+    --paper:#fffdf9; --tint:#e9f6f1; --danger:#b3261e; --danger-bg:#fcecea;
+    --font:"Plex Arabic",system-ui,-apple-system,"Segoe UI",Tahoma,sans-serif;
+    --display:"Plex Arabic",system-ui,sans-serif;
+  }
+  html[lang="en"]{ --font:"Archivo","Plex Arabic",system-ui,-apple-system,"Segoe UI",sans-serif; --display:"Archivo","Plex Arabic",system-ui,sans-serif; }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%;scroll-padding-top:128px}
+  body{margin:0;background:var(--limestone);color:var(--asphalt);font-family:var(--font);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  html[lang="en"] body{font-size:16.5px}
+  a{color:var(--green-deep)}
+  button,input,select,textarea{font:inherit;color:inherit}
+  [hidden]{display:none!important}
+
+  /* ---- sticky header + progress ---- */
+  .top{position:sticky;top:0;z-index:20;background:rgba(243,238,228,.96);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid var(--sand-line)}
+  .top-row{max-width:600px;margin:0 auto;display:flex;align-items:center;gap:12px;padding:10px 16px}
+  .logo{height:26px;width:auto;display:block;flex:0 0 auto}
+  .initiative{flex:1;min-width:0;line-height:1.25}
+  .initiative .i-ar{display:block;font-family:"Plex Arabic",sans-serif;font-size:.9rem;font-weight:700;color:var(--green-deep)}
+  .initiative .i-en{display:block;font-family:"Archivo","Plex Arabic",sans-serif;font-size:.72rem;font-weight:500;color:var(--asphalt-soft);letter-spacing:.01em}
+  .initiative .i-sep{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+  .lang{flex:0 0 auto;min-height:40px;padding:0 14px;border:1px solid var(--asphalt);border-radius:999px;background:transparent;font-size:.85rem;cursor:pointer}
+  .progress{max-width:600px;margin:0 auto;padding:0 16px 10px}
+  .progress-label{font-size:.8rem;color:var(--asphalt-soft);margin-bottom:5px;font-variant-numeric:tabular-nums}
+  .bar{height:5px;background:rgba(35,35,35,.08);border-radius:999px;overflow:hidden}
+  .bar i{display:block;height:100%;width:0;background:var(--green);border-radius:inherit;transition:width .25s ease}
+
+  main{max-width:600px;margin:0 auto;padding:18px 16px 48px}
+
+  /* ---- intro ---- */
+  .intro{padding:6px 2px 4px}
+  .intro h1{font-family:var(--display);font-size:1.75rem;line-height:1.25;margin:4px 0 10px;font-weight:700}
+  html[lang="en"] .intro h1{font-weight:800;letter-spacing:-.01em}
+  .intro p{margin:0;color:var(--asphalt-soft)}
+  .badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+  .badge{font-size:.78rem;background:var(--paper);border:1px solid var(--sand-line);border-radius:999px;padding:4px 11px;color:var(--asphalt)}
+
+  /* ---- sections & question cards ---- */
+  .section-title{display:flex;align-items:center;gap:10px;margin:30px 2px 12px;font-size:.95rem;font-weight:700;color:var(--green-deep)}
+  .section-title::after{content:"";flex:1;height:1px;background:var(--sand-line)}
+  .q{scroll-margin-top:128px;background:var(--paper);border:1px solid var(--sand-line);border-radius:14px;padding:18px 16px 16px;margin-bottom:14px;transition:border-color .2s,box-shadow .2s}
+  .q.invalid{border-color:var(--danger);box-shadow:0 0 0 3px rgba(179,38,30,.12)}
+  .qnum{display:block;font-size:.78rem;font-weight:600;color:var(--green-deep);margin-bottom:4px;font-variant-numeric:tabular-nums}
+  .qtext{display:block;font-size:1.06rem;font-weight:700;line-height:1.45;margin:0 0 4px}
+  .req{color:var(--danger);font-weight:700;margin-inline-start:3px}
+  .hint{display:block;font-size:.85rem;color:var(--asphalt-soft);margin-bottom:10px}
+  .opts{display:grid;gap:8px;margin-top:12px}
+
+  /* big tap targets */
+  .opt{position:relative;display:flex;align-items:center;gap:12px;min-height:54px;padding:12px 14px;border:1.5px solid var(--sand-line);border-radius:11px;background:#fff;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:border-color .15s,background .15s}
+  .opt input{position:absolute;opacity:0;width:1px;height:1px;pointer-events:none}
+  .opt::before{content:"";flex:0 0 22px;height:22px;border:2px solid #b9ad97;border-radius:50%;background:#fff;transition:all .15s}
+  .opt.check::before{border-radius:6px}
+  .opt.is-checked{border-color:var(--green-deep);background:var(--tint)}
+  .opt.is-checked::before{border-color:var(--green-deep);background:var(--green-deep);box-shadow:inset 0 0 0 4px #fff}
+  .opt.check.is-checked::before{box-shadow:none;background:var(--green-deep) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E") center/16px no-repeat}
+  .opt:focus-within{outline:3px solid var(--green);outline-offset:2px}
+  .opt.is-disabled{opacity:.45;cursor:not-allowed}
+  .opt-txt{flex:1;line-height:1.4}
+
+  .field{display:block;width:100%;min-height:54px;padding:12px 14px;border:1.5px solid var(--sand-line);border-radius:11px;background:#fff;font-size:1rem;margin-top:12px;outline:none;transition:border-color .15s}
+  .field:focus{border-color:var(--green-deep);box-shadow:0 0 0 3px rgba(39,179,141,.18)}
+  select.field{appearance:none;-webkit-appearance:none;background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23232323' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") no-repeat;background-size:18px;background-position:left 14px center;padding-inline-end:44px}
+  html[dir="ltr"] select.field{background-position:right 14px center}
+  textarea.field{min-height:110px;resize:vertical;line-height:1.5}
+  .sub-label{display:block;font-size:.92rem;font-weight:600;margin-top:16px}
+  .counter{display:block;text-align:end;font-size:.78rem;color:var(--asphalt-soft);margin-top:6px;font-variant-numeric:tabular-nums}
+
+  /* confidence scale */
+  .scale{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:14px}
+  .scale label{position:relative;display:flex;align-items:center;justify-content:center;aspect-ratio:1;min-height:54px;border:1.5px solid var(--sand-line);border-radius:12px;background:#fff;font-size:1.35rem;font-weight:700;cursor:pointer;-webkit-tap-highlight-color:transparent;font-variant-numeric:tabular-nums;transition:all .15s}
+  .scale input{position:absolute;opacity:0;width:1px;height:1px;pointer-events:none}
+  .scale label.is-checked{background:var(--green-deep);border-color:var(--green-deep);color:#fff}
+  .scale label:focus-within{outline:3px solid var(--green);outline-offset:2px}
+  .scale-ends{display:flex;justify-content:space-between;gap:10px;margin-top:8px;font-size:.82rem;color:var(--asphalt-soft)}
+
+  .err{display:flex;gap:6px;align-items:center;margin:10px 0 0;font-size:.88rem;font-weight:600;color:var(--danger)}
+
+  /* submit area */
+  .submit-wrap{margin-top:24px}
+  .btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;min-height:58px;border:0;border-radius:12px;background:var(--green-deep);color:#fff;font-size:1.08rem;font-weight:700;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:background .15s,opacity .15s}
+  .btn:hover{background:#12664d}
+  .btn:disabled{opacity:.7;cursor:progress}
+  .btn.ghost{background:transparent;color:var(--green-deep);border:1.5px solid var(--green-deep)}
+  .spinner{width:18px;height:18px;border:2.5px solid rgba(255,255,255,.4);border-top-color:#fff;border-radius:50%;animation:spin .8s linear infinite}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .alert{border-radius:12px;padding:14px 16px;margin-bottom:12px;font-size:.95rem;line-height:1.5}
+  .alert.danger{background:var(--danger-bg);border:1px solid rgba(179,38,30,.35);color:#7a1a14}
+  .alert strong{display:block;margin-bottom:2px}
+  .alert .btn{margin-top:12px;min-height:50px;font-size:1rem}
+  .privacy-note{font-size:.82rem;color:var(--asphalt-soft);text-align:center;margin:14px 0 0}
+
+  /* thank-you */
+  .thanks{text-align:center;background:var(--paper);border:1px solid var(--sand-line);border-radius:16px;padding:40px 22px;margin-top:20px}
+  .thanks .tick{width:64px;height:64px;margin:0 auto 16px;border-radius:50%;background:var(--tint);display:flex;align-items:center;justify-content:center}
+  .thanks h2{font-family:var(--display);font-size:1.6rem;margin:0 0 8px}
+  .thanks p{margin:0 0 22px;color:var(--asphalt-soft)}
+  .thanks .btn{max-width:320px;margin:0 auto;text-decoration:none}
+
+  footer{text-align:center;font-size:.8rem;color:var(--asphalt-soft);padding:0 16px 36px}
+  footer a{color:inherit}
+  @media (min-width:640px){ main{padding-top:28px} .intro h1{font-size:2.1rem} }
+  @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="top-row">
+    <img class="logo" src="/uploads/site/logo-green.png" alt="مدن Mudun" width="72" height="26">
+    <div class="initiative"><span class="i-ar" lang="ar">تنقّل بثقة</span><span class="i-sep"> | </span><span class="i-en" lang="en" dir="ltr">Mobility with Confidence</span></div>
+    <button type="button" class="lang" id="langBtn" lang="en">English</button>
+  </div>
+  <div class="progress" id="progressWrap">
+    <div class="progress-label" id="progressLabel" aria-live="polite">سؤال 1 من 12</div>
+    <div class="bar" aria-hidden="true"><i id="progressBar"></i></div>
+  </div>
+</header>
+
+<main>
+  <div id="formView">
+    <div class="intro">
+      <h1 data-ar="كيف تصل إلى الجامعة؟" data-en="How do you get to UJ?">كيف تصل إلى الجامعة؟</h1>
+      <p data-ar="استبيان قصير (دقيقتان) من مبادرة تنقّل بثقة ومنصة مدن، بالتعاون مع رؤية عمّان. لا نطلب اسمك أو رقمك، والإجابات مجهولة الهوية. سننشر النتائج مجمّعة على mudunlab.org ونشاركها مع الجهات المعنية لتحسين المواصلات إلى الجامعة."
+         data-en="A 2-minute survey by Mobility with Confidence and Mudun, with Amman Vision. We don't ask for your name or number; answers are anonymous. Results will be published in aggregate on mudunlab.org and shared with the relevant bodies to improve transport to the university.">استبيان قصير (دقيقتان) من مبادرة تنقّل بثقة ومنصة مدن، بالتعاون مع رؤية عمّان. لا نطلب اسمك أو رقمك، والإجابات مجهولة الهوية. سننشر النتائج مجمّعة على mudunlab.org ونشاركها مع الجهات المعنية لتحسين المواصلات إلى الجامعة.</p>
+      <div class="badges">
+        <span class="badge" data-ar="دقيقتان" data-en="2 minutes">دقيقتان</span>
+        <span class="badge" data-ar="مجهول الهوية" data-en="Anonymous">مجهول الهوية</span>
+        <span class="badge" data-ar="* سؤال مطلوب" data-en="* required">* سؤال مطلوب</span>
+      </div>
+    </div>
+
+    <form id="surveyForm" novalidate>
+      <input type="hidden" name="source" value="booth-uj-2026-11-03">
+      <input type="hidden" name="lang" id="langField" value="ar">
+
+      <h2 class="section-title" data-ar="عنك" data-en="About you">عنك</h2>
+
+      <section class="q" id="q-role" data-required="radio" data-key="role" role="radiogroup" aria-labelledby="t-role">
+        <span class="qnum"></span>
+        <span class="qtext" id="t-role"><span data-ar="أنتَ:" data-en="You are:">أنتَ:</span><span class="req" aria-hidden="true">*</span></span>
+        {{ radios("role", [
+          {v:"طالب بكالوريوس", en:"Undergraduate"},
+          {v:"طالب دراسات عليا", en:"Postgraduate"},
+          {v:"موظف أو عضو هيئة تدريس", en:"Staff or faculty"},
+          {v:"زائر", en:"Visitor"}
+        ]) }}
+        <p class="err" hidden data-ar="هذا السؤال مطلوب." data-en="This question is required.">هذا السؤال مطلوب.</p>
+      </section>
+
+      <section class="q" id="q-governorate" data-required="select" data-key="governorate" aria-labelledby="t-gov">
+        <span class="qnum"></span>
+        <label class="qtext" id="t-gov" for="governorate"><span data-ar="أين تسكن؟ المحافظة" data-en="Where do you live? Governorate">أين تسكن؟ المحافظة</span><span class="req" aria-hidden="true">*</span></label>
+        <select class="field" id="governorate" name="governorate">
+          <option value="" data-ar="اختر المحافظة" data-en="Choose a governorate">اختر المحافظة</option>
+          {%- for g in governorates %}
+          <option value="{{ g.v }}" data-ar="{{ g.v }}" data-en="{{ g.en }}">{{ g.v }}</option>
+          {%- endfor %}
+        </select>
+        <label class="sub-label" for="area" data-ar="المنطقة أو الحي (اختياري)" data-en="Area or neighbourhood (optional)">المنطقة أو الحي (اختياري)</label>
+        <input class="field" type="text" id="area" name="area" maxlength="80" autocomplete="off" data-ar-ph="مثال: صويلح، الهاشمي الشمالي" data-en-ph="e.g. Sweileh, North Hashmi" placeholder="مثال: صويلح، الهاشمي الشمالي">
+        <p class="err" hidden data-ar="اختر المحافظة." data-en="Please choose a governorate.">اختر المحافظة.</p>
+      </section>
+
+      <h2 class="section-title" data-ar="رحلتك" data-en="Your trip">رحلتك</h2>
+
+      <section class="q" id="q-mode" data-required="radio" data-key="mode" role="radiogroup" aria-labelledby="t-mode">
+        <span class="qnum"></span>
+        <span class="qtext" id="t-mode"><span data-ar="كيف تصل عادةً إلى الجامعة؟" data-en="How do you usually get to UJ?">كيف تصل عادةً إلى الجامعة؟</span><span class="req" aria-hidden="true">*</span></span>
+        <span class="hint" data-ar="الوسيلة الرئيسية" data-en="Your main mode">الوسيلة الرئيسية</span>
+        {{ radios("mode", modes) }}
+        <p class="err" hidden data-ar="هذا السؤال مطلوب." data-en="This question is required.">هذا السؤال مطلوب.</p>
+      </section>
+
+      <section class="q" id="q-line" data-key="line" data-transit-only hidden aria-labelledby="t-line">
+        <span class="qnum"></span>
+        <label class="qtext" id="t-line" for="line"><span data-ar="ما رقم الخط الذي تستخدمه؟ (اختياري)" data-en="Which line number do you use? (optional)">ما رقم الخط الذي تستخدمه؟ (اختياري)</span></label>
+        <input class="field" type="text" id="line" name="line" maxlength="40" autocomplete="off" data-ar-ph="مثال: 99 أو صويلح – الجامعة" data-en-ph="e.g. 99 or Sweileh – UJ" placeholder="مثال: 99 أو صويلح – الجامعة">
+      </section>
+
+      <section class="q" id="q-transfers" data-key="transfers" data-transit-only hidden role="radiogroup" aria-labelledby="t-transfers">
+        <span class="qnum"></span>
+        <span class="qtext" id="t-transfers" data-ar="كم مرة تبدّل المواصلات في الطريق؟" data-en="How many times do you change vehicles?">كم مرة تبدّل المواصلات في الطريق؟</span>
+        {{ radios("transfers", [
+          {v:"لا أبدّل", en:"None"},
+          {v:"مرة", en:"Once"},
+          {v:"مرتين أو أكثر", en:"Twice or more"}
+        ]) }}
+      </section>
+
+      <section class="q" id="q-time" data-required="radio" data-key="time" role="radiogroup" aria-labelledby="t-time">
+        <span class="qnum"></span>
+        <span class="qtext" id="t-time"><span data-ar="كم تستغرق الرحلة من باب البيت إلى القاعة؟" data-en="Door to classroom, how long does the trip take?">كم تستغرق الرحلة من باب البيت إلى القاعة؟</span><span class="req" aria-hidden="true">*</span></span>
+        {{ radios("time", [
+          {v:"أقل من 20 دقيقة", en:"Under 20 min"},
+          {v:"20–40", ar:"20–40 دقيقة", en:"20–40 min"},
+          {v:"40–60", ar:"40–60 دقيقة", en:"40–60 min"},
+          {v:"60–90", ar:"60–90 دقيقة", en:"60–90 min"},
+          {v:"أكثر من 90 دقيقة", en:"Over 90 min"}
+        ]) }}
+        <p class="err" hidden data-ar="هذا السؤال مطلوب." data-en="This question is required.">هذا السؤال مطلوب.</p>
+      </section>
+
+      <section class="q" id="q-cost" data-required="radio" data-key="cost" role="radiogroup" aria-labelledby="t-cost">
+        <span class="qnum"></span>
+        <span class="qtext" id="t-cost"><span data-ar="كم تدفع يومياً على المواصلات ذهاباً وإياباً؟" data-en="How much do you spend on transport per day, both ways?">كم تدفع يومياً على المواصلات ذهاباً وإياباً؟</span><span class="req" aria-hidden="true">*</span></span>
+        {{ radios("cost", [
+          {v:"لا شيء", en:"Nothing"},
+          {v:"أقل من 1 دينار", en:"Under 1 JD"},
+          {v:"1–2 دينار", en:"1–2 JD"},
+          {v:"2–4 دنانير", en:"2–4 JD"},
+          {v:"أكثر من 4 دنانير", en:"Over 4 JD"}
+        ]) }}
+        <p class="err" hidden data-ar="هذا السؤال مطلوب." data-en="This question is required.">هذا السؤال مطلوب.</p>
+      </section>
+
+      <section class="q" id="q-gate" data-key="gate" role="radiogroup" aria-labelledby="t-gate">
+        <span class="qnum"></span>
+        <span class="qtext" id="t-gate" data-ar="من أي موقف أو بوابة تدخل الجامعة عادةً؟" data-en="Which stop or gate do you usually use?">من أي موقف أو بوابة تدخل الجامعة عادةً؟</span>
+        {{ radios("gate", [
+          {v:"البوابة الرئيسية", en:"Main gate"},
+          {v:"مسجد الجامعة", en:"UJ Mosque"},
+          {v:"بوابة كلية الزراعة", en:"Agriculture gate"},
+          {v:"مستشفى الجامعة", en:"UJ Hospital"},
+          {v:"البوابة الشمالية", en:"Northern gate"},
+          {v:"غير ذلك أو لا أعرف", en:"Other or not sure"}
+        ]) }}
+      </section>
+
+      <h2 class="section-title" data-ar="رأيك" data-en="Your view">رأيك</h2>
+
+      <section class="q" id="q-problems" data-required="checkbox" data-key="problems" role="group" aria-labelledby="t-problems">
+        <span class="qnum"></span>
+        <span class="qtext" id="t-problems"><span data-ar="ما أكبر مشكلتين تواجههما في المواصلات؟" data-en="Your two biggest problems getting here?">ما أكبر مشكلتين تواجههما في المواصلات؟</span><span class="req" aria-hidden="true">*</span></span>
+        <span class="hint" id="problemsHint" data-ar="اختر اثنتين فقط" data-en="Pick two">اختر اثنتين فقط</span>
+        <div class="opts">
+          {%- for o in [
+            {v:"الانتظار الطويل أو عدم انتظام المواعيد", en:"Long or unpredictable waits"},
+            {v:"لا يوجد خط قريب من سكني", en:"No line near my home"},
+            {v:"الازدحام داخل الباص", en:"Crowded buses"},
+            {v:"كثرة التبديل", en:"Too many transfers"},
+            {v:"التكلفة", en:"Cost"},
+            {v:"المشي من الموقف إلى الكلية", en:"Walk from the stop to my faculty"},
+            {v:"الشعور بعدم الأمان أو الراحة", en:"Not feeling safe or comfortable"},
+            {v:"لا أعرف الخطوط والمواعيد", en:"Don't know the lines or times"}
+          ] %}
+          <label class="opt check"><input type="checkbox" name="problems" value="{{ o.v }}"><span class="opt-txt" data-ar="{{ o.v }}" data-en="{{ o.en }}">{{ o.v }}</span></label>
+          {%- endfor %}
+        </div>
+        <p class="err" hidden data-ar="اختر مشكلة واحدة على الأقل." data-en="Pick at least one.">اختر مشكلة واحدة على الأقل.</p>
+      </section>
+
+      <section class="q" id="q-app" data-key="app" role="radiogroup" aria-labelledby="t-app">
+        <span class="qnum"></span>
+        <span class="qtext" id="t-app" data-ar="هل تستخدم تطبيق باص عمّان (Amman Bus)؟" data-en="Do you use the Amman Bus app?">هل تستخدم تطبيق باص عمّان (Amman Bus)؟</span>
+        {{ radios("app", [
+          {v:"نعم، بانتظام", en:"Yes, regularly"},
+          {v:"أحياناً", en:"Sometimes"},
+          {v:"أعرفه ولا أستخدمه", en:"I know it but don't use it"},
+          {v:"لا أعرفه", en:"I didn't know about it"}
+        ]) }}
+      </section>
+
+      <section class="q" id="q-confidence" data-required="radio" data-key="confidence" role="radiogroup" aria-labelledby="t-confidence">
+        <span class="qnum"></span>
+        <span class="qtext" id="t-confidence"><span data-ar="من 1 إلى 5، ما مدى ثقتك باستخدام المواصلات العامة للوصول إلى الجامعة؟" data-en="From 1 to 5, how confident are you using public transport to get to UJ?">من 1 إلى 5، ما مدى ثقتك باستخدام المواصلات العامة للوصول إلى الجامعة؟</span><span class="req" aria-hidden="true">*</span></span>
+        <div class="scale">
+          {%- for n in [1,2,3,4,5] %}
+          <label><input type="radio" name="confidence" value="{{ n }}" aria-label="{{ n }}">{{ n }}</label>
+          {%- endfor %}
+        </div>
+        <div class="scale-ends">
+          <span data-ar="1 لا أثق أبداً" data-en="1 not at all">1 لا أثق أبداً</span>
+          <span data-ar="5 أثق تماماً" data-en="5 fully">5 أثق تماماً</span>
+        </div>
+        <p class="err" hidden data-ar="هذا السؤال مطلوب." data-en="This question is required.">هذا السؤال مطلوب.</p>
+      </section>
+
+      <section class="q" id="q-improve" data-key="improve" aria-labelledby="t-improve">
+        <span class="qnum"></span>
+        <label class="qtext" id="t-improve" for="improve"><span data-ar="ما الشيء الوحيد الذي سيجعلك تستخدم الباص أكثر؟ (اختياري)" data-en="What one thing would make you take the bus more? (optional)">ما الشيء الوحيد الذي سيجعلك تستخدم الباص أكثر؟ (اختياري)</span></label>
+        <textarea class="field" id="improve" name="improve" maxlength="300" rows="4"></textarea>
+        <span class="counter" id="improveCount">0 / 300</span>
+      </section>
+
+      <div class="submit-wrap">
+        <div class="alert danger" id="formError" role="alert" hidden>
+          <strong id="formErrorTitle"></strong>
+          <span id="formErrorText"></span>
+          <button type="button" class="btn ghost" id="retryBtn" hidden data-ar="إعادة المحاولة" data-en="Try again">إعادة المحاولة</button>
+        </div>
+        <button type="submit" class="btn" id="submitBtn"><span id="submitLabel" data-ar="إرسال الإجابات" data-en="Send my answers">إرسال الإجابات</span></button>
+        <p class="privacy-note" data-ar="لا نجمع أسماء أو أرقام هواتف أو بريداً إلكترونياً." data-en="We don't collect names, phone numbers or emails.">لا نجمع أسماء أو أرقام هواتف أو بريداً إلكترونياً.</p>
+      </div>
+    </form>
+  </div>
+
+  <div id="thanksView" hidden>
+    <div class="thanks" role="status">
+      <div class="tick"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#17795c" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
+      <h2 data-ar="شكراً!" data-en="Thanks!">شكراً!</h2>
+      <p><span data-ar="تابعوا النتائج على" data-en="Follow the results on">تابعوا النتائج على</span> <bdi>mudunlab.org</bdi></p>
+      <a class="btn" href="/" data-ar="زيارة موقع مدن" data-en="Visit mudunlab.org">زيارة موقع مدن</a>
+    </div>
+  </div>
+</main>
+
+<footer><a href="/">مدن · Mudun</a> · <bdi>mudunlab.org</bdi></footer>
+
+<script>
+(function () {
+  // ===================== CONFIG =====================
+  // Paste the Google Apps Script Web App URL between the quotes.
+  // It looks like: https://script.google.com/macros/s/XXXXXXXX/exec
+  var SURVEY_ENDPOINT = '';
+  // ==================================================
+
+  var REQUEST_TIMEOUT_MS = 25000;
+  var form = document.getElementById('surveyForm');
+  var submitBtn = document.getElementById('submitBtn');
+  var submitLabel = document.getElementById('submitLabel');
+  var errBox = document.getElementById('formError');
+  var errTitle = document.getElementById('formErrorTitle');
+  var errText = document.getElementById('formErrorText');
+  var retryBtn = document.getElementById('retryBtn');
+  var langField = document.getElementById('langField');
+  var sending = false, sent = false;
+
+  var T = {
+    ar: { progress: function (n, t) { return 'سؤال ' + n + ' من ' + t; },
+          qnum: function (n, t) { return 'سؤال ' + n + ' من ' + t; },
+          sending: 'جارٍ الإرسال…', fixTitle: 'بقيت أسئلة مطلوبة', fixText: 'أكمل الأسئلة المعلّمة بالأحمر ثم اضغط إرسال.',
+          netTitle: 'تعذّر الإرسال', netText: 'تحقّق من اتصالك بالإنترنت ثم أعد المحاولة. إجاباتك محفوظة في الصفحة.',
+          cfgText: 'الاستبيان غير مفعّل بعد. أخبر فريق مدن في الركن.', pickTwo: 'اخترت اثنتين. أزل واحدة لتغيير اختيارك.', pick: 'اختر اثنتين فقط',
+          toggle: 'English', title: 'كيف تصل إلى الجامعة؟ · تنقّل بثقة | مدن' },
+    en: { progress: function (n, t) { return 'Question ' + n + ' of ' + t; },
+          qnum: function (n, t) { return 'Question ' + n + ' of ' + t; },
+          sending: 'Sending…', fixTitle: 'Some required questions are missing', fixText: 'Answer the questions marked in red, then press send.',
+          netTitle: "Couldn't send your answers", netText: 'Check your internet connection and try again. Your answers are still here.',
+          cfgText: "The survey isn't switched on yet. Please tell the Mudun team at the booth.", pickTwo: "You've picked two. Untick one to change.", pick: 'Pick two',
+          toggle: 'العربية', title: 'How do you get to UJ? · Mobility with Confidence | Mudun' }
+  };
+
+  // ---------- language ----------
+  var params = new URLSearchParams(location.search);
+  var lang = params.get('lang') === 'en' ? 'en' : 'ar';
+
+  function applyLang() {
+    var html = document.documentElement;
+    html.lang = lang; html.dir = lang === 'ar' ? 'rtl' : 'ltr';
+    document.title = T[lang].title;
+    langField.value = lang;
+    document.querySelectorAll('[data-ar][data-en]').forEach(function (el) {
+      el.textContent = el.getAttribute('data-' + lang);
+    });
+    document.querySelectorAll('[data-ar-ph]').forEach(function (el) {
+      el.setAttribute('placeholder', el.getAttribute('data-' + lang + '-ph'));
+    });
+    var lb = document.getElementById('langBtn');
+    lb.textContent = T[lang].toggle; lb.lang = lang === 'ar' ? 'en' : 'ar';
+    updateProblemsLimit(); renumber(); updateProgress();
+    if (!errBox.hidden && errBox.dataset.kind) showError(errBox.dataset.kind);
+  }
+  document.getElementById('langBtn').addEventListener('click', function () {
+    lang = lang === 'ar' ? 'en' : 'ar'; applyLang();
+  });
+
+  // ---------- conditional questions (line + transfers) ----------
+  function isTransitMode() {
+    var m = form.querySelector('input[name="mode"]:checked');
+    return !!(m && m.hasAttribute('data-transit'));
+  }
+  function updateConditional() {
+    var show = isTransitMode();
+    document.querySelectorAll('[data-transit-only]').forEach(function (card) {
+      card.hidden = !show;
+      if (!show) {
+        card.querySelectorAll('input').forEach(function (i) {
+          if (i.type === 'radio') i.checked = false; else i.value = '';
+        });
+      }
+    });
+    syncChecked(); renumber(); updateProgress();
+  }
+
+  // ---------- numbering & progress ----------
+  function visibleCards() {
+    return Array.prototype.filter.call(form.querySelectorAll('.q'), function (c) { return !c.hidden; });
+  }
+  function renumber() {
+    var cards = visibleCards();
+    cards.forEach(function (c, i) { c.querySelector('.qnum').textContent = T[lang].qnum(i + 1, cards.length); });
+  }
+  function updateProgress() {
+    var cards = visibleCards();
+    if (!cards.length) return;
+    var line = window.innerHeight * 0.45, current = 1;
+    cards.forEach(function (c, i) { if (c.getBoundingClientRect().top < line) current = i + 1; });
+    var atEnd = (window.innerHeight + window.scrollY) >= document.documentElement.scrollHeight - 4;
+    if (atEnd) current = cards.length;
+    document.getElementById('progressLabel').textContent = T[lang].progress(current, cards.length);
+    document.getElementById('progressBar').style.width = (current / cards.length * 100) + '%';
+  }
+  var ticking = false;
+  window.addEventListener('scroll', function () {
+    if (!ticking) { ticking = true; requestAnimationFrame(function () { updateProgress(); ticking = false; }); }
+  }, { passive: true });
+  window.addEventListener('resize', updateProgress);
+
+  // ---------- selected/disabled styling via classes (works without CSS :has) ----------
+  function syncChecked() {
+    form.querySelectorAll('.opt, .scale label').forEach(function (lab) {
+      var inp = lab.querySelector('input');
+      lab.classList.toggle('is-checked', inp.checked);
+      lab.classList.toggle('is-disabled', inp.disabled);
+    });
+  }
+
+  // ---------- "pick two" limit ----------
+  function updateProblemsLimit() {
+    var boxes = form.querySelectorAll('input[name="problems"]');
+    var n = form.querySelectorAll('input[name="problems"]:checked').length;
+    boxes.forEach(function (b) { b.disabled = !b.checked && n >= 2; });
+    document.getElementById('problemsHint').textContent = n >= 2 ? T[lang].pickTwo : T[lang].pick;
+  }
+
+  // ---------- character counter ----------
+  var improve = document.getElementById('improve');
+  improve.addEventListener('input', function () {
+    document.getElementById('improveCount').textContent = improve.value.length + ' / 300';
+  });
+
+  // ---------- validation ----------
+  function cardValid(card) {
+    var kind = card.getAttribute('data-required'), key = card.getAttribute('data-key');
+    if (!kind || card.hidden) return true;
+    if (kind === 'select') return !!form.elements[key].value;
+    return !!form.querySelector('input[name="' + key + '"]:checked');
+  }
+  function setInvalid(card, bad) {
+    card.classList.toggle('invalid', bad);
+    var e = card.querySelector('.err'); if (e) e.hidden = !bad;
+  }
+  function validate() {
+    var first = null;
+    form.querySelectorAll('.q[data-required]').forEach(function (card) {
+      var ok = cardValid(card); setInvalid(card, !ok);
+      if (!ok && !first) first = card;
+    });
+    return first;
+  }
+
+  form.addEventListener('change', function (e) {
+    var card = e.target.closest('.q');
+    if (e.target.name === 'mode') updateConditional();
+    if (e.target.name === 'problems') updateProblemsLimit();
+    syncChecked();
+    if (card && card.classList.contains('invalid') && cardValid(card)) setInvalid(card, false);
+    if (!errBox.hidden && errBox.dataset.kind === 'fix' && !form.querySelector('.q.invalid')) hideError();
+  });
+
+  // ---------- errors ----------
+  function showError(kind) {
+    errBox.dataset.kind = kind;
+    var t = T[lang];
+    errTitle.textContent = kind === 'fix' ? t.fixTitle : t.netTitle;
+    errText.textContent = kind === 'fix' ? t.fixText : (kind === 'config' ? t.cfgText : t.netText);
+    retryBtn.hidden = kind !== 'network';
+    errBox.hidden = false;
+  }
+  function hideError() { errBox.hidden = true; errBox.dataset.kind = ''; }
+
+  function setSending(on) {
+    sending = on;
+    submitBtn.disabled = on; retryBtn.disabled = on;
+    submitBtn.setAttribute('aria-busy', on ? 'true' : 'false');
+    if (on) { submitBtn.innerHTML = '<span class="spinner" aria-hidden="true"></span><span>' + T[lang].sending + '</span>'; }
+    else { submitBtn.innerHTML = ''; submitBtn.appendChild(submitLabel); submitLabel.textContent = submitLabel.getAttribute('data-' + lang); }
+  }
+
+  // ---------- payload: every key always present, values in Arabic ----------
+  function collect() {
+    var val = function (k) { var el = form.querySelector('input[name="' + k + '"]:checked'); return el ? el.value : ''; };
+    return {
+      source: form.elements.source.value,
+      lang: lang,
+      role: val('role'),
+      governorate: form.elements.governorate.value,
+      area: form.elements.area.value.trim(),
+      mode: val('mode'),
+      line: isTransitMode() ? form.elements.line.value.trim() : '',
+      transfers: isTransitMode() ? val('transfers') : '',
+      time: val('time'),
+      cost: val('cost'),
+      gate: val('gate'),
+      problems: Array.prototype.map.call(form.querySelectorAll('input[name="problems"]:checked'), function (b) { return b.value; }).join(', '),
+      app: val('app'),
+      confidence: val('confidence'),
+      improve: improve.value.trim().slice(0, 300)
+    };
+  }
+
+  function send() {
+    if (sending || sent) return;
+    var firstBad = validate();
+    if (firstBad) {
+      showError('fix');
+      firstBad.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      var focusable = firstBad.querySelector('input:not([type=hidden]),select');
+      if (focusable) setTimeout(function () { focusable.focus({ preventScroll: true }); }, 400);
+      return;
+    }
+    if (!SURVEY_ENDPOINT || SURVEY_ENDPOINT.indexOf('https://') !== 0) { showError('config'); return; }
+
+    hideError(); setSending(true);
+    var data = collect();
+    var ctrl = window.AbortController ? new AbortController() : null;
+    var timer = setTimeout(function () { if (ctrl) ctrl.abort(); }, REQUEST_TIMEOUT_MS);
+
+    fetch(SURVEY_ENDPOINT, {
+      method: 'POST', mode: 'no-cors',
+      headers: { 'Content-Type': 'text/plain' },
+      body: JSON.stringify(data),
+      signal: ctrl ? ctrl.signal : undefined
+    }).then(function () {
+      clearTimeout(timer); sent = true; setSending(false);
+      document.getElementById('formView').hidden = true;
+      document.getElementById('progressWrap').hidden = true;
+      document.getElementById('thanksView').hidden = false;
+      window.scrollTo(0, 0);
+    }).catch(function () {
+      clearTimeout(timer); setSending(false); showError('network');
+      errBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+  }
+
+  form.addEventListener('submit', function (e) { e.preventDefault(); send(); });
+  retryBtn.addEventListener('click', send);
+
+  applyLang();
+  syncChecked();
+})();
+</script>
+</body>
+</html>
