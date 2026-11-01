@@ -30,6 +30,7 @@ body{margin:0;background:var(--limestone);color:var(--asphalt);font-family:var(-
 .leaflet-control-attribution{font:11px var(--f-num);background:rgba(255,253,248,.85)!important;color:var(--ink2)}
 .leaflet-control-attribution a{color:var(--ink2)}
 .leaflet-control-zoom{display:none}
+.osm-tiles{filter:saturate(.55) sepia(.12) brightness(1.02) contrast(.95)}
 .leaflet-top{top:calc(92px + env(safe-area-inset-top,0px))}
 
 .top{position:fixed;top:0;left:0;right:0;z-index:20;display:flex;align-items:center;justify-content:space-between;gap:10px;
@@ -268,19 +269,19 @@ let S=fresh();
 
 /* ================= map ================= */
 const map=Lf.map('map',{zoomControl:false,preferCanvas:true,minZoom:9,maxZoom:17}).setView([31.97,35.90],11);
-map.attributionControl.setPosition('topleft');map.attributionControl.setPrefix(false).addAttribution('Roads © OpenStreetMap · Lines: Amman Vision');
+map.attributionControl.setPosition('topleft');map.attributionControl.setPrefix(false).addAttribution('Lines: Amman Vision');
 const R=Lf.canvas({padding:0.3});
 map.createPane('base');map.getPane('base').style.zIndex=250;
 const RB=Lf.canvas({padding:0.3,pane:'base'});
 /* Basemap: full street map tiles (every street, neighbourhood names) on the live site.
    Where tiles can't load, fall back to our own OpenStreetMap street data, with all streets shown from zoom 13. */
-const tiles=Lf.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',{subdomains:'abcd',maxZoom:19,attribution:'© OpenStreetMap © CARTO'}).addTo(map);
+const tiles=Lf.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,className:'osm-tiles',attribution:'© OpenStreetMap contributors'}).addTo(map);
 let tileOk=0,tileErr=0,vector=false;
 tiles.on('tileload',()=>tileOk++);tiles.on('tileerror',()=>{if(++tileErr>2&&!tileOk)useVector();});
 setTimeout(()=>{if(!tileOk)useVector();},3500);
 const rs={1:{c:'#e3dac8',w:1},2:{c:'#d3c8b2',w:1.6},3:{c:'#bdb19a',w:2.4}};
 function useVector(){
-  if(vector)return;vector=true;map.removeLayer(tiles);
+  if(vector)return;vector=true;map.removeLayer(tiles);map.attributionControl.addAttribution('Roads © OpenStreetMap');
   if(window._placesWaiting){window._placesWaiting=false;map.on('zoomend moveend',paintPlaces);setTimeout(paintPlaces,0);}
   [1,2,3].forEach(k=>DATA.roads[k].forEach(g=>Lf.polyline(g,{renderer:RB,color:rs[k].c,weight:rs[k].w,interactive:false}).addTo(map)));
   map.on('moveend zoomend',paintStreets);paintStreets();
@@ -313,7 +314,6 @@ function onPlaces(){
   PL=D.map(p=>({n:p.n,ne:p.ne||p.n,la:p.la,lo:p.lo,t:TIER[p.t]||3})).sort((a,b)=>a.t-b.t);
   buildIndex();
   if(window.PLACES_APPROX&&!vector){window._placesWaiting=true;return;}
-  if(!vector){map.removeLayer(tiles);tiles.setUrl('https://{s}.basemaps.cartocdn.com/rastertiles/voyager_nolabels/{z}/{x}/{y}{r}.png');tiles.addTo(map);tiles.bringToBack();}
   map.on('zoomend moveend',paintPlaces);paintPlaces();
 }
 function paintPlaces(){
