@@ -85,6 +85,9 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy({ "src/humans.txt": "humans.txt" });
   eleventyConfig.addPassthroughCopy({ "src/llms.txt": "llms.txt" });
   eleventyConfig.addPassthroughCopy({ "src/_headers": "_headers" });
+  // /uj: standalone interactive trip map for the UJ booth. Copied as-is (no layout, no template processing).
+  eleventyConfig.addPassthroughCopy({ "src/uj": "uj" });
+  eleventyConfig.ignores.add("src/uj/**");
 
   // Research collection — newest first
   eleventyConfig.addCollection("research", function (collectionApi) {

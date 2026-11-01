@@ -11,6 +11,13 @@
 /survey
   X-Robots-Tag: noindex, nofollow
 
+/uj
+  X-Robots-Tag: noindex, nofollow
+
+/uj/*
+  X-Robots-Tag: noindex, nofollow
+  Cache-Control: public, max-age=300
+
 /survey/*
   X-Robots-Tag: noindex, nofollow
 
