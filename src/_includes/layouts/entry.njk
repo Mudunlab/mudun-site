@@ -48,7 +48,7 @@ layout: base.njk
          note and the English text (left-to-right), never an empty page. #}
       <div style="margin-top:clamp(28px,4vw,40px)">
         {% if type == 'research' %}
-        <h4 class="sub-label" data-en="The brief" data-ar="الملخّص"></h4>
+        <h3 class="sub-label" data-en="The brief" data-ar="الملخّص"></h3>
         {% endif %}
 
         {% if brief_ar %}
@@ -75,7 +75,7 @@ layout: base.njk
 
       {# ---- Research-only: what the study examines ---- #}
       {% if type == "research" and examines_en and examines_en.length %}
-        <h4 class="sub-label" style="margin-top:22px" data-en="What this study examines" data-ar="ما الذي تتناوله الدراسة"></h4>
+        <h3 class="sub-label" style="margin-top:22px" data-en="What this study examines" data-ar="ما الذي تتناوله الدراسة"></h3>
         {% if examines_ar and examines_ar.length %}
         <ul style="margin:0 0 18px;padding-inline-start:1.1em;color:var(--asphalt-soft)">
           {% for i in range(0, examines_en.length) %}
@@ -83,7 +83,7 @@ layout: base.njk
           {% endfor %}
         </ul>
         {% else %}
-        <ul dir="ltr" lang="en" style="margin:0 0 18px;padding-inline-start:1.1em;color:var(--asphalt-soft);text-align:left;font-family:'Inter',system-ui,sans-serif">
+        <ul dir="ltr" lang="en" style="margin:0 0 18px;padding-inline-start:1.1em;color:var(--asphalt-soft);text-align:left;font-family:'IBM Plex Sans',system-ui,sans-serif">
           {% for item in examines_en %}<li style="margin-bottom:6px">{{ item }}</li>{% endfor %}
         </ul>
         {% endif %}
@@ -91,7 +91,7 @@ layout: base.njk
 
       {# ---- Presentation slides (self-hosted, bilingual) ---- #}
       {% if type == "research" and (slides_en.length or slides_ar.length) %}
-        <h4 class="sub-label" style="margin-top:28px" data-en="Presentation" data-ar="العرض التقديمي"></h4>
+        <h3 class="sub-label" style="margin-top:28px" data-en="Presentation" data-ar="العرض التقديمي"></h3>
 
         {% if slides_en.length %}
         <div {% if slides_ar.length %}data-only="en"{% else %}dir="ltr"{% endif %}>
@@ -122,7 +122,7 @@ layout: base.njk
         <div id="lightbox" class="lightbox" onclick="if(event.target===this)closeLightbox()">
           <button type="button" class="lightbox-close" aria-label="Close" onclick="closeLightbox()">✕</button>
           <button type="button" class="lightbox-arrow lightbox-prev" aria-label="Previous" onclick="lightboxNav(-1)">‹</button>
-          <img id="lightbox-img" src="" alt="">
+          <img id="lightbox-img" alt="">
           <button type="button" class="lightbox-arrow lightbox-next" aria-label="Next" onclick="lightboxNav(1)">›</button>
         </div>
       {% endif %}
@@ -130,7 +130,7 @@ layout: base.njk
       {# ---- Layer 2: the full study PDF ---- #}
       {% if type == "research" %}
         <div style="margin-top:clamp(28px,4vw,40px);padding-top:clamp(20px,3vw,28px);border-top:1px solid var(--sand-line)">
-        <h4 class="sub-label" data-en="Full study" data-ar="الدراسة الكاملة"></h4>
+        <h3 class="sub-label" data-en="Full study" data-ar="الدراسة الكاملة"></h3>
         {% if pdf %}
           <div class="pdf-actions">
             <a class="btn btn-primary" href="{{ pdf }}" download>
