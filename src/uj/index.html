@@ -199,7 +199,7 @@ const T = {
   eyebrow:'استبيان على شكل رحلة',title:'ارسم رحلتك إلى<br><em>الجامعة الأردنية</em>',
   intro:'دقيقتين. بترسم طريقك من البيت للجامعة على الخريطة، مرحلة مرحلة، وبتشوفها جنب رحلات باقي الطلاب. ما بنطلب اسمك ولا رقمك، وبيتك بينحفظ تقريبياً على مستوى الحي.',
   you:'أنت:',roles:['طالب بكالوريوس','دراسات عليا','موظف أو هيئة تدريس','زائر'],start:'يلّا نبدأ',
-  s1:'من وين بتبلّش رحلتك؟',s1p:'ابحث عن منطقتك أو شارعك ليقرّبك، وبعدين اضغط على الخريطة مكان بيتك تقريباً.',sPh:'ابحث: الجبيهة، شارع الأردن...',kArea:'منطقة',kStreet:'شارع',kStop:'موقف',sPh2:'ابحث: محطة طارق، صويلح، دوار...',adjust:'تقدر تضغط على الخريطة لتعدّل مكان النزول.',noRes:'ما لقينا اسم مطابق. قرّب الخريطة بإيدك واضغط مكانك.',nowTap:'الآن اضغط مكان بيتك',tapHome:'اضغط على مكان سكنك',
+  s1:'من وين بتبلّش رحلتك؟',s1p:'ابحث عن منطقتك أو شارعك ليقرّبك، وبعدين اضغط على الخريطة مكان بيتك تقريباً.',sPh:'ابحث: الجبيهة، شارع الأردن...',mapsLink:'خرائط الخطوط لهاتفك',kArea:'منطقة',kStreet:'شارع',kStop:'موقف',sPh2:'ابحث: محطة طارق، صويلح، دوار...',adjust:'تقدر تضغط على الخريطة لتعدّل مكان النزول.',noRes:'ما لقينا اسم مطابق. قرّب الخريطة بإيدك واضغط مكانك.',nowTap:'الآن اضغط مكان بيتك',tapHome:'اضغط على مكان سكنك',
   nearT:n=>`${n} ${n==1?'خط بيوصل':'خطوط بتوصل'} الجامعة مباشرة من منطقتك`,stopAt:m=>`أقرب موقف ${m} م`,
   noneT:'ما في خط بيوصل الجامعة مباشرة قريب منك. هاي معلومة مهمة، وإجابتك بتساعدنا نوصّلها.',
   area:'اسم منطقتك (اختياري)',areaPh:'مثلاً: صويلح، طبربور، الهاشمي',next:'التالي',back:'رجوع',
@@ -230,7 +230,7 @@ const T = {
   eyebrow:'A survey shaped like a trip',title:'Draw your trip to<br><em>the University of Jordan</em>',
   intro:'Two minutes. Draw your way from home to UJ on the map, leg by leg, and see it next to everyone else’s. No name or number; your home is stored roughly, at neighbourhood level.',
   you:'You are:',roles:['Undergraduate','Postgraduate','Staff or faculty','Visitor'],start:'Start',
-  s1:'Where does your trip start?',s1p:'Search your area or street to zoom in, then tap roughly where you live.',sPh:'Search: Jubeiha, Sweifieh...',kArea:'area',kStreet:'street',kStop:'stop',sPh2:'Search: Tariq Station, Sweileh...',adjust:'You can tap the map to adjust where you got off.',noRes:'No match. Zoom the map yourself and tap your spot.',nowTap:'Now tap where you live',tapHome:'Tap where you live',
+  s1:'Where does your trip start?',s1p:'Search your area or street to zoom in, then tap roughly where you live.',sPh:'Search: Jubeiha, Sweifieh...',mapsLink:'Bus maps for your phone',kArea:'area',kStreet:'street',kStop:'stop',sPh2:'Search: Tariq Station, Sweileh...',adjust:'You can tap the map to adjust where you got off.',noRes:'No match. Zoom the map yourself and tap your spot.',nowTap:'Now tap where you live',tapHome:'Tap where you live',
   nearT:n=>`${n} line${n>1?'s':''} reach UJ directly from your area`,stopAt:m=>`nearest stop ${m} m`,
   noneT:'No line reaches UJ directly from near you. That is useful to know, and your answer helps us show it.',
   area:'Your area (optional)',areaPh:'e.g. Swaileh, Tabarbour, Hashmi',next:'Next',back:'Back',
@@ -465,7 +465,8 @@ function render(){
     h=`${logosHTML()}<div class="eyebrow">${x.eyebrow}</div><h1>${x.title}</h1><p>${x.intro}</p>
       ${LS.get('uj_done')?`<div class="callout">${x.already}</div>`:''}
       <div><label class="q">${x.you}</label>${chips('role',x.roles.map((r,i)=>[String(i),r]),S.role)}</div>
-      <button class="btn" id="go" ${S.role===null?'disabled':''}>${x.start}</button>`;
+      <button class="btn" id="go" ${S.role===null?'disabled':''}>${x.start}</button>
+      <a class="link" href="/field/uj-mobility/#maps">${x.mapsLink}</a>`;
   } else if(S.step===1){
     if(!S.home) hint(x.tapHome);
     h=`${prog(1)}<h2>${x.s1}</h2><p>${x.s1p}</p>
@@ -531,6 +532,7 @@ function render(){
        <div class="legend"><span>${x.legend[0]}</span><div class="bar"></div><span>${x.legend[1]}</span></div>
        <button class="btn" id="showcard">${x.cardBtn}</button>
        <div id="cardbox" class="stack" hidden><img class="card-img" id="card" alt="${esc(x.share.t)}"><button class="btn dark" id="sharebtn">${x.share.btn}</button><p class="small" id="savehint" hidden>${x.share.saved}</p></div>
+       <a class="btn ghost" href="/field/uj-mobility/#maps" style="display:flex;align-items:center;justify-content:center;text-decoration:none;box-sizing:border-box">${x.mapsLink}</a>
        <button class="btn ghost" id="again">${x.again}</button>`;
   }
   W.innerHTML=`<div class="stack fade">${h}</div>`;
