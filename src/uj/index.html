@@ -47,7 +47,8 @@ body{margin:0;background:var(--limestone);color:var(--asphalt);font-family:var(-
   box-shadow:0 -10px 30px rgba(35,35,35,.13);max-height:70%;overflow-y:auto;overscroll-behavior:contain;
   padding-top:10px;padding-bottom:calc(18px + env(safe-area-inset-bottom,0px));
   padding-left:max(18px,env(safe-area-inset-left,0px));padding-right:max(18px,env(safe-area-inset-right,0px))}
-.sheet .grab{width:42px;height:4px;border-radius:4px;background:var(--line);margin:0 auto 12px}
+.sheet .grab{display:block;width:72px;height:24px;border:0;padding:0;margin:-6px auto 6px;background:linear-gradient(var(--line),var(--line)) center/42px 5px no-repeat;border-radius:4px;cursor:pointer}
+.sheet.min{max-height:64px!important;overflow:hidden}.sheet.min .wrap{visibility:hidden}
 .wrap{max-width:560px;margin:0 auto}
 .stack{display:flex;flex-direction:column;gap:14px}
 .prog{display:flex;gap:5px}
@@ -171,7 +172,7 @@ input[type=range]{width:100%;accent-color:var(--green-deep);height:30px}
 </div>
 <div class="demo" id="demo" hidden>بيانات تجريبية للعرض فقط</div>
 <div class="hint" id="hint" hidden></div>
-<section class="sheet" id="sheet" aria-live="polite"><div class="grab"></div><div class="wrap" id="wrap"></div></section>
+<section class="sheet" id="sheet" aria-live="polite"><button type="button" class="grab" id="grab" aria-label="Show map"></button><div class="wrap" id="wrap"></div></section>
 <div class="live" id="live" hidden></div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"></script>
@@ -220,7 +221,7 @@ const T = {
   area:'اسم منطقتك (اختياري)',areaPh:'مثلاً: صويلح، طبربور، الهاشمي',next:'التالي',back:'رجوع',
   s2:'ارسم رحلتك',s2p:'زي ما صارت معك عادةً، مرحلة مرحلة.',legN:n=>`المرحلة ${n}`,how:'كيف كمّلت من هون؟',
   whichLine:'أي خط؟',otherNum:'رقم خط ثاني (اختياري)',otherPh:'مثلاً: 6',
-  tapTo:'اضغط على الخريطة وين نزلت',tapToWalk:'اضغط على الخريطة لوين مشيت',toUJ:'لحد الجامعة',orTap:'أو اضغط على الخريطة',reachQ:'وصلت الجامعة؟ عند أي بوابة أو موقف:',campusTag:'آخر مرحلة: جوّا الجامعة',campusQ:'وين رايح جوّا الجامعة؟',campusP:'اختار كليتك، أو اضغط على الخريطة مكان وجهتك.',tapDest:'اضغط على مكان وجهتك بالجامعة',otherPlace:'مكان ثاني بالجامعة',lastHow:'كيف وصلت من البوابة لهناك؟',lastMin:'قدّيش أخذت؟',lastOk:'وصلت، أضف المرحلة',lastModes:[['walk','مشي'],['taxi','تاكسي أو تطبيق'],['car','حدا وصّلني بالسيارة']],
+  tapTo:'اضغط على الخريطة وين نزلت',tapToWalk:'اضغط على الخريطة لوين مشيت',toUJ:'لحد الجامعة',orTap:'أو اضغط على الخريطة',noNear:'ما في خط من هاد النوع قريب من آخر نقطة، هاي كل الخطوط:',allLines:'اعرض كل الخطوط',reachQ:'وصلت الجامعة؟ عند أي بوابة أو موقف:',campusTag:'آخر مرحلة: جوّا الجامعة',campusQ:'وين رايح جوّا الجامعة؟',campusP:'اختار كليتك، أو اضغط على الخريطة مكان وجهتك.',tapDest:'اضغط على مكان وجهتك بالجامعة',otherPlace:'مكان ثاني بالجامعة',lastHow:'كيف وصلت من البوابة لهناك؟',lastMin:'قدّيش أخذت؟',lastOk:'وصلت، أضف المرحلة',lastModes:[['walk','مشي'],['taxi','تاكسي أو تطبيق'],['car','حدا وصّلني بالسيارة']],
   wait:'قدّيش استنيت؟',dur:m=>MODES[m].transit?'قدّيش أخذ المشوار فيه؟':'قدّيش أخذ المشوار؟',min:'دقيقة',
   addLeg:'أضف المرحلة',undo:'شيل آخر مرحلة',arrived:'وصلت الجامعة، كمّل',quick:'مستعجل؟ اعطينا الوقت الكلي بس',
   waitSeg:'انتظار',total:'المجموع',transfers:n=>n<=0?'بدون تبديل':n==1?'تبديل واحد':`${n} تبديلات`,
@@ -258,7 +259,7 @@ const T = {
   area:'Your area (optional)',areaPh:'e.g. Swaileh, Tabarbour, Hashmi',next:'Next',back:'Back',
   s2:'Draw your trip',s2p:'The way you usually come, one leg at a time.',legN:n=>`Leg ${n}`,how:'How did you go on from here?',
   whichLine:'Which line?',otherNum:'Another line number (optional)',otherPh:'e.g. 6',
-  tapTo:'Tap on the map where you got off',tapToWalk:'Tap on the map where you walked to',toUJ:'All the way to UJ',orTap:'or tap on the map',reachQ:'Reached UJ? At which gate or stop:',campusTag:'Last leg: on campus',campusQ:'Where on campus are you going?',campusP:'Pick your faculty, or tap your destination on the map.',tapDest:'Tap where you are going on campus',otherPlace:'Another place on campus',lastHow:'How did you get there from the gate?',lastMin:'How long did it take?',lastOk:'Arrived, add this leg',lastModes:[['walk','Walk'],['taxi','Taxi or app'],['car','Someone dropped me']],
+  tapTo:'Tap on the map where you got off',tapToWalk:'Tap on the map where you walked to',toUJ:'All the way to UJ',orTap:'or tap on the map',noNear:'No line of this kind runs near your last point. Here are all of them:',allLines:'Show all lines',reachQ:'Reached UJ? At which gate or stop:',campusTag:'Last leg: on campus',campusQ:'Where on campus are you going?',campusP:'Pick your faculty, or tap your destination on the map.',tapDest:'Tap where you are going on campus',otherPlace:'Another place on campus',lastHow:'How did you get there from the gate?',lastMin:'How long did it take?',lastOk:'Arrived, add this leg',lastModes:[['walk','Walk'],['taxi','Taxi or app'],['car','Someone dropped me']],
   wait:'How long did you wait?',dur:m=>MODES[m].transit?'How long was the ride?':'How long did it take?',min:'min',
   addLeg:'Add this leg',undo:'Remove last leg',arrived:'I reached UJ, continue',quick:'In a hurry? Just give us the total time',
   waitSeg:'wait',total:'Total',transfers:n=>n<=0?'no transfers':n==1?'1 transfer':`${n} transfers`,
@@ -427,6 +428,7 @@ const atUJ=()=>S.legs.length&&S.legs[S.legs.length-1].toUJ;
 const campusDone=()=>S.legs.length&&S.legs[S.legs.length-1].campus;
 const nearestCS=p=>{let b=null;CSTOPS.forEach(c=>{const d=dist(p,[c[3],c[4]]);if(!b||d<b.d)b={c,d};});return b;};
 const csName=c=>LANG==='ar'?c[1]:c[2], facName=f=>LANG==='ar'?f[1]:f[2];
+function onLine(p){const l=S.cur.line&&lineBy(S.cur.line);if(!l)return p;let b=null;l.g.forEach(g=>{const r=nearestOn(g,p);if(!b||r.d<b.d)b=r;});return b?b.pt.slice():p;}
 function reachUJ(p){const n=nearestCS(p);if(n.d<350||dist(p,UJ)<450){S.cur.to=[n.c[3],n.c[4]];S.cur.toUJ=true;S.cur.gate=n.c[0];}else{S.cur.to=p;S.cur.toUJ=false;S.cur.gate=null;}}
 
 /* ================= trip numbers ================= */
@@ -535,8 +537,9 @@ function render(){
       if(!c.mode){
         h+=`<div><label class="q">${x.how}</label>${chips('mode',Object.keys(MODES).map(k=>[k,ml(k),MODES[k].col]),c.mode)}</div>`;
       } else if(needLine){
-        const pos=here(), list=LINES_BY_MODE[c.mode].slice().sort((a,b)=>distToLine(pos,lineBy(a))-distToLine(pos,lineBy(b)));
-        h+=`${sel}<div><label class="q">${x.whichLine}</label>${chips('line',list.map(k=>[k,k,lineBy(k).col]),c.line)}</div>
+        const pos=here(), all=LINES_BY_MODE[c.mode].slice().sort((a,b)=>distToLine(pos,lineBy(a))-distToLine(pos,lineBy(b)));
+        const near=all.filter(k=>distToLine(pos,lineBy(k))<NEAR_M), list=(c.all||!near.length)?all:near;
+        h+=`${sel}<div><label class="q">${x.whichLine}</label>${!near.length?`<p class="small" style="margin:0 0 8px">${x.noNear}</p>`:''}${chips('line',list.map(k=>[k,k,lineBy(k).col]),c.line)}${(near.length&&near.length<all.length&&!c.all)?`<button type="button" class="link" id="allLines">${x.allLines}</button>`:''}</div>
             <div><label class="q" for="other">${x.otherNum}</label><div class="row"><input type="text" id="other" maxlength="12" placeholder="${x.otherPh}" value="${esc(c.other)}"><button class="btn dark" id="otherOk" style="flex:0 0 auto;width:auto">${x.next}</button></div></div>`;
       } else if(!c.to){
         hint(c.mode==='walk'?x.tapToWalk:x.tapTo);
@@ -585,6 +588,7 @@ function render(){
        <button class="btn ghost" id="again">${x.again}</button>`;
   }
   W.innerHTML=`<div class="stack fade">${h}</div>`;
+  document.getElementById('sheet').classList.remove('min');
   document.getElementById('sheet').classList.toggle('short',S.step===2&&!!atUJ()&&!campusDone());
   bind();
   if(S._fitPick){S._fitPick=false;requestAnimationFrame(()=>fitVisible(Lf.latLngBounds([here(),UJ]).pad(.3),14));}
@@ -618,10 +622,11 @@ function bind(){
   });
   const area=document.getElementById('area');if(area)area.oninput=e=>S.area=e.target.value;
   bindSearch('q','res',it=>{const sh=document.getElementById('sheet').offsetHeight;map.flyTo(it.pt,it.z,{duration:.8});setTimeout(()=>map.panBy([0,sh/2-40],{animate:false}),850);hint(x.nowTap);});
-  bindSearch('q2','res2',it=>{reachUJ(it.pt.slice());S.q2='';previewLeg();render();
+  bindSearch('q2','res2',it=>{reachUJ(onLine(it.pt.slice()));S.q2='';previewLeg();render();
     requestAnimationFrame(()=>fitVisible(Lf.latLngBounds([here(),S.cur.to]).pad(.35),16));});
   const other=document.getElementById('other');if(other)other.oninput=e=>{S.cur.other=e.target.value.trim();};
   on('chg',()=>{S.cur={mode:null,line:null,other:'',otherOk:false,to:null,toUJ:false,wait:null,dur:null};draftLayer.clearLayers();highlight([]);render();});
+  on('allLines',()=>{S.cur.all=true;render();});
   on('otherOk',()=>{if(S.cur.other){S.cur.otherOk=true;render();}});
   on('toUJ',()=>{S.cur.to=UJ.slice();S.cur.toUJ=true;previewLeg();render();});
   const fx=document.getElementById('fix');if(fx)fx.oninput=e=>{S.fix=e.target.value;};
@@ -665,6 +670,12 @@ function showFac(on){if(facLayer){map.removeLayer(facLayer);facLayer=null;}if(!o
     return Lf.marker([f[3],f[4]],{icon:Lf.divIcon({className:'',html:(sel||big)?`<div class="fac${sel?' on':''}">${esc(facName(f))}</div>`:`<div class="facdot"></div>`,iconSize:null,iconAnchor:[0,0]}),interactive:true,zIndexOffset:sel?1000:0})
       .on('click',()=>{S.dest={k:f[0],pt:[f[3],f[4]],name:facName(f)};previewCampus();render();});})).addTo(map);}
 map.on('zoomend',()=>{if(facLayer)showFac(true);});
+(()=>{const sh=document.getElementById('sheet'),gb=document.getElementById('grab');let y0=null;
+  const set=m=>{sh.classList.toggle('min',m);gb.setAttribute('aria-label',m?'Show questions':'Show map');};
+  gb.onclick=()=>set(!sh.classList.contains('min'));
+  gb.addEventListener('touchstart',e=>{y0=e.touches[0].clientY;},{passive:true});
+  gb.addEventListener('touchend',e=>{if(y0===null)return;const dy=e.changedTouches[0].clientY-y0;y0=null;if(Math.abs(dy)>30){e.preventDefault();set(dy>0);}},{passive:false});
+})();
 function enterCampus(){showFac(true);previewCampus();requestAnimationFrame(()=>fitVisible(Lf.latLngBounds(CAMPUS),17));}
 function previewCampus(){draftLayer.clearLayers();showFac(true);if(!S.dest)return;const prev=S.legs[S.legs.length-1];
   if(prev&&!prev.campus)drawLeg(draftLayer,{mode:S.lm||'walk',from:prev.to,to:S.dest.pt,toUJ:true});
@@ -683,7 +694,7 @@ map.on('click',e=>{
     let b=null;FAC.forEach(f=>{const d=dist(p,[f[3],f[4]]);if(!b||d<b.d)b={f,d};});
     S.dest=b.d<90?{k:b.f[0],pt:[b.f[3],b.f[4]],name:facName(b.f)}:{k:'other',pt:p,name:x0().otherPlace};previewCampus();render();
   } else if(S.step===2&&S.cur.mode&&!atUJ()){
-    reachUJ(p); previewLeg(); render();
+    reachUJ(onLine(p)); previewLeg(); render();
   }
 });
 
