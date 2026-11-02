@@ -93,6 +93,12 @@ input[type=text]{font:500 15px var(--f-ar);width:100%;box-sizing:border-box;bord
 .tot b{font:800 40px/1 var(--f-num);font-variant-numeric:tabular-nums}
 .tot span{font-weight:700;color:var(--ink2)}
 .step-tag{font:700 12px var(--f-ar);color:var(--green-deep)}
+.fac{transform:translate(-50%,-50%);white-space:nowrap;font:700 11.5px var(--f-ar);background:rgba(255,253,248,.92);border:1.5px solid #17795c;color:#17795c;border-radius:9px;padding:3px 7px;cursor:pointer}
+.fac.on{background:#17795c;color:#fff}
+.facdot{transform:translate(-50%,-50%);width:14px;height:14px;border-radius:50%;background:#fffdf8;border:3px solid #17795c;cursor:pointer}
+.sheet.short{max-height:50%}.sheet.short .chip{min-height:36px;padding:6px 10px;font-size:13.5px}
+label.q.grp{font-size:13px;color:var(--green-deep);margin:4px 0 6px}
+textarea{font:500 15px var(--f-ar);width:100%;box-sizing:border-box;border:1.5px solid var(--line);border-radius:12px;padding:11px 12px;background:#fff;color:var(--asphalt);resize:vertical}
 .pick{border:2px dashed var(--green-deep);border-radius:14px;padding:12px;text-align:center;font-weight:700;color:var(--green-deep);background:#f1f8f4}
 
 .big{font:800 60px/1 var(--f-num);letter-spacing:-.02em;font-variant-numeric:tabular-nums;color:var(--asphalt)}
@@ -181,6 +187,14 @@ const GRID = 0.002;             // home is stored snapped to ~200 m
 const NEAR_M = 700;             // a UJ line counts as "near" within this distance
 const SNAP_M = 450;             // a tapped point snaps to a known line's real path within this distance
 const Lf = window.L;
+// UJ stops and gates (A–E, same letters as the printed campus map) and campus destinations
+const CSTOPS=[['B','البوابة الرئيسية','Main Gate',32.01534,35.86801],['A','موقف مسجد الجامعة','University Mosque stop',32.01833,35.86565],['E','شمال الحرم','North Campus',32.02171,35.87079],['C','بوابة الزراعة','Agriculture Gate',32.0108,35.87099],['D','مستشفى الجامعة','University Hospital',32.00611,35.8728]];
+const FAC=[['eng','كلية الهندسة','Engineering',32.01042,35.87481],['it','تكنولوجيا المعلومات','IT (KASIT)',32.01411,35.87307],['sci','كلية العلوم','Science',32.013,35.8743],['agri','كلية الزراعة','Agriculture',32.01135,35.8734],
+ ['med','كلية الطب','Medicine',32.0079,35.87603],['nurs','كلية التمريض','Nursing',32.00863,35.87582],['hosp','مستشفى الجامعة','University Hospital',32.0066,35.87449],
+ ['arts','كلية الآداب','Arts',32.01823,35.87036],['bus','كلية الأعمال','Business',32.0188,35.87121],['law','كلية الحقوق','Law',32.0186,35.87262],['sharia','كلية الشريعة','Sharia',32.01747,35.87241],
+ ['edu','العلوم التربوية','Educational Sciences',32.0204,35.87099],['lang','كلية اللغات','Foreign Languages',32.01712,35.8701],['design','الفنون والتصميم','Arts & Design',32.0164,35.8688],
+ ['lib','المكتبة','Library',32.01529,35.87001],['mosque','مسجد الجامعة','University Mosque',32.01795,35.86674]];
+const CAMPUS=[[32.0035,35.8645],[32.0235,35.8805]];
 
 /* ================= text ================= */
 const MODES = {
@@ -206,7 +220,7 @@ const T = {
   area:'اسم منطقتك (اختياري)',areaPh:'مثلاً: صويلح، طبربور، الهاشمي',next:'التالي',back:'رجوع',
   s2:'ارسم رحلتك',s2p:'زي ما صارت معك عادةً، مرحلة مرحلة.',legN:n=>`المرحلة ${n}`,how:'كيف كمّلت من هون؟',
   whichLine:'أي خط؟',otherNum:'رقم خط ثاني (اختياري)',otherPh:'مثلاً: 6',
-  tapTo:'اضغط على الخريطة وين نزلت',tapToWalk:'اضغط على الخريطة لوين مشيت',toUJ:'لحد الجامعة',orTap:'أو اضغط على الخريطة',
+  tapTo:'اضغط على الخريطة وين نزلت',tapToWalk:'اضغط على الخريطة لوين مشيت',toUJ:'لحد الجامعة',orTap:'أو اضغط على الخريطة',reachQ:'وصلت الجامعة؟ عند أي بوابة أو موقف:',campusTag:'آخر مرحلة: جوّا الجامعة',campusQ:'وين رايح جوّا الجامعة؟',campusP:'اختار كليتك، أو اضغط على الخريطة مكان وجهتك.',tapDest:'اضغط على مكان وجهتك بالجامعة',otherPlace:'مكان ثاني بالجامعة',lastHow:'كيف وصلت من البوابة لهناك؟',lastMin:'قدّيش أخذت؟',lastOk:'وصلت، أضف المرحلة',lastModes:[['walk','مشي'],['taxi','تاكسي أو تطبيق'],['car','حدا وصّلني بالسيارة']],
   wait:'قدّيش استنيت؟',dur:m=>MODES[m].transit?'قدّيش أخذ المشوار فيه؟':'قدّيش أخذ المشوار؟',min:'دقيقة',
   addLeg:'أضف المرحلة',undo:'شيل آخر مرحلة',arrived:'وصلت الجامعة، كمّل',quick:'مستعجل؟ اعطينا الوقت الكلي بس',
   waitSeg:'انتظار',total:'المجموع',transfers:n=>n<=0?'بدون تبديل':n==1?'تبديل واحد':`${n} تبديلات`,
@@ -215,7 +229,14 @@ const T = {
   s4:'قبل ما نكشف...',s4p:'برأيك، كم دقيقة معدّل رحلة الطالب للجامعة؟ حرّك المؤشر.',guess:'هاي توقعاتي',
   rv:(g,a,pct)=>`توقعت <b>${g}</b> دقيقة. المعدّل الحقيقي لحد الآن <b>${a}</b> دقيقة. رحلتك أطول من <b>${pct}%</b> من الرحلات.`,
   avg:'معدّل الرحلة',yours:'رحلتك',
-  s5:'آخر سؤالين',probs:'أكبر مشكلتين بتواجهك (اختار اثنتين)',P:[['wait','الانتظار وعدم انتظام المواعيد'],['noline','ما في خط قريب من سكني'],['crowd','الازدحام'],['transfers','كثرة التبديل'],['cost','التكلفة'],['walk','المشي من الموقف للكلية'],['safety','عدم الشعور بالأمان أو الراحة'],['info','ما بعرف الخطوط والمواعيد']],
+  s5:'شو أكثر إشي بيتعبك بالمواصلات للجامعة؟',s5p:'اختار لحد ٣. كل ما كانت إجابتك أدق، كل ما قدرنا نوصّل المشكلة صح.',pickN:n=>`اخترت ${n} من ٣`,
+  PG:[['عند الموقف',[['late','الباص بيتأخر أو مواعيده مش ثابتة'],['fullpass','الباص بيمرق مليان وما بيوقف'],['shelter','ما في مظلة أو مقعد أو إنارة'],['stopfar','الموقف بعيد أو الطريق له صعب']]],
+      ['جوّا الباص',[['standing','بضل واقف، الباص مليان طلاب'],['traffic','الأزمة بتأخر الباص'],['hot','الباص حر أو مش نظيف'],['driver','تعامل السائق']]],
+      ['الخطوط والمواعيد',[['peak','الباصات قليلة وقت الذروة'],['nodirect','ما في خط مباشر من منطقتي'],['transfers','لازم أبدّل أكثر من مرة'],['evening','ما في باص بعد المحاضرات المسائية'],['cost','الأجرة غالية علي'],['card','الدفع والبطاقة والشحن']]],
+      ['التطبيق والمعلومات',[['appwrong','التطبيق بيعطي مواعيد غلط أو الباص مش ظاهر'],['apphard','التطبيق بطيء أو صعب الاستخدام'],['info','ما بعرف أي خط بيوصلني ووين موقفه']]],
+      ['بالجامعة وبشكل عام',[['campuswalk','المشي من البوابة لكليتي طويل'],['safety','مضايقات أو عدم شعور بالأمان']]]],
+  s6:'آخر ثلاث أسئلة',appQ:'بتستخدم تطبيق Amman Bus؟',APP:[['always','دايماً'],['some','أحياناً'],['quit','نزّلته وبطّلت أستخدمه'],['never','ما بستخدمه']],
+  fix:'لو في شي واحد يتغيّر ويفرق معك، شو هو؟ (اختياري)',fixPh:'مثلاً: باص كل ١٠ دقايق الصبح من صويلح',
   conf:'قدّيش واثق إنك تقدر تعتمد على المواصلات العامة للجامعة؟',F:['أبداً','قليلاً','نوعاً ما','غالباً','تماماً'],
   send:'أضِف رحلتي للخريطة',sending:'عم نضيف رحلتك...',queued:'النت ضعيف. حفظنا رحلتك وبنرسلها لحالها أول ما يرجع الاتصال.',
   done:'رحلتك صارت على الخريطة',doneP:n=>`أنت واحد من ${n} رحلة لحد الآن. كل مربع منطقة، ولونه معدّل وقت الرحلة منها.`,
@@ -237,7 +258,7 @@ const T = {
   area:'Your area (optional)',areaPh:'e.g. Swaileh, Tabarbour, Hashmi',next:'Next',back:'Back',
   s2:'Draw your trip',s2p:'The way you usually come, one leg at a time.',legN:n=>`Leg ${n}`,how:'How did you go on from here?',
   whichLine:'Which line?',otherNum:'Another line number (optional)',otherPh:'e.g. 6',
-  tapTo:'Tap on the map where you got off',tapToWalk:'Tap on the map where you walked to',toUJ:'All the way to UJ',orTap:'or tap on the map',
+  tapTo:'Tap on the map where you got off',tapToWalk:'Tap on the map where you walked to',toUJ:'All the way to UJ',orTap:'or tap on the map',reachQ:'Reached UJ? At which gate or stop:',campusTag:'Last leg: on campus',campusQ:'Where on campus are you going?',campusP:'Pick your faculty, or tap your destination on the map.',tapDest:'Tap where you are going on campus',otherPlace:'Another place on campus',lastHow:'How did you get there from the gate?',lastMin:'How long did it take?',lastOk:'Arrived, add this leg',lastModes:[['walk','Walk'],['taxi','Taxi or app'],['car','Someone dropped me']],
   wait:'How long did you wait?',dur:m=>MODES[m].transit?'How long was the ride?':'How long did it take?',min:'min',
   addLeg:'Add this leg',undo:'Remove last leg',arrived:'I reached UJ, continue',quick:'In a hurry? Just give us the total time',
   waitSeg:'wait',total:'Total',transfers:n=>n<=0?'no transfers':n==1?'1 transfer':`${n} transfers`,
@@ -246,7 +267,14 @@ const T = {
   s4:'Before we reveal...',s4p:'How many minutes do you think the average student’s trip takes? Move the slider.',guess:'That’s my guess',
   rv:(g,a,pct)=>`You guessed <b>${g}</b> min. The real average so far is <b>${a}</b> min. Your trip is longer than <b>${pct}%</b> of trips.`,
   avg:'Average trip',yours:'Your trip',
-  s5:'Two last questions',probs:'Your two biggest problems (pick two)',P:[['wait','Long or unpredictable waits'],['noline','No line near my home'],['crowd','Crowding'],['transfers','Too many transfers'],['cost','Cost'],['walk','Walk from the stop to my faculty'],['safety','Not feeling safe or comfortable'],['info','I don’t know the lines or times']],
+  s5:'What makes the trip to UJ hardest?',s5p:'Pick up to 3. The more precise you are, the better we can make the case.',pickN:n=>`${n} of 3 picked`,
+  PG:[['At the stop',[['late','Buses are late or don’t keep a schedule'],['fullpass','Full buses pass without stopping'],['shelter','No shelter, seat or lighting'],['stopfar','The stop is far or hard to reach']]],
+      ['On the bus',[['standing','I stand the whole way, the bus is full of students'],['traffic','Traffic makes the bus slow'],['hot','The bus is hot or not clean'],['driver','How the driver behaves']]],
+      ['Lines and times',[['peak','Too few buses at peak times'],['nodirect','No direct line from my area'],['transfers','I have to change more than once'],['evening','No bus after evening classes'],['cost','The fare is too much for me'],['card','Paying, the card and top-ups']]],
+      ['The app and information',[['appwrong','The app shows wrong times or the bus is missing'],['apphard','The app is slow or hard to use'],['info','I don’t know which line to take or where it stops']]],
+      ['On campus and in general',[['campuswalk','The walk from the gate to my faculty is long'],['safety','Harassment or not feeling safe']]]],
+  s6:'Three last questions',appQ:'Do you use the Amman Bus app?',APP:[['always','Always'],['some','Sometimes'],['quit','Downloaded it, stopped using it'],['never','I don’t use it']],
+  fix:'If one thing changed that would make a difference to you, what would it be? (optional)',fixPh:'e.g. a bus every 10 minutes in the morning from Sweileh',
   conf:'How confident are you that you can rely on public transport to UJ?',F:['Not at all','A little','Somewhat','Mostly','Fully'],
   send:'Add my trip to the map',sending:'Adding your trip...',queued:'Weak connection. We saved your trip and will send it as soon as you are back online.',
   done:'Your trip is on the map',doneP:n=>`You are one of ${n} trips so far. Each square is an area, coloured by the average trip time from there.`,
@@ -265,7 +293,7 @@ const IMG={};['mwc','mudun','av'].forEach(k=>{if(LOGO[k]){const i=new Image();i.
 const lineBy=c=>DATA.lines.find(l=>l.c===c);
 
 /* ================= state ================= */
-const fresh=()=>({step:0,role:null,home:null,area:'',near:[],legs:[],cur:{mode:null,line:null,other:'',otherOk:false,to:null,toUJ:false,wait:null,dur:null},quick:false,qtime:null,cost:null,guess:null,problems:[],conf:null});
+const fresh=()=>({step:0,role:null,home:null,area:'',near:[],legs:[],cur:{mode:null,line:null,other:'',otherOk:false,to:null,toUJ:false,wait:null,dur:null},quick:false,qtime:null,cost:null,guess:null,problems:[],conf:null,dest:null,lm:null,lmin:null,app:null,fix:''});
 let S=fresh();
 
 /* ================= map ================= */
@@ -396,6 +424,10 @@ function redrawTrip(){tripLayer.clearLayers();S.legs.forEach((lg,i)=>drawLeg(tri
 function highlight(codes){DATA.lines.forEach(l=>{const on=codes.includes(l.c);lineLayers[l.c].eachLayer(p=>p.setStyle({opacity:codes.length?(on?.95:.12):.55,weight:on?4.5:2.4}));});}
 const here=()=>S.legs.length?S.legs[S.legs.length-1].to:S.home;
 const atUJ=()=>S.legs.length&&S.legs[S.legs.length-1].toUJ;
+const campusDone=()=>S.legs.length&&S.legs[S.legs.length-1].campus;
+const nearestCS=p=>{let b=null;CSTOPS.forEach(c=>{const d=dist(p,[c[3],c[4]]);if(!b||d<b.d)b={c,d};});return b;};
+const csName=c=>LANG==='ar'?c[1]:c[2], facName=f=>LANG==='ar'?f[1]:f[2];
+function reachUJ(p){const n=nearestCS(p);if(n.d<350||dist(p,UJ)<450){S.cur.to=[n.c[3],n.c[4]];S.cur.toUJ=true;S.cur.gate=n.c[0];}else{S.cur.to=p;S.cur.toUJ=false;S.cur.gate=null;}}
 
 /* ================= trip numbers ================= */
 function tripStats(){
@@ -432,13 +464,15 @@ async function post(rec){await fetch(ENDPOINT,{method:'POST',mode:'no-cors',head
 async function flushQueue(){if(DEMO)return;const q=LS.get('uj_queue')||[];if(!q.length)return;const left=[];for(const r of q){try{await post(r)}catch(e){left.push(r)}}LS.set('uj_queue',left);}
 window.addEventListener('online',flushQueue);flushQueue();
 const fmtChain=c=>String(c||'').split(' → ').filter(Boolean).map(k=>MODES[k]?ml(k):k).join(LANG==='ar'?' ← ':' → ');
-function chainText(){if(S.quick)return '';return S.legs.filter(l=>l.mode!=='walk').map(l=>l.line||l.other||l.mode).join(' → ');}
+function chainText(){if(S.quick)return '';return S.legs.filter(l=>l.mode!=='walk'&&!l.campus).map(l=>l.line||l.other||l.mode).join(' → ');}
 async function submit(){
   const st=tripStats();
-  const legs=S.legs.map((l,i)=>({m:l.mode,line:l.line||l.other||'',wait:l.wait||0,dur:l.dur,to:l.toUJ?'UJ':[+l.to[0].toFixed(4),+l.to[1].toFixed(4)]}));
+  const legs=S.legs.map((l,i)=>({m:l.mode,line:l.line||l.other||'',wait:l.wait||0,dur:l.dur,to:l.campus?('campus:'+(S.dest&&S.dest.k)):l.gate?('UJ:'+l.gate):l.toUJ?'UJ':[+l.to[0].toFixed(4),+l.to[1].toFixed(4)]}));
+  const gl=S.legs.find(l=>l.gate), cl=S.legs.find(l=>l.campus);
   const rec={role:S.role,lat:+snap(S.home[0]).toFixed(3),lon:+snap(S.home[1]).toFixed(3),area:S.area.trim().slice(0,60),lines_near:S.near.join(' '),
     mode:S.quick?'quick':'drawn',legs:JSON.stringify(legs),chain:chainText(),time:st.total,wait:st.wait,ride:st.ride,walk:st.walk,transfers:st.transfers??'',
-    cost:S.cost,guess:S.guess,problems:S.problems.join(' '),confidence:S.conf,lang:LANG,source:'booth-uj-2026-11-03'};
+    cost:S.cost,guess:S.guess,problems:S.problems.join(' '),confidence:S.conf,lang:LANG,source:'booth-uj-2026-11-03',
+    gate:gl?gl.gate:'',dest:S.dest?S.dest.k:'',dest_lat:S.dest?+S.dest.pt[0].toFixed(4):'',dest_lon:S.dest?+S.dest.pt[1].toFixed(4):'',campus_mode:cl?cl.mode:'',campus_min:cl?cl.dur:'',app:S.app||'',fix:S.fix.trim().slice(0,240)};
   store.push({lat:rec.lat,lon:rec.lon,time:rec.time,chain:rec.chain});
   LS.set('uj_done',1);
   if(DEMO) return 'ok';
@@ -448,7 +482,7 @@ async function submit(){
 /* ================= UI ================= */
 const W=document.getElementById('wrap');
 const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-const prog=n=>`<div class="prog" aria-hidden="true">${[1,2,3,4,5].map(i=>`<i class="${i<=n?'on':''}"></i>`).join('')}</div>`;
+const prog=n=>`<div class="prog" aria-hidden="true">${[1,2,3,4,5,6].map(i=>`<i class="${i<=n?'on':''}"></i>`).join('')}</div>`;
 const chips=(name,opts,sel,multi)=>`<div class="chips" role="group">${opts.map(o=>{const[v,lab,col]=o;return `<button type="button" class="chip" data-g="${name}" data-v="${esc(v)}" aria-pressed="${multi?sel.includes(v):String(sel)===String(v)}">${col?`<span class="sw" style="background:${col}"></span>`:''}${esc(lab)}</button>`;}).join('')}</div>`;
 const pill=l=>`<span class="pill" style="background:${l.col}">${l.c}</span>`;
 function hint(x){const h=document.getElementById('hint');h.textContent=x||'';h.hidden=!x;}
@@ -482,8 +516,17 @@ function render(){
     h=`${prog(2)}<h2>${x.s2}</h2>`;
     if(S.legs.length){const st=tripStats();h+=`${chainHTML()}${tbarHTML()}<div class="tot"><b>${st.total}</b><span>${x.min} · ${x.transfers(st.transfers)}</span></div>`;}
     else h+=`<p>${x.s2p}</p>`;
-    if(atUJ()){
+    if(atUJ()&&campusDone()){
       h+=`<button class="btn" id="arrived">${x.arrived}</button><div class="row"><button class="btn ghost" id="undo">${x.undo}</button></div>`;
+    } else if(atUJ()){
+      if(!S.dest) hint(x.tapDest);
+      h+=`<div class="step-tag">${x.campusTag}</div><div><label class="q">${x.campusQ}</label><p class="small" style="margin:0 0 8px">${x.campusP}</p>${chips('dest',FAC.map(f=>[f[0],facName(f)]).concat(S.dest&&S.dest.k==='other'?[['other',x.otherPlace]]:[]),S.dest?S.dest.k:null)}</div>`;
+      if(S.dest){
+        h+=`<div><label class="q">${x.lastHow}</label>${chips('lm',x.lastModes,S.lm)}</div>
+            <div><label class="q">${x.lastMin}</label>${chips('lmin',[2,5,10,15,20,30].map(v=>[v,v+(v==30?'+':'')+' '+x.min]),S.lmin)}</div>
+            <button class="btn" id="lastok" ${S.lm&&S.lmin!==null?'':'disabled'}>${x.lastOk}</button>`;
+      }
+      h+=`<div class="row"><button class="btn ghost" id="undo">${x.undo}</button></div>`;
     } else {
       const c=S.cur, md=c.mode&&MODES[c.mode];
       const needLine=md&&md.line&&!c.line&&!c.otherOk;
@@ -497,10 +540,10 @@ function render(){
             <div><label class="q" for="other">${x.otherNum}</label><div class="row"><input type="text" id="other" maxlength="12" placeholder="${x.otherPh}" value="${esc(c.other)}"><button class="btn dark" id="otherOk" style="flex:0 0 auto;width:auto">${x.next}</button></div></div>`;
       } else if(!c.to){
         hint(c.mode==='walk'?x.tapToWalk:x.tapTo);
-        h+=`${sel}<div class="pick">${c.mode==='walk'?x.tapToWalk:x.tapTo}</div>${searchBox('q2',x.sPh2)}<button class="btn dark" id="toUJ">${x.toUJ}</button>`;
+        h+=`${sel}<div class="pick">${c.mode==='walk'?x.tapToWalk:x.tapTo}</div>${searchBox('q2',x.sPh2)}<div><label class="q">${x.reachQ}</label>${chips('gate',CSTOPS.map(g=>[g[0],csName(g)]),null)}</div>`;
         S._fitPick=true;
       } else {
-        h+=sel+(c.toUJ?'':`<p class="small">${x.adjust}</p>`);
+        h+=sel+(c.toUJ?`<div class="step-tag">● ${esc(csName(CSTOPS.find(g=>g[0]===c.gate)))}</div>`:'')+`<p class="small">${x.adjust}</p>`;
         if(md.transit) h+=`<div><label class="q">${x.wait}</label>${chips('wait',WAITS.map(v=>[v,v+(v==45?'+':'')+' '+x.min]),c.wait)}</div>`;
         h+=`<div><label class="q">${x.dur(c.mode)}</label>${chips('dur',DURS.map(v=>[v,v+(v==90?'+':'')+' '+x.min]),c.dur)}</div>`;
         const ok=c.dur!==null&&(!md.transit||c.wait!==null);
@@ -524,11 +567,16 @@ function render(){
        <div id="rv"></div>
        <div class="row"><button class="btn ghost" id="back">${x.back}</button><button class="btn" id="reveal" ${S.guess===null?'disabled':''}>${x.guess}</button></div>`;
   } else if(S.step===5){
-    h=`${prog(5)}<h2>${x.s5}</h2><div><label class="q">${x.probs}</label>${chips('prob',x.P,S.problems,true)}</div>
-       <div><label class="q">${x.conf}</label><div class="faces">${x.F.map((f,i)=>`<button type="button" class="face" data-g="conf" data-v="${i+1}" aria-pressed="${S.conf===i+1}">${i+1}<span>${f}</span></button>`).join('')}</div></div>
-       <div id="msg"></div>
-       <div class="row"><button class="btn ghost" id="back">${x.back}</button><button class="btn" id="send" ${S.problems.length&&S.conf?'':'disabled'}>${x.send}</button></div>`;
+    h=`${prog(5)}<h2>${x.s5}</h2><p>${x.s5p}</p>${x.PG.map(([gt,opts])=>`<div><label class="q grp">${gt}</label>${chips('prob',opts,S.problems,true)}</div>`).join('')}
+       <p class="small" style="margin:0">${x.pickN(S.problems.length)}</p>
+       <div class="row"><button class="btn ghost" id="back">${x.back}</button><button class="btn" id="next" ${S.problems.length?'':'disabled'}>${x.next}</button></div>`;
   } else if(S.step===6){
+    h=`${prog(6)}<h2>${x.s6}</h2><div><label class="q">${x.appQ}</label>${chips('app',x.APP,S.app)}</div>
+       <div><label class="q">${x.conf}</label><div class="faces">${x.F.map((f,i)=>`<button type="button" class="face" data-g="conf" data-v="${i+1}" aria-pressed="${S.conf===i+1}">${i+1}<span>${f}</span></button>`).join('')}</div></div>
+       <div><label class="q" for="fix">${x.fix}</label><textarea id="fix" maxlength="240" rows="2" placeholder="${esc(x.fixPh)}">${esc(S.fix)}</textarea></div>
+       <div id="msg"></div>
+       <div class="row"><button class="btn ghost" id="back">${x.back}</button><button class="btn" id="send" ${S.app&&S.conf?'':'disabled'}>${x.send}</button></div>`;
+  } else if(S.step===7){
     h=`<div class="eyebrow">✓</div><h2>${x.done}</h2>${S.queuedMsg?`<div class="callout warn">${x.queued}</div>`:''}<p>${x.doneP(store.length)}</p>
        <div class="legend"><span>${x.legend[0]}</span><div class="bar"></div><span>${x.legend[1]}</span></div>
        <button class="btn" id="showcard">${x.cardBtn}</button>
@@ -537,6 +585,7 @@ function render(){
        <button class="btn ghost" id="again">${x.again}</button>`;
   }
   W.innerHTML=`<div class="stack fade">${h}</div>`;
+  document.getElementById('sheet').classList.toggle('short',S.step===2&&!!atUJ()&&!campusDone());
   bind();
   if(S._fitPick){S._fitPick=false;requestAnimationFrame(()=>fitVisible(Lf.latLngBounds([here(),UJ]).pad(.3),14));}
 }
@@ -552,7 +601,12 @@ function bind(){
     if(g==='dur')c.dur=+v;
     if(g==='cost')S.cost=v;
     if(g==='conf')S.conf=+v;
-    if(g==='prob'){const i=S.problems.indexOf(v);if(i>=0)S.problems.splice(i,1);else{S.problems.push(v);if(S.problems.length>2)S.problems.shift();}}
+    if(g==='prob'){const i=S.problems.indexOf(v);if(i>=0)S.problems.splice(i,1);else{S.problems.push(v);if(S.problems.length>3)S.problems.shift();}}
+    if(g==='app')S.app=v;
+    if(g==='lm'){S.lm=v;previewCampus();}
+    if(g==='lmin')S.lmin=+v;
+    if(g==='gate'){const gg=CSTOPS.find(q=>q[0]===v);c.to=[gg[3],gg[4]];c.toUJ=true;c.gate=v;previewLeg();}
+    if(g==='dest'&&v!=='other'){const ff=FAC.find(q=>q[0]===v);S.dest={k:v,pt:[ff[3],ff[4]],name:facName(ff)};previewCampus();}
     render();
   });
   const on=(id,f)=>{const e=document.getElementById(id);if(e)e.onclick=f;};
@@ -564,18 +618,22 @@ function bind(){
   });
   const area=document.getElementById('area');if(area)area.oninput=e=>S.area=e.target.value;
   bindSearch('q','res',it=>{const sh=document.getElementById('sheet').offsetHeight;map.flyTo(it.pt,it.z,{duration:.8});setTimeout(()=>map.panBy([0,sh/2-40],{animate:false}),850);hint(x.nowTap);});
-  bindSearch('q2','res2',it=>{const toUJ=dist(it.pt,UJ)<350;S.cur.to=toUJ?UJ.slice():it.pt.slice();S.cur.toUJ=toUJ;S.q2='';previewLeg();render();
+  bindSearch('q2','res2',it=>{reachUJ(it.pt.slice());S.q2='';previewLeg();render();
     requestAnimationFrame(()=>fitVisible(Lf.latLngBounds([here(),S.cur.to]).pad(.35),16));});
   const other=document.getElementById('other');if(other)other.oninput=e=>{S.cur.other=e.target.value.trim();};
   on('chg',()=>{S.cur={mode:null,line:null,other:'',otherOk:false,to:null,toUJ:false,wait:null,dur:null};draftLayer.clearLayers();highlight([]);render();});
   on('otherOk',()=>{if(S.cur.other){S.cur.otherOk=true;render();}});
   on('toUJ',()=>{S.cur.to=UJ.slice();S.cur.toUJ=true;previewLeg();render();});
+  const fx=document.getElementById('fix');if(fx)fx.oninput=e=>{S.fix=e.target.value;};
+  on('lastok',()=>{const prev=S.legs[S.legs.length-1];S.legs.push({mode:S.lm,line:null,other:'',from:prev.to,to:S.dest.pt,toUJ:true,campus:true,wait:0,dur:S.lmin,name:S.dest.name});
+    draftLayer.clearLayers();showFac(false);redrawTrip();render();fitVisible(Lf.latLngBounds([S.home,UJ,...S.legs.map(l=>l.to)]).pad(.25));});
   on('addleg',()=>{
-    const c=S.cur;S.legs.push({mode:c.mode,line:c.line,other:c.other,from:here(),to:c.to,toUJ:c.toUJ,wait:MODES[c.mode].transit?c.wait:0,dur:c.dur});
+    const c=S.cur;S.legs.push({mode:c.mode,line:c.line,other:c.other,from:here(),to:c.to,toUJ:c.toUJ,gate:c.gate||null,name:c.gate?csName(CSTOPS.find(g=>g[0]===c.gate)):null,wait:MODES[c.mode].transit?c.wait:0,dur:c.dur});
     S.cur={mode:null,line:null,other:'',to:null,toUJ:false,wait:null,dur:null};draftLayer.clearLayers();highlight([]);redrawTrip();render();
-    if(atUJ())fitVisible(Lf.latLngBounds([S.home,UJ,...S.legs.map(l=>l.to)]).pad(.25));
+    if(atUJ())enterCampus();
   });
-  on('undo',()=>{S.legs.pop();S.cur={mode:null,line:null,other:'',to:null,toUJ:false,wait:null,dur:null};draftLayer.clearLayers();redrawTrip();render();});
+  on('undo',()=>{const wasCampus=campusDone();S.legs.pop();S.cur={mode:null,line:null,other:'',to:null,toUJ:false,wait:null,dur:null};draftLayer.clearLayers();redrawTrip();
+    if(wasCampus){render();enterCampus();}else{S.dest=null;S.lm=null;S.lmin=null;showFac(false);render();}});
   on('arrived',()=>{S.step=3;render();});
   on('quick',()=>{S.quick=true;S.legs=[];tripLayer.clearLayers();draftLayer.clearLayers();S.step=3;render();});
   const qt=document.getElementById('qtime');if(qt)qt.oninput=e=>{S.qtime=+e.target.value;const tv=document.getElementById('tv');tv.classList.remove('empty');tv.firstChild.nodeValue=S.qtime+(S.qtime>=150?'+':'');const n=document.getElementById('next');if(n)n.disabled=S.cost===null;};
@@ -590,15 +648,27 @@ function bind(){
       <div class="bar"><i style="left:${pos(avg)}%"></i><i class="g" style="left:${pos(S.guess)}%"></i></div><p>${x.rv(S.guess,avg,pct)}</p></div>`;
     b.dataset.done=1;b.textContent=x.next;
   });
-  on('send',async()=>{const b=document.getElementById('send');b.disabled=true;b.textContent=x.sending;const r=await submit();S.queuedMsg=r==='queued';S.step=6;render();showGrid();});
+  on('send',async()=>{const b=document.getElementById('send');b.disabled=true;b.textContent=x.sending;const r=await submit();S.queuedMsg=r==='queued';S.step=7;render();showGrid();});
   on('showcard',async()=>{const c=document.getElementById('cardbox');c.hidden=!c.hidden;if(!c.hidden&&!document.getElementById('card').src){await drawCard();c.scrollIntoView({behavior:'smooth',block:'start'});}});
   on('sharebtn',async()=>{
     try{const blob=await (await fetch(document.getElementById('card').src)).blob();const file=new File([blob],'my-trip-to-uj.png',{type:'image/png'});
       if(navigator.canShare&&navigator.canShare({files:[file]})){await navigator.share({files:[file],text:`${x.share.ask} ${x.share.draw}: mudunlab.org/uj ${x.share.tag}`});return;}}catch(e){}
     document.getElementById('savehint').hidden=false;});
-  on('again',()=>{S=fresh();S.step=1;if(homeLayer)map.removeLayer(homeLayer);homeLayer=null;tripLayer.clearLayers();draftLayer.clearLayers();if(gridLayer)map.removeLayer(gridLayer);gridLayer=null;highlight([]);render();fitVisible(AMMAN);});
+  on('again',()=>{S=fresh();S.step=1;showFac(false);if(homeLayer)map.removeLayer(homeLayer);homeLayer=null;tripLayer.clearLayers();draftLayer.clearLayers();if(gridLayer)map.removeLayer(gridLayer);gridLayer=null;highlight([]);render();fitVisible(AMMAN);});
 }
 
+const x0=()=>t();
+let facLayer=null;
+function showFac(on){if(facLayer){map.removeLayer(facLayer);facLayer=null;}if(!on)return;
+  const big=map.getZoom()>=18;
+  facLayer=Lf.layerGroup(FAC.map(f=>{const sel=S.dest&&S.dest.k===f[0];
+    return Lf.marker([f[3],f[4]],{icon:Lf.divIcon({className:'',html:(sel||big)?`<div class="fac${sel?' on':''}">${esc(facName(f))}</div>`:`<div class="facdot"></div>`,iconSize:null,iconAnchor:[0,0]}),interactive:true,zIndexOffset:sel?1000:0})
+      .on('click',()=>{S.dest={k:f[0],pt:[f[3],f[4]],name:facName(f)};previewCampus();render();});})).addTo(map);}
+map.on('zoomend',()=>{if(facLayer)showFac(true);});
+function enterCampus(){showFac(true);previewCampus();requestAnimationFrame(()=>fitVisible(Lf.latLngBounds(CAMPUS),17));}
+function previewCampus(){draftLayer.clearLayers();showFac(true);if(!S.dest)return;const prev=S.legs[S.legs.length-1];
+  if(prev&&!prev.campus)drawLeg(draftLayer,{mode:S.lm||'walk',from:prev.to,to:S.dest.pt,toUJ:true});
+  draftLayer.addLayer(Lf.circleMarker(S.dest.pt,{radius:9,color:'#fffdf8',weight:3,fillColor:'#232323',fillOpacity:1,interactive:false}));}
 function previewLeg(){draftLayer.clearLayers();const c=S.cur;if(c.mode&&c.to)drawLeg(draftLayer,{mode:c.mode,line:c.line,from:here(),to:c.to,toUJ:c.toUJ});}
 
 map.on('click',e=>{
@@ -609,8 +679,11 @@ map.on('click',e=>{
     homeLayer=Lf.layerGroup([Lf.circle([snap(p[0]),snap(p[1])],{radius:200,color:'#17795c',weight:1.5,fillColor:'#27B38D',fillOpacity:.1,interactive:false}),
       Lf.circleMarker(p,{radius:8,color:'#fffdf8',weight:3,fillColor:'#17795c',fillOpacity:1,interactive:false})]).addTo(map);
     highlight(S.near);render();
+  } else if(S.step===2&&atUJ()&&!campusDone()){
+    let b=null;FAC.forEach(f=>{const d=dist(p,[f[3],f[4]]);if(!b||d<b.d)b={f,d};});
+    S.dest=b.d<90?{k:b.f[0],pt:[b.f[3],b.f[4]],name:facName(b.f)}:{k:'other',pt:p,name:x0().otherPlace};previewCampus();render();
   } else if(S.step===2&&S.cur.mode&&!atUJ()){
-    const toUJ=dist(p,UJ)<350; S.cur.to=toUJ?UJ.slice():p; S.cur.toUJ=toUJ; previewLeg(); render();
+    reachUJ(p); previewLeg(); render();
   }
 });
 
@@ -653,12 +726,12 @@ async function drawCard(){
   y+=112;
   // ticket with the line diagram
   const legs=S.quick?[{mode:'quick',dur:st.total,to:UJ,toUJ:true}]:S.legs;
-  const tkTop=y,tkH=Math.min(820,170+legs.length*210),tkX=60,tkW=w-120;
+  const tkTop=y,tkH=Math.min(h-390-300-y-60,150+legs.length*180),tkX=60,tkW=w-120;
   rr(tkX,tkTop,tkW,tkH,40,'#fffdf8');
   g.fillStyle='#17795c';[tkTop+tkH*0.5].forEach(cy=>{g.beginPath();g.arc(tkX,cy,26,0,7);g.arc(tkX+tkW,cy,26,0,7);g.fill();});
   const lx=side(190), tx=side(250), seg=(tkH-150)/legs.length;
   const names=[S.area||S.homeStreet||X.home];
-  legs.forEach((l,i)=>names.push(l.toUJ?X.uj:(streetNear(l.to)||X.stop(i+1))));
+  legs.forEach((l,i)=>names.push(l.name?(l.campus?l.name:X.uj+' · '+l.name):l.toUJ?X.uj:(streetNear(l.to)||X.stop(i+1))));
   let sy=tkTop+75;
   legs.forEach((l,i)=>{
     const y0=sy+i*seg,y1=y0+seg,col=l.mode==='walk'?'#a59c8c':l.mode==='quick'?'#232323':legColor(l);
@@ -668,9 +741,9 @@ async function drawCard(){
     const lab=l.mode==='quick'?'':(l.line||l.other||ml(l.mode));const ym=y0+seg*0.64;
     if(lab){g.font=`700 38px ${NUM}`;const pw=g.measureText(lab).width+40;const px=rtl?tx-pw:tx;rr(px,ym-38,pw,60,30,l.mode==='walk'?'#ece5d7':col);
       g.fillStyle=l.mode==='walk'?'#232323':'#fff';g.textAlign='center';g.fillText(lab,px+pw/2,ym+5);
-      align('left');g.fillStyle='#55524b';g.font=`700 36px ${NUM}`;g.fillText(`${l.dur} ${x.min}`,rtl?px-24:px+pw+24,ym+5);}
+      align('left');g.fillStyle='#55524b';g.font=`700 36px ${NUM}`;const dt=`${l.dur} ${x.min}`;g.fillText(dt,rtl?px-24:px+pw+24,ym+5);
+      if(l.wait){const dw=g.measureText(dt).width;g.font=`700 30px ${AR}`;const wt=X.waitP(l.wait),ww=g.measureText(wt).width+32;const wx=rtl?px-24-dw-22-ww:px+pw+24+dw+22;rr(wx,ym-30,ww,46,23,'#fbe6c8');g.fillStyle='#8a4b12';g.textAlign='center';g.fillText(wt,wx+ww/2,ym+3);}}
     else{align('left');g.fillStyle='#55524b';g.font=`700 40px ${NUM}`;g.fillText(`${l.dur} ${x.min}`,tx,ym+10);}
-    if(l.wait){g.font=`700 30px ${AR}`;const wt=X.waitP(l.wait),ww=g.measureText(wt).width+32;const wx=rtl?tx-ww:tx;rr(wx,y0+48,ww,46,23,'#fbe6c8');g.fillStyle='#8a4b12';g.textAlign='center';g.fillText(wt,wx+ww/2,y0+81);}
   });
   // stations
   names.forEach((n,i)=>{const yy=sy+i*seg,end=i===names.length-1;
