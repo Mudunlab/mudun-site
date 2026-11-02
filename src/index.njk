@@ -1,8 +1,9 @@
 ---
 layout: base.njk
-title: "Mudun — Urban Planning & Cities · Jordan"
-description: "An independent, bilingual platform advocating for better-designed cities and mobility in Jordan: research anyone can read, plus the stories behind our streets, transit, and public spaces."
+title: "Mudun Lab · Urban research and fieldwork in Jordan"
+description: "Research anyone can read, essays from the street, and surveys you can take part in, on cities in Jordan, starting with Amman. In Arabic and English."
 ---
+{% import "entry-card.njk" as cardlib %}
   <section class="view active" id="view-home">
     <div class="hero">
       <div class="wrap hero-grid">
@@ -10,56 +11,84 @@ description: "An independent, bilingual platform advocating for better-designed 
           <h1 data-en="Cities built for the people who live in them."
               data-ar="مدنٌ تُبنى لمن يعيشون فيها."></h1>
           <p class="lede"
-             data-en="Mudun raises awareness and advocates for better-designed, more livable cities in Jordan. We publish research anyone can read, tell the stories behind our streets, and bring people together around the idea that cities should be built for the people who live in them."
-             data-ar="مدن ترفع الوعي وتدعو إلى مدنٍ أردنية أفضل تصميمًا وأكثر قابليةً للعيش. ننشر أبحاثًا يستطيع أيّ شخص قراءتها، ونروي القصص الكامنة خلف شوارعنا، ونجمع الناس حول فكرةٍ واحدة: أن تُبنى المدن لمن يعيشون فيها."></p>
+             data-en="Mudun Lab studies how cities in Jordan work, starting with Amman. We publish research anyone can read, essays from the street, and surveys you can take part in."
+             data-ar="تدرس مدن لاب كيف تعمل المدن في الأردن، بدءًا من عمّان. ننشر أبحاثًا يستطيع أيّ شخص قراءتها، ومقالاتٍ من الشارع، واستبياناتٍ يمكنك المشاركة فيها."></p>
           <div class="hero-cta">
-            <a class="btn btn-primary" href="/join/" data-en="Join Mudun · free" data-ar="انضمّ إلى مدن · مجّانًا"></a>
+            <a class="btn btn-primary" href="#latest"><span data-en="See the work" data-ar="تصفّح الأعمال"></span><span class="arrow">↓</span></a>
+            <a class="btn btn-ghost" href="/join/" data-en="Join Mudun Lab" data-ar="انضمّ إلى مدن لاب"></a>
             {% if site.social.instagram %}<a href="{{ site.social.instagram }}" target="_blank" rel="noopener" aria-label="Instagram" class="hero-social"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>{% endif %}
           </div>
         </div>
         <div class="hero-visual">
-          <img class="hero-mark" src="/uploads/site/mudun-mark.png" alt="Mudun" width="420" height="450">
+          <img class="hero-mark" src="/uploads/site/mudun-mark.png" alt="Mudun Lab mark" width="420" height="450">
         </div>
       </div>
     </div>
 
-    <hr class="divider" style="margin-block:clamp(40px,6vw,72px)">
-
     <div class="wrap">
-      <div class="sec-head">
-        <span class="label" data-en="What you'll find here" data-ar="ماذا ستجد هنا"></span>
-        <h2 data-en="How Mudun works" data-ar="كيف تعمل مدن"></h2>
+
+      {# ---- Now in the field: the live project ---- #}
+      <div class="home-block" id="latest">
+        <div class="sec-head">
+          <span class="label" data-en="Now in the field" data-ar="الآن في الميدان"></span>
+          <h2 data-en="How do students get to the University of Jordan?" data-ar="كيف يصل الطلاب إلى الجامعة الأردنية؟"></h2>
+        </div>
+        <a class="field-card" href="/field/uj-mobility/">
+          <div>
+            <div class="field-tags">
+              <span class="live" data-en="Open now" data-ar="مفتوح الآن"></span>
+              <span data-en="Survey + maps" data-ar="استبيان وخرائط"></span>
+              <span data-en="University of Jordan" data-ar="الجامعة الأردنية"></span>
+            </div>
+            <h3 data-en="Mobility with Confidence: University of Jordan" data-ar="تنقّل بثقة: الجامعة الأردنية"></h3>
+            <p data-en="Draw your trip to campus on the map: where you start, which lines you take, and how long you wait. Then download the bus maps to your phone."
+               data-ar="ارسم رحلتك إلى الجامعة على الخريطة: من أين تبدأ، وأيّ الخطوط تستقلّ، وكم تنتظر. ثم نزّل خرائط الباصات على هاتفك."></p>
+            <span class="btn btn-primary btn-sm"><span data-en="Open the project" data-ar="افتح المشروع"></span><span class="arrow">→</span></span>
+          </div>
+          <img src="/uploads/field/uj/lockscreen-amman-lines-thumb.jpg" alt="Map of Amman bus lines to the University of Jordan" loading="lazy">
+        </a>
       </div>
-      <div class="grid-4">
-        <div class="card">
-          <div class="kicker"><span class="dot"></span><span class="mono" style="color:var(--asphalt-soft)" data-en="Research" data-ar="الأبحاث"></span></div>
-          <h3 data-en="Real studies on how the city works" data-ar="دراساتٌ حقيقية عن كيفية عمل المدينة"></h3>
-          <p data-en="Studies on Amman's streets, transit, and public spaces. Each one opens with a plain-language summary, so you get the point before deciding to read the whole thing." data-ar="دراساتٌ عن شوارع عمّان ونقلها وفضائها العام. تبدأ كلّ دراسة بملخّصٍ بلغةٍ واضحة، لتعرف الفكرة قبل أن تقرّر قراءتها كاملة."></p>
-          <a class="btn btn-ghost btn-sm" href="/research/" style="margin-top:14px"><span data-en="Explore the research" data-ar="استكشف الأبحاث"></span><span class="arrow">→</span></a>
+
+      {# ---- Latest published pieces (newest first, research + magazine) ---- #}
+      {% set latest = [] %}
+      {% for e in collections.research %}{% if e.data.status != "preparation" %}{% set latest = (latest.push({entry: e, type: "research"}), latest) %}{% endif %}{% endfor %}
+      {% for e in collections.magazine %}{% if e.data.status != "preparation" %}{% set latest = (latest.push({entry: e, type: "magazine"}), latest) %}{% endif %}{% endfor %}
+      {% if latest.length %}
+      <div class="home-block">
+        <div class="sec-head">
+          <span class="label" data-en="Published" data-ar="منشور"></span>
+          <h2 data-en="Latest research and writing" data-ar="أحدث الأبحاث والمقالات"></h2>
         </div>
-        <div class="card">
-          <div class="kicker"><span class="dot"></span><span class="mono" style="color:var(--asphalt-soft)" data-en="Magazine" data-ar="المجلّة"></span></div>
-          <h3 data-en="The human side of city life" data-ar="الجانب الإنساني من حياة المدينة"></h3>
-          <p data-en="Essays, photography, and opinion about everyday life in our cities, and how people really move through them, use them, and live in them." data-ar="مقالات وصور وآراء عن الحياة اليومية في مدننا، وكيف يتنقّل الناس فيها فعلًا ويستخدمونها ويعيشون فيها."></p>
-          <a class="btn btn-ghost btn-sm" href="/magazine/" style="margin-top:14px"><span data-en="Read the magazine" data-ar="اقرأ المجلّة"></span><span class="arrow">→</span></a>
+        <div class="entries">
+{% for item in latest | sort(true, false, "entry.data.date") %}{% if loop.index <= 3 %}{{ cardlib.card(item.entry, item.type, categories) }}{% endif %}{% endfor %}
         </div>
-        <div class="card">
-          <div class="kicker"><span class="dot"></span><span class="mono" style="color:var(--asphalt-soft)" data-en="Share your work" data-ar="شارك عملك"></span></div>
-          <h3 data-en="Have something worth publishing?" data-ar="لديك ما يستحق النشر؟"></h3>
-          <p data-en="A study, an essay, a set of photographs. We read every submission ourselves. It's free, and your work stays yours." data-ar="دراسة، أو مقال، أو مجموعة صور. نقرأ كلّ ما يُرسَل بأنفسنا. النشر مجّانيّ، ويبقى عملك ملكًا لك."></p>
-          <a class="btn btn-ghost btn-sm" href="/publish/" style="margin-top:14px"><span data-en="Publish with us" data-ar="انشُر معنا"></span><span class="arrow">→</span></a>
+        <p style="margin-top:18px">
+          <a href="/research/" data-en="All research →" data-ar="كلّ الأبحاث ←"></a>
+          <span style="color:var(--sand);margin-inline:10px">|</span>
+          <a href="/magazine/" data-en="The magazine →" data-ar="المجلّة ←"></a>
+        </p>
+      </div>
+      {% endif %}
+
+      {# ---- Two ways in ---- #}
+      <div class="home-invite">
+        <div>
+          <h3 data-en="Have something to publish?" data-ar="لديك عملٌ للنشر؟"></h3>
+          <p data-en="A study, an essay or a set of photographs about a city in Jordan. We read every submission ourselves, and the work stays yours."
+             data-ar="دراسة أو مقال أو مجموعة صور عن مدينة أردنية. نقرأ كلّ ما يصلنا بأنفسنا، ويبقى العمل ملكًا لك."></p>
+          <a class="btn btn-ghost btn-sm" href="/publish/"><span data-en="Publish with us" data-ar="انشُر معنا"></span><span class="arrow">→</span></a>
         </div>
-        <div class="card">
-          <div class="kicker"><span class="dot"></span><span class="mono" style="color:var(--asphalt-soft)" data-en="Membership" data-ar="العضوية"></span></div>
-          <h3 data-en="Join a growing circle" data-ar="انضمّ إلى دائرةٍ تنمو"></h3>
-          <p data-en="Joining is free. You'll get early access to new research and become part of a group that wants better, more livable cities." data-ar="الانضمام مجّانيّ. ستحصل على وصولٍ مبكّر للأبحاث الجديدة، وتصبح جزءًا من مجموعةٍ تريد مدنًا أفضل وأكثر ملاءمةً للعيش."></p>
-          <a class="btn btn-ghost btn-sm" href="/join/" style="margin-top:14px"><span data-en="Become a member · free" data-ar="كن عضوًا · مجّانًا"></span><span class="arrow">→</span></a>
+        <div>
+          <h3 data-en="Want to take part?" data-ar="تودّ المشاركة؟"></h3>
+          <p data-en="Add your name and we'll get in touch when a project needs people: a survey, a field day, or a call for writers."
+             data-ar="أضف اسمك وسنتواصل معك حين يحتاج مشروعٌ إلى مشاركين: استبيان، أو يوم ميداني، أو دعوة للكتابة."></p>
+          <a class="btn btn-ghost btn-sm" href="/join/"><span data-en="Join Mudun Lab" data-ar="انضمّ إلى مدن لاب"></span><span class="arrow">→</span></a>
         </div>
       </div>
     </div>
 
     <figure class="city-band">
       <img src="/uploads/site/amman-aerial-hero.jpg" alt="Aerial view of downtown Amman around the Roman Theatre" loading="lazy">
-      <figcaption data-en="Downtown Amman from above · Photo: Greater Amman Municipality" data-ar="وسط عمّان من الأعلى · تصوير: أمانة عمّان الكبرى"></figcaption>
+      <figcaption data-en="Downtown Amman from above. Photo: Greater Amman Municipality" data-ar="وسط عمّان من الأعلى. تصوير: أمانة عمّان الكبرى"></figcaption>
     </figure>
   </section>

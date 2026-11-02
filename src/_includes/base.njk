@@ -10,7 +10,7 @@
 </script>
 <title>{{ title }}</title>
 <meta name="description" content="{{ description or site.default_description }}" />
-<meta name="author" content="Mudun" />
+<meta name="author" content="Mudun Lab" />
 <meta name="theme-color" content="#27B38D" />
 <meta name="format-detection" content="telephone=no" />
 
@@ -27,14 +27,14 @@
 
 <!-- Open Graph (LinkedIn, WhatsApp, Facebook link previews) -->
 <meta property="og:type" content="{{ og_type or 'website' }}" />
-<meta property="og:site_name" content="Mudun" />
+<meta property="og:site_name" content="Mudun Lab" />
 <meta property="og:title" content="{{ title }}" />
 <meta property="og:description" content="{{ description or site.default_description }}" />
 <meta property="og:url" content="{{ site.url }}{{ page.url }}" />
 <meta property="og:image" content="{{ site.url }}/uploads/site/og-image.png" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
-<meta property="og:image:alt" content="Mudun — urban planning and cities platform for Jordan" />
+<meta property="og:image:alt" content="Mudun Lab: urban research and fieldwork in Jordan" />
 <meta property="og:locale" content="en_US" />
 <meta property="og:locale:alternate" content="ar_JO" />
 
@@ -43,7 +43,7 @@
 <meta name="twitter:title" content="{{ title }}" />
 <meta name="twitter:description" content="{{ description or site.default_description }}" />
 <meta name="twitter:image" content="{{ site.url }}/uploads/site/og-image.png" />
-<meta name="twitter:image:alt" content="Mudun — urban planning and cities platform for Jordan" />
+<meta name="twitter:image:alt" content="Mudun Lab: urban research and fieldwork in Jordan" />
 
 <!-- Structured data: identity of the site (Organization + WebSite) -->
 <script type="application/ld+json">
@@ -53,8 +53,8 @@
     {
       "@type": "Organization",
       "@id": "{{ site.url }}/#organization",
-      "name": "Mudun",
-      "alternateName": "مدن",
+      "name": "Mudun Lab",
+      "alternateName": ["مدن لاب", "Mudun", "مدن"],
       "url": "{{ site.url }}",
       "logo": "{{ site.url }}/uploads/site/icon-512.png",
       "email": "{{ site.email }}",
@@ -64,8 +64,7 @@
         "name": "Amman, Jordan"
       },
       "areaServed": [
-        { "@type": "Country", "name": "Jordan" },
-        { "@type": "Place", "name": "Middle East and North Africa" }
+        { "@type": "Country", "name": "Jordan" }
       ],
       "sameAs": [
         {%- set links = [] -%}
@@ -79,7 +78,7 @@
       "@type": "WebSite",
       "@id": "{{ site.url }}/#website",
       "url": "{{ site.url }}",
-      "name": "Mudun",
+      "name": "Mudun Lab",
       "publisher": { "@id": "{{ site.url }}/#organization" },
       "inLanguage": ["en", "ar"]
     }
@@ -102,7 +101,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Inter:wght@400;500;600&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 {% include "styles.css" %}
 </style>
@@ -111,18 +110,11 @@
 
   <a href="#main" class="skip-link" data-en="Skip to content" data-ar="تخطّ إلى المحتوى"></a>
 
-  <div class="rail" aria-hidden="true">
-    <div class="wrap">
-      <span data-en="Mudun · urban planning & cities" data-ar="مدن · تخطيط حضري ومدن"></span>
-      <span><b>AMMAN</b> · 31.95°N 35.93°E · <span data-en="Jordan" data-ar="الأردن"></span></span>
-    </div>
-  </div>
-
   <header>
     <div class="wrap bar">
-      <a class="brand" href="/" aria-label="Mudun — home">
-        <img src="{{ brand.logo_green }}" alt="Mudun مدن logo">
-        <span class="en">Mudun</span>
+      <a class="brand" href="/" aria-label="Mudun Lab, home">
+        <img src="{{ brand.logo_green }}" alt="Mudun Lab مدن لاب logo">
+        <span class="en">Mudun Lab</span>
       </a>
 
       <div class="right-cluster">
@@ -133,7 +125,7 @@
           <a class="nav-link" href="/magazine/"  {% if "/magazine/" in page.url %}aria-current="page"{% endif %} data-en="Magazine" data-ar="المجلّة"></a>
           <a class="nav-link" href="/field/"     {% if "/field/" in page.url %}aria-current="page"{% endif %} data-en="Field" data-ar="الميدان"></a>
           <a class="nav-link" href="/contact/"   {% if "/contact/" in page.url %}aria-current="page"{% endif %} data-en="Contact" data-ar="تواصل"></a>
-          <a class="btn btn-primary btn-sm join-btn" href="/join/" data-en="Join · free" data-ar="انضمّ · مجّانًا"></a>
+          <a class="btn btn-primary btn-sm join-btn" href="/join/" data-en="Join" data-ar="انضمّ"></a>
         </nav>
         <button class="lang" id="langBtn">العربية</button>
         <button class="menu-btn" id="menuBtn" aria-label="Menu" aria-expanded="false"><span></span></button>
@@ -150,10 +142,10 @@
     <div class="wrap">
       <div class="foot-grid">
         <div class="foot-brand">
-          <img src="{{ brand.logo_white }}" alt="Mudun مدن">
-          <p data-en="An independent, research-anchored platform for understanding cities in Jordan, starting with Amman."
-             data-ar="منصّةٌ مستقلّة قائمة على البحث لفهم مدن الأردن، بدءًا من عمّان."></p>
-          <a class="btn btn-primary foot-cta" href="/join/" data-en="Become a member · free" data-ar="كن عضوًا · مجّانًا"></a>
+          <img src="{{ brand.logo_white }}" alt="Mudun Lab مدن لاب">
+          <p data-en="Research, essays and fieldwork on cities in Jordan, starting with Amman."
+             data-ar="أبحاثٌ ومقالاتٌ وعملٌ ميداني عن مدن الأردن، بدءًا من عمّان."></p>
+          <a class="btn btn-primary foot-cta" href="/join/" data-en="Become a member" data-ar="كن عضوًا"></a>
         </div>
         <div>
           <h4 data-en="Explore" data-ar="تصفّح"></h4>
@@ -175,8 +167,8 @@
         </div>
       </div>
       <div class="colophon">
-        <span>© <span id="yr"></span> Mudun · مدن</span>
-        <span data-en="Independent · non-commercial · Amman" data-ar="مستقلّ · غير ربحي · عمّان"></span>
+        <span>© <span id="yr"></span> Mudun Lab · مدن لاب</span>
+        <span data-en="Independent and non-commercial, based in Amman" data-ar="مستقلّة وغير تجارية، مقرّها عمّان"></span>
       </div>
     </div>
   </footer>

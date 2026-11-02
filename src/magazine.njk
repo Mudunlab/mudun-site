@@ -1,26 +1,27 @@
 ---
 layout: base.njk
-title: "Magazine · Mudun · Stories about the city"
+title: "Magazine · Mudun Lab"
 description: "Essays, opinion, and photography on cities in Jordan, the human, everyday side of urban life. Open to writers, photographers, and researchers."
 ---
 {% import "entry-card.njk" as cardlib %}
   <section class="view active" id="view-magazine">
     <div class="wrap">
       <div class="sec-head">
-        <span class="label" data-en="Magazine" data-ar="المجلّة"></span>
         <h2 data-en="Stories about the city" data-ar="حكاياتٌ عن المدينة"></h2>
         <p class="lede" style="margin-top:1rem"
-           data-en="Essays, opinion, and photography about cities in Jordan, the human, everyday side of urban life. Lighter than the research, and open to anyone who sees the city clearly."
-           data-ar="مقالاتٌ وآراءٌ وتصوير عن مدن الأردن، الجانب الإنسانيّ اليوميّ من الحياة الحضرية. أخفّ من الأبحاث، ومفتوحة لكلّ من يرى المدينة بوضوح."></p>
+           data-en="Essays, opinion and photography about everyday life in Jordan's cities. Shorter and more personal than the research, and open to contributors."
+           data-ar="مقالاتٌ وآراءٌ وصورٌ عن الحياة اليومية في مدن الأردن. أقصر من الأبحاث وأقرب إلى التجربة الشخصية، ومفتوحةٌ للمساهمين."></p>
       </div>
 
+      {# Only show filters for categories that actually have a piece, and only when there's more than one #}
+      {% set used = [] %}
+      {% for e in collections.magazine %}{% if e.data.category not in used %}{% set used = (used.push(e.data.category), used) %}{% endif %}{% endfor %}
+      {% if used.length > 1 %}
       <div class="filters" data-filter-group aria-label="Categories">
         <button class="chip active" data-filter="all" data-en="All" data-ar="الكل"></button>
-        <button class="chip" data-filter="photo" data-en="Photography" data-ar="تصوير"></button>
-        <button class="chip" data-filter="essay" data-en="Essays" data-ar="مقالات"></button>
-        <button class="chip" data-filter="opinion" data-en="Opinion" data-ar="رأي"></button>
-        <button class="chip" data-filter="life" data-en="City life" data-ar="حياة المدينة"></button>
+        {% for key, c in categories.magazine %}{% if key in used %}<button class="chip" data-filter="{{ key }}" data-en="{{ c.en }}" data-ar="{{ c.ar }}"></button>{% endif %}{% endfor %}
       </div>
+      {% endif %}
 
       <div class="entries">
 {% for entry in collections.magazine %}{{ cardlib.card(entry, "magazine", categories) }}{% endfor %}

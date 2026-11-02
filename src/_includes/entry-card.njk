@@ -15,7 +15,7 @@
           <p class="why"{% if entry.data.status == "preparation" %} style="margin:0"{% endif %} data-en="{{ entry.data.why_en }}" data-ar="{{ entry.data.why_ar }}"></p>
           {% if entry.data.status != "preparation" %}
           <a class="entry-toggle" href="{{ entry.url }}" style="text-decoration:none">
-            <span class="plus">→</span><span data-en="Read the brief" data-ar="اقرأ الملخّص"></span>
+            <span class="plus">→</span>{% if type == "research" %}<span data-en="Read the brief" data-ar="اقرأ الملخّص"></span>{% else %}<span data-en="Read" data-ar="اقرأ"></span>{% endif %}
           </a>
           {% endif %}
         </article>
