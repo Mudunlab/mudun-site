@@ -104,7 +104,7 @@ textarea{font:500 16px var(--f-ar);width:100%;box-sizing:border-box;border:1.5px
 .fcard{display:grid;grid-template-columns:1fr auto;grid-template-areas:'logo btn' 'txt txt';align-items:center;gap:8px 12px;padding:14px 16px;border:1.5px solid var(--line);border-radius:16px;background:#fff;color:var(--asphalt);text-decoration:none}
 .fcard img{grid-area:logo;height:24px;width:auto}.fcard img.fl-mwc{height:32px}
 .fcard div{grid-area:txt;display:flex;flex-direction:column;gap:2px}.fcard b{font-size:15px}.fcard span{font-size:13px;color:var(--ink2);line-height:1.5}
-.fcard i{grid-area:btn;font-style:normal;font-weight:700;font-size:14px;background:var(--green-deep);color:#fff;border-radius:999px;padding:10px 18px}
+.fcard i{grid-area:btn;display:inline-flex;align-items:center;gap:7px;font-style:normal;font-weight:700;font-size:14px;background:var(--green-deep);color:#fff;border-radius:999px;padding:10px 18px}
 .pick{border:2px dashed var(--green-deep);border-radius:14px;padding:12px;text-align:center;font-weight:700;color:var(--green-deep);background:#f1f8f4}
 
 .big{font:800 60px/1 var(--f-num);letter-spacing:-.02em;font-variant-numeric:tabular-nums;color:var(--asphalt)}
@@ -195,6 +195,8 @@ const SNAP_M = 450;             // a tapped point snaps to a known line's real p
 const Lf = window.L;
 // UJ stops and gates (A–E, same letters as the printed campus map) and campus destinations
 const CSTOPS=[['B','البوابة الرئيسية','Main Gate',32.01534,35.86801],['A','موقف مسجد الجامعة','University Mosque stop',32.01833,35.86565],['E','شمال الحرم','North Campus',32.02171,35.87079],['C','بوابة الزراعة','Agriculture Gate',32.0108,35.87099],['D','مستشفى الجامعة','University Hospital',32.00611,35.8728]];
+// lines that stop at each UJ gate (from the Amman Vision stop files)
+const GATE_LINES={A:['100','104','106','11','40','64','98','99','JR01','JR02'],B:['100','104','106','11','34','98','99','CM113','CM114','CM135','CM153','CM160','CM161','CM168','IR02','JR01','JR02','TF06'],C:['100','104','106','11','34','98','99','CM113'],D:['100','104','106','11','34','98','99','AJAM02','CM113','IR02','JR01','JR02','SL01'],E:['11','40','64']};
 const FAC=[['eng','كلية الهندسة','Engineering',32.01042,35.87481],['it','تكنولوجيا المعلومات','IT (KASIT)',32.01411,35.87307],['sci','كلية العلوم','Science',32.013,35.8743],['agri','كلية الزراعة','Agriculture',32.01135,35.8734],
  ['med','كلية الطب','Medicine',32.0079,35.87603],['nurs','كلية التمريض','Nursing',32.00863,35.87582],['hosp','مستشفى الجامعة','University Hospital',32.0066,35.87449],
  ['arts','كلية الآداب','Arts',32.01823,35.87036],['bus','كلية الأعمال','Business',32.0188,35.87121],['law','كلية الحقوق','Law',32.0186,35.87262],['sharia','كلية الشريعة','Sharia',32.01747,35.87241],
@@ -226,7 +228,7 @@ const T = {
   area:'اسم منطقتك (اختياري)',areaPh:'مثلاً: صويلح، طبربور، الهاشمي',next:'التالي',back:'رجوع',
   s2:'ارسم رحلتك',s2p:'زي ما صارت معك عادةً، مرحلة مرحلة.',legN:n=>`المرحلة ${n}`,how:'كيف كمّلت من هون؟',
   whichLine:'أي خط؟',otherNum:'رقم خط ثاني (اختياري)',otherPh:'مثلاً: 6',
-  tapTo:'اضغط على الخريطة وين نزلت',tapToWalk:'اضغط على الخريطة لوين مشيت',toUJ:'لحد الجامعة',orTap:'أو اضغط على الخريطة',nearLine:'اضغط على مسار الخط اللي ركبته، وين نزلت',noNear:'ما في خط من هاد النوع قريب من آخر نقطة، هاي كل الخطوط:',allLines:'اعرض كل الخطوط',reachQ:'وصلت الجامعة؟ عند أي بوابة أو موقف:',campusTag:'آخر مرحلة: جوّا الجامعة',campusQ:'وين رايح جوّا الجامعة؟',campusP:'اختار كليتك، أو اضغط على الخريطة مكان وجهتك.',tapDest:'اضغط على مكان وجهتك بالجامعة',otherPlace:'مكان ثاني بالجامعة',lastHow:'كيف وصلت من البوابة لهناك؟',lastMin:'قدّيش أخذت؟',lastOk:'وصلت، أضف المرحلة',lastModes:[['walk','مشي'],['taxi','تاكسي أو تطبيق'],['car','حدا وصّلني بالسيارة']],
+  tapTo:'اضغط على الخريطة وين نزلت',tapToWalk:'اضغط على الخريطة لوين مشيت',toUJ:'لحد الجامعة',orTap:'أو اضغط على الخريطة',nearLine:'اضغط على مسار الخط اللي ركبته، وين نزلت',noNear:'ما في خط من هاد النوع قريب من آخر نقطة، هاي كل الخطوط:',allLines:'اعرض كل الخطوط',reachQ:'وصلت الجامعة؟ عند أي بوابة أو موقف:',reachLine:'نزلت بالجامعة؟ اختار الموقف:',reachMore:'وصلت الجامعة بهالمرحلة؟',campusTag:'آخر مرحلة: جوّا الجامعة',campusQ:'وين رايح جوّا الجامعة؟',campusP:'اختار كليتك، أو اضغط على الخريطة مكان وجهتك.',tapDest:'اضغط على مكان وجهتك بالجامعة',otherPlace:'مكان ثاني بالجامعة',lastHow:'كيف وصلت من البوابة لهناك؟',lastMin:'قدّيش أخذت؟',lastOk:'وصلت، أضف المرحلة',lastModes:[['walk','مشي'],['taxi','تاكسي أو تطبيق'],['car','حدا وصّلني بالسيارة']],
   wait:'قدّيش استنيت؟',dur:m=>MODES[m].transit?'قدّيش أخذ المشوار فيه؟':'قدّيش أخذ المشوار؟',min:'دقيقة',
   addLeg:'أضف المرحلة',undo:'شيل آخر مرحلة',arrived:'وصلت الجامعة، كمّل',quick:'مستعجل؟ اعطينا الوقت الكلي بس',
   waitSeg:'انتظار',total:'المجموع',transfers:n=>n<=0?'بدون تبديل':n==1?'تبديل واحد':`${n} تبديلات`,
@@ -265,7 +267,7 @@ const T = {
   area:'Your area (optional)',areaPh:'e.g. Swaileh, Tabarbour, Hashmi',next:'Next',back:'Back',
   s2:'Draw your trip',s2p:'The way you usually come, one leg at a time.',legN:n=>`Leg ${n}`,how:'How did you go on from here?',
   whichLine:'Which line?',otherNum:'Another line number (optional)',otherPh:'e.g. 6',
-  tapTo:'Tap on the map where you got off',tapToWalk:'Tap on the map where you walked to',toUJ:'All the way to UJ',orTap:'or tap on the map',nearLine:'Tap on the route of the line you took, where you got off',noNear:'No line of this kind runs near your last point. Here are all of them:',allLines:'Show all lines',reachQ:'Reached UJ? At which gate or stop:',campusTag:'Last leg: on campus',campusQ:'Where on campus are you going?',campusP:'Pick your faculty, or tap your destination on the map.',tapDest:'Tap where you are going on campus',otherPlace:'Another place on campus',lastHow:'How did you get there from the gate?',lastMin:'How long did it take?',lastOk:'Arrived, add this leg',lastModes:[['walk','Walk'],['taxi','Taxi or app'],['car','Someone dropped me']],
+  tapTo:'Tap on the map where you got off',tapToWalk:'Tap on the map where you walked to',toUJ:'All the way to UJ',orTap:'or tap on the map',nearLine:'Tap on the route of the line you took, where you got off',noNear:'No line of this kind runs near your last point. Here are all of them:',allLines:'Show all lines',reachQ:'Reached UJ? At which gate or stop:',reachLine:'Got off at UJ? Pick the stop:',reachMore:'Did this leg take you to UJ?',campusTag:'Last leg: on campus',campusQ:'Where on campus are you going?',campusP:'Pick your faculty, or tap your destination on the map.',tapDest:'Tap where you are going on campus',otherPlace:'Another place on campus',lastHow:'How did you get there from the gate?',lastMin:'How long did it take?',lastOk:'Arrived, add this leg',lastModes:[['walk','Walk'],['taxi','Taxi or app'],['car','Someone dropped me']],
   wait:'How long did you wait?',dur:m=>MODES[m].transit?'How long was the ride?':'How long did it take?',min:'min',
   addLeg:'Add this leg',undo:'Remove last leg',arrived:'I reached UJ, continue',quick:'In a hurry? Just give us the total time',
   waitSeg:'wait',total:'Total',transfers:n=>n<=0?'no transfers':n==1?'1 transfer':`${n} transfers`,
@@ -518,6 +520,15 @@ const WAITS=[0,5,10,15,20,30,45], DURS=[5,10,15,20,25,30,45,60,90];
 
 function nearestStopFor(code,p){let m=1e9;for(const s of DATA.stops){if(s[2].split(',').includes(code)){const d=dist(p,[s[0],s[1]]);if(d<m)m=d;}}return m;}
 
+function gateBlock(c,x){
+  // gates only make sense for a leg that can end at UJ: a UJ line (only the gates it stops at), or a taxi/lift; other legs get a small link
+  let gates=null,q=x.reachQ;
+  if(c.line&&GATE_LINES.B&&lineBy(c.line)){gates=CSTOPS.filter(g=>(GATE_LINES[g[0]]||[]).includes(c.line));q=x.reachLine;}
+  else if(c.mode==='taxi'||c.mode==='car'||c.showGates){gates=CSTOPS;}
+  if(!gates)return `<button type="button" class="link" id="showGates">${x.reachMore}</button>`;
+  if(!gates.length)return '';
+  return `<div><label class="q">${q}</label>${chips('gate',gates.map(g=>[g[0],csName(g)]),null)}</div>`;
+}
 function render(){
   const x=t(); document.documentElement.dir=x.dir; document.documentElement.lang=LANG;
   document.getElementById('lang').textContent=x.lang; document.getElementById('brandtxt').innerHTML=x.brand;
@@ -569,7 +580,7 @@ function render(){
             <div><label class="q" for="other">${x.otherNum}</label><div class="row"><input type="text" id="other" maxlength="12" placeholder="${x.otherPh}" value="${esc(c.other)}"><button class="btn dark" id="otherOk" style="flex:0 0 auto;width:auto">${x.next}</button></div></div>`;
       } else if(!c.to){
         hint(c.mode==='walk'?x.tapToWalk:x.tapTo);
-        h+=`${sel}<div class="pick">${c.mode==='walk'?x.tapToWalk:x.tapTo}</div>${searchBox('q2',x.sPh2)}<div><label class="q">${x.reachQ}</label>${chips('gate',CSTOPS.map(g=>[g[0],csName(g)]),null)}</div>`;
+        h+=`${sel}<div class="pick">${c.mode==='walk'?x.tapToWalk:x.tapTo}</div>${searchBox('q2',x.sPh2)}${gateBlock(c,x)}`;
         S._fitPick=true;
       } else {
         h+=sel+(c.toUJ?`<div class="step-tag">● ${esc(csName(CSTOPS.find(g=>g[0]===c.gate)))}</div>`:'')+`<p class="small">${x.adjust}</p>`;
@@ -609,8 +620,8 @@ function render(){
     h=`<div class="eyebrow">✓</div><h2>${x.done}</h2>${S.queuedMsg?`<div class="callout warn">${x.queued}</div>`:''}<p>${store.length>=5?x.doneP(store.length):x.doneFew}</p>
        <div class="legend"><span>${x.legend[0]}</span><div class="bar"></div><span>${x.legend[1]}</span></div>
        <div class="follow">
-         <a class="fcard" href="https://www.instagram.com/mudun.lab/" target="_blank" rel="noopener"><img src="${LOGO.mudun}" alt="" class="fl-mud"><div><b>${x.fMud[0]}</b><span>${x.fMud[1]}</span></div><i>${x.follow}</i></a>
-         <a class="fcard" href="https://www.instagram.com/mobilitywithconfidence/" target="_blank" rel="noopener"><img src="${LOGO.mwc}" alt="" class="fl-mwc"><div><b>${x.fMwc[0]}</b><span>${x.fMwc[1]}</span></div><i>${x.follow}</i></a>
+         <a class="fcard" href="https://www.instagram.com/mudun.lab/" target="_blank" rel="noopener"><img src="${LOGO.mudun}" alt="" class="fl-mud"><div><b>${x.fMud[0]}</b><span>${x.fMud[1]}</span></div><i><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>${x.follow}</i></a>
+         <a class="fcard" href="https://www.instagram.com/mobilitywithconfidence/" target="_blank" rel="noopener"><img src="${LOGO.mwc}" alt="" class="fl-mwc"><div><b>${x.fMwc[0]}</b><span>${x.fMwc[1]}</span></div><i><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>${x.follow}</i></a>
        </div>
        <div class="row"><a class="link" href="/field/uj-mobility/#maps">${x.mapsLink}</a></div>
        <button class="link" id="again">${x.again}</button>`;
@@ -654,6 +665,7 @@ function bind(){
     requestAnimationFrame(()=>fitVisible(Lf.latLngBounds([here(),S.cur.to]).pad(.35),16));});
   const other=document.getElementById('other');if(other)other.oninput=e=>{S.cur.other=e.target.value.trim();};
   on('chg',()=>{S.cur={mode:null,line:null,other:'',otherOk:false,to:null,toUJ:false,wait:null,dur:null};draftLayer.clearLayers();highlight([]);render();});
+  on('showGates',()=>{S.cur.showGates=true;render();});
   on('allLines',()=>{S.cur.all=true;render();});
   on('otherOk',()=>{if(S.cur.other){S.cur.otherOk=true;render();}});
   on('toUJ',()=>{S.cur.to=UJ.slice();S.cur.toUJ=true;previewLeg();render();});
