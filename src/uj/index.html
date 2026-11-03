@@ -238,12 +238,12 @@ const T = {
   rvFew:(g,a)=>`توقعت <b>${g}</b> دقيقة. لسّا الرحلات قليلة، والمعدّل لحد الآن <b>${a}</b> دقيقة. رجع شوف المعدّل بعد ما يشارك طلاب أكثر.`,
   rv:(g,a,pct)=>`توقعت <b>${g}</b> دقيقة. المعدّل الحقيقي لحد الآن <b>${a}</b> دقيقة. رحلتك أطول من <b>${pct}%</b> من الرحلات.`,
   avg:'معدّل الرحلة',yours:'رحلتك',
-  s5:'شو أكثر إشي بيتعبك بالمواصلات للجامعة؟',s5p:'اختار لحد ٣. كل ما كانت إجابتك أدق، كل ما قدرنا نوصّل المشكلة صح.',pickN:n=>`اخترت ${n} من ٣`,
+  s5:'شو الأشياء اللي بتتعبك بالمواصلات للجامعة؟',s5p:'اختار كل اللي بينطبق عليك. كل ما كانت إجابتك أدق، كل ما قدرنا نوصّل المشكلة صح.',pickN:n=>n?`اخترت ${n}`:'',
   PG:[['عند الموقف',[['late','الباص بيتأخر أو مواعيده مش ثابتة'],['fullpass','الباص بيمرق مليان وما بيوقف'],['shelter','ما في مظلة أو مقعد أو إنارة'],['stopfar','الموقف بعيد أو الطريق له صعب']]],
       ['جوّا الباص',[['standing','بضل واقف، الباص مليان طلاب'],['traffic','الأزمة بتأخر الباص'],['hot','الباص حر أو مش نظيف'],['driver','تعامل السائق']]],
       ['الخطوط والمواعيد',[['peak','الباصات قليلة وقت الذروة'],['nodirect','ما في خط مباشر من منطقتي'],['transfers','لازم أبدّل أكثر من مرة'],['evening','ما في باص بعد المحاضرات المسائية'],['cost','الأجرة غالية علي'],['card','الدفع والبطاقة والشحن']]],
       ['التطبيق والمعلومات',[['appwrong','التطبيق بيعطي مواعيد غلط أو الباص مش ظاهر'],['apphard','التطبيق بطيء أو صعب الاستخدام'],['info','ما بعرف أي خط بيوصلني ووين موقفه']]],
-      ['بالجامعة وبشكل عام',[['campuswalk','المشي من البوابة لكليتي طويل'],['safety','مضايقات أو عدم شعور بالأمان']]]],
+      ['بشكل عام',[['safety','مضايقات أو عدم شعور بالأمان']]]],
   s6:'آخر ثلاث أسئلة',appQ:'بتستخدم تطبيق Amman Bus؟',APP:[['always','دايماً'],['some','أحياناً'],['quit','نزّلته وبطّلت أستخدمه'],['never','ما بستخدمه']],
   fix:'لو في شي واحد يتغيّر ويفرق معك، شو هو؟ (اختياري)',fixPh:'مثلاً: باص كل ١٠ دقايق الصبح من صويلح',
   conf:'قدّيش واثق إنك تقدر تعتمد على المواصلات العامة للجامعة؟',F:['أبداً','قليلاً','نوعاً ما','غالباً','تماماً'],
@@ -277,12 +277,12 @@ const T = {
   rvFew:(g,a)=>`You guessed <b>${g}</b> min. Few trips are in yet; the average so far is <b>${a}</b> min. Check back once more students take part.`,
   rv:(g,a,pct)=>`You guessed <b>${g}</b> min. The real average so far is <b>${a}</b> min. Your trip is longer than <b>${pct}%</b> of trips.`,
   avg:'Average trip',yours:'Your trip',
-  s5:'What makes the trip to UJ hardest?',s5p:'Pick up to 3. The more precise you are, the better we can make the case.',pickN:n=>`${n} of 3 picked`,
+  s5:'What makes the trip to UJ hard?',s5p:'Pick everything that applies to you. The more precise you are, the better we can make the case.',pickN:n=>n?`${n} picked`:'',
   PG:[['At the stop',[['late','Buses are late or don’t keep a schedule'],['fullpass','Full buses pass without stopping'],['shelter','No shelter, seat or lighting'],['stopfar','The stop is far or hard to reach']]],
       ['On the bus',[['standing','I stand the whole way, the bus is full of students'],['traffic','Traffic makes the bus slow'],['hot','The bus is hot or not clean'],['driver','How the driver behaves']]],
       ['Lines and times',[['peak','Too few buses at peak times'],['nodirect','No direct line from my area'],['transfers','I have to change more than once'],['evening','No bus after evening classes'],['cost','The fare is too much for me'],['card','Paying, the card and top-ups']]],
       ['The app and information',[['appwrong','The app shows wrong times or the bus is missing'],['apphard','The app is slow or hard to use'],['info','I don’t know which line to take or where it stops']]],
-      ['On campus and in general',[['campuswalk','The walk from the gate to my faculty is long'],['safety','Harassment or not feeling safe']]]],
+      ['In general',[['safety','Harassment or not feeling safe']]]],
   s6:'Three last questions',appQ:'Do you use the Amman Bus app?',APP:[['always','Always'],['some','Sometimes'],['quit','Downloaded it, stopped using it'],['never','I don’t use it']],
   fix:'If one thing changed that would make a difference to you, what would it be? (optional)',fixPh:'e.g. a bus every 10 minutes in the morning from Sweileh',
   conf:'How confident are you that you can rely on public transport to UJ?',F:['Not at all','A little','Somewhat','Mostly','Fully'],
@@ -555,7 +555,7 @@ function render(){
     h=`${prog(2)}<h2>${x.s2}</h2>`;
     if(S.legs.length){const st=tripStats();h+=`${chainHTML()}${tbarHTML()}<div class="tot"><b>${st.total}</b><span>${x.min} · ${x.transfers(st.transfers)}</span></div>`;}
     else h+=`<p>${x.s2p}</p>`;
-    if(atUJ()&&campusDone()){
+    if(atUJ()){
       h+=`<button class="btn" id="arrived">${x.arrived}</button><div class="row"><button class="btn ghost" id="undo">${x.undo}</button></div>`;
     } else if(atUJ()){
       if(!S.dest) hint(x.tapDest);
@@ -628,7 +628,7 @@ function render(){
   }
   W.innerHTML=`<div class="stack fade">${h}</div>`;
   document.getElementById('sheet').classList.remove('min');
-  document.getElementById('sheet').classList.toggle('short',S.step===2&&!!atUJ()&&!campusDone());
+
   bind();
   if(S._fitPick){S._fitPick=false;requestAnimationFrame(()=>fitVisible(Lf.latLngBounds([here(),UJ]).pad(.3),14));}
 }
@@ -644,7 +644,7 @@ function bind(){
     if(g==='dur')c.dur=+v;
     if(g==='cost')S.cost=v;
     if(g==='conf')S.conf=+v;
-    if(g==='prob'){const i=S.problems.indexOf(v);if(i>=0)S.problems.splice(i,1);else{S.problems.push(v);if(S.problems.length>3)S.problems.shift();}}
+    if(g==='prob'){const i=S.problems.indexOf(v);if(i>=0)S.problems.splice(i,1);else S.problems.push(v);}
     if(g==='app')S.app=v;
     if(g==='lm'){S.lm=v;previewCampus();}
     if(g==='lmin')S.lmin=+v;
@@ -675,7 +675,7 @@ function bind(){
   on('addleg',()=>{
     const c=S.cur;S.legs.push({mode:c.mode,line:c.line,other:c.other,from:here(),to:c.to,toUJ:c.toUJ,gate:c.gate||null,name:c.gate?csName(CSTOPS.find(g=>g[0]===c.gate)):null,wait:MODES[c.mode].transit?c.wait:0,dur:c.dur});
     S.cur={mode:null,line:null,other:'',to:null,toUJ:false,wait:null,dur:null};draftLayer.clearLayers();highlight([]);redrawTrip();render();
-    if(atUJ())enterCampus();
+    if(atUJ())fitVisible(Lf.latLngBounds([S.home,UJ,...S.legs.map(l=>l.to)]).pad(.25));
   });
   on('undo',()=>{const wasCampus=campusDone();S.legs.pop();S.cur={mode:null,line:null,other:'',to:null,toUJ:false,wait:null,dur:null};draftLayer.clearLayers();redrawTrip();
     if(wasCampus){render();enterCampus();}else{S.dest=null;S.lm=null;S.lmin=null;showFac(false);render();}});
@@ -732,10 +732,6 @@ map.on('click',e=>{
     homeLayer=Lf.layerGroup([Lf.circle([snap(p[0]),snap(p[1])],{radius:200,color:'#17795c',weight:1.5,fillColor:'#27B38D',fillOpacity:.1,interactive:false}),
       Lf.circleMarker(p,{radius:8,color:'#fffdf8',weight:3,fillColor:'#17795c',fillOpacity:1,interactive:false})]).addTo(map);
     highlight(S.near);render();
-  } else if(S.step===2&&atUJ()&&!campusDone()){
-    if(!Lf.latLngBounds(CAMPUS).pad(.15).contains(p)){hint(x0().tapDest);return;}
-    let b=null;FAC.forEach(f=>{const d=dist(p,[f[3],f[4]]);if(!b||d<b.d)b={f,d};});
-    S.dest=b.d<90?{k:b.f[0],pt:[b.f[3],b.f[4]],name:facName(b.f)}:{k:'other',pt:p,name:x0().otherPlace};previewCampus();render();
   } else if(S.step===2&&S.cur.mode&&!atUJ()){
     const md=MODES[S.cur.mode]; if(md.line&&!S.cur.line&&!S.cur.otherOk)return;   // still choosing the line
     const q=onLine(p); if(!q){hint(x0().nearLine);return;}
