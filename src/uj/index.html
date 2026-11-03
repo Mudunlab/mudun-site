@@ -482,12 +482,13 @@ if(DEMO){seedDemo();document.getElementById('demo').hidden=false;}
 let statsP=null,statsAt=0;
 function loadStats(){if(DEMO)return Promise.resolve(store);if(statsP&&Date.now()-statsAt<15000)return statsP;statsAt=Date.now();
   statsP=(async()=>{const ac=new AbortController(),tm=setTimeout(()=>ac.abort(),5000);try{const r=await fetch(ENDPOINT+'?stats=1',{cache:'no-store',signal:ac.signal});const j=await r.json();store=j.trips||[];}catch(e){}finally{clearTimeout(tm);}return store;})();return statsP;}
-async function post(rec){const ac=new AbortController(),tm=setTimeout(()=>ac.abort(),8000);
-  try{await fetch(ENDPOINT,{method:'POST',mode:'no-cors',keepalive:true,signal:ac.signal,headers:{'Content-Type':'text/plain'},body:JSON.stringify(rec)});}finally{clearTimeout(tm);}}
+const inFlight=new Set();
+async function post(rec){if(inFlight.has(rec.id))throw new Error('busy');inFlight.add(rec.id);rec.tries=(rec.tries||0)+1;const ac=new AbortController(),tm=setTimeout(()=>ac.abort(),30000);
+  try{await fetch(ENDPOINT,{method:'POST',mode:'no-cors',keepalive:true,signal:ac.signal,headers:{'Content-Type':'text/plain'},body:JSON.stringify(rec)});}catch(e){const q=qGet();const it=q.find(r=>r.id===rec.id);if(it){it.next=Date.now()+180000;LS.set('uj_queue',q);}throw e;}finally{clearTimeout(tm);inFlight.delete(rec.id);}}
 const qGet=()=>LS.get('uj_queue')||[], qDrop=id=>LS.set('uj_queue',qGet().filter(r=>r.id!==id));
 let flushing=false;
 async function flushQueue(){if(DEMO||flushing||(navigator.onLine===false))return;const q=qGet();if(!q.length)return;flushing=true;
-  try{for(const r of q){try{await post(r);qDrop(r.id);}catch(e){break;}}}finally{flushing=false;}}
+  try{for(const r of q){if(r.next&&Date.now()<r.next)continue;try{await post(r);qDrop(r.id);}catch(e){break;}}}finally{flushing=false;}}
 window.addEventListener('online',flushQueue);document.addEventListener('visibilitychange',()=>{if(!document.hidden)flushQueue();});setInterval(flushQueue,30000);flushQueue();
 const fmtChain=c=>String(c||'').split(' → ').filter(Boolean).map(k=>MODES[k]?ml(k):k).join(LANG==='ar'?' ← ':' → ');
 function chainText(){if(S.quick)return '';return S.legs.filter(l=>l.mode!=='walk'&&!l.campus).map(l=>l.line||l.other||l.mode).join(' → ');}
@@ -505,8 +506,9 @@ async function submit(){
   LS.set('uj_done',1);
   if(DEMO) return 'ok';
   const q=qGet();q.push(rec);LS.set('uj_queue',q);           // saved on the phone first, so closing the page loses nothing
-  if(flushing) return 'queued';
-  try{await post(rec);qDrop(rec.id);return 'ok';}catch(e){return 'queued';}
+  // send in the background: the student moves on at once, the trip is already safe in the queue
+  post(rec).then(()=>qDrop(rec.id)).catch(()=>{});
+  return navigator.onLine===false?'queued':'ok';
 }
 
 /* ================= UI ================= */
