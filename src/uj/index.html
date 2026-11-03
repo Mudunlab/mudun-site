@@ -100,6 +100,11 @@ input[type=text]{font:500 16px var(--f-ar);width:100%;box-sizing:border-box;bord
 .sheet.short{max-height:50%}.sheet.short .chip{min-height:40px;padding:6px 10px;font-size:13.5px}
 label.q.grp{font-size:13px;color:var(--green-deep);margin:4px 0 6px}
 textarea{font:500 16px var(--f-ar);width:100%;box-sizing:border-box;border:1.5px solid var(--line);border-radius:12px;padding:11px 12px;background:#fff;color:var(--asphalt);resize:vertical}
+.follow{display:flex;flex-direction:column;gap:10px}
+.fcard{display:grid;grid-template-columns:1fr auto;grid-template-areas:'logo btn' 'txt txt';align-items:center;gap:8px 12px;padding:14px 16px;border:1.5px solid var(--line);border-radius:16px;background:#fff;color:var(--asphalt);text-decoration:none}
+.fcard img{grid-area:logo;height:24px;width:auto}.fcard img.fl-mwc{height:32px}
+.fcard div{grid-area:txt;display:flex;flex-direction:column;gap:2px}.fcard b{font-size:15px}.fcard span{font-size:13px;color:var(--ink2);line-height:1.5}
+.fcard i{grid-area:btn;font-style:normal;font-weight:700;font-size:14px;background:var(--green-deep);color:#fff;border-radius:999px;padding:10px 18px}
 .pick{border:2px dashed var(--green-deep);border-radius:14px;padding:12px;text-align:center;font-weight:700;color:var(--green-deep);background:#f1f8f4}
 
 .big{font:800 60px/1 var(--f-num);letter-spacing:-.02em;font-variant-numeric:tabular-nums;color:var(--asphalt)}
@@ -215,7 +220,7 @@ const T = {
   eyebrow:'استبيان قصير',title:'ارسم رحلتك إلى<br><em>الجامعة الأردنية</em>',
   intro:'بياخد دقيقتين. ارسم طريقك من البيت للجامعة على الخريطة، وقارنه برحلات باقي الطلاب. ما بدنا اسمك ولا رقمك، ومن عنوانك بنحفظ المنطقة بس.',
   you:'أنت:',roles:['طالب بكالوريوس','دراسات عليا','موظف أو هيئة تدريس','زائر'],start:'يلّا نبدأ',
-  s1:'من وين بتبلّش رحلتك؟',s1p:'دوّر على منطقتك أو شارعك، وبعدين اضغط على الخريطة قريب من بيتك.',sPh:'مثلاً: الجبيهة، شارع الأردن',mapsLink:'خرائط الخطوط لهاتفك',kArea:'منطقة',kStreet:'شارع',kStop:'موقف',sPh2:'ابحث: محطة طارق، صويلح، دوار...',adjust:'تقدر تضغط على الخريطة لتعدّل مكان النزول.',noRes:'ما طلعت نتيجة. كبّر الخريطة بإصبعيك واضغط قريب من بيتك.',nowTap:'اضغط قريب من بيتك',tapHome:'اضغط قريب من بيتك',
+  s1:'من وين بتبلّش رحلتك؟',s1p:'دوّر على منطقتك أو شارعك، وبعدين اضغط على الخريطة قريب من بيتك.',sPh:'مثلاً: الجبيهة، شارع الأردن',mapsLink:'حمّل خرائط الباصات مجاناً',follow:'تابع',fMud:['مدن لاب','منصة بحثية عن مدن الأردن. نتائج هالاستبيان رح تنشر عندها.'],fMwc:['تنقّل بثقة','مبادرة بتشجّع على استخدام المواصلات العامة، بالشراكة مع رؤية عمّان.'],kArea:'منطقة',kStreet:'شارع',kStop:'موقف',sPh2:'ابحث: محطة طارق، صويلح، دوار...',adjust:'تقدر تضغط على الخريطة لتعدّل مكان النزول.',noRes:'ما طلعت نتيجة. كبّر الخريطة بإصبعيك واضغط قريب من بيتك.',nowTap:'اضغط قريب من بيتك',tapHome:'اضغط قريب من بيتك',
   nearT:n=>n==1?'خط واحد بيوصل الجامعة مباشرة من منطقتك':n==2?'خطّين بيوصلوا الجامعة مباشرة من منطقتك':`${n} خطوط بتوصل الجامعة مباشرة من منطقتك`,stopAt:m=>`أقرب موقف ${m} م`,
   noneT:'ما في خط مباشر للجامعة قريب منك. كمّل وارسم كيف بتوصل.',
   area:'اسم منطقتك (اختياري)',areaPh:'مثلاً: صويلح، طبربور، الهاشمي',next:'التالي',back:'رجوع',
@@ -254,7 +259,7 @@ const T = {
   eyebrow:'A survey shaped like a trip',title:'Draw your trip to<br><em>the University of Jordan</em>',
   intro:'Two minutes. Draw your way from home to UJ on the map, leg by leg, and see it next to everyone else’s. No name or number; your home is stored roughly, at neighbourhood level.',
   you:'You are:',roles:['Undergraduate','Postgraduate','Staff or faculty','Visitor'],start:'Start',
-  s1:'Where does your trip start?',s1p:'Search your area or street to zoom in, then tap roughly where you live.',sPh:'Search: Jubeiha, Sweifieh...',mapsLink:'Bus maps for your phone',kArea:'area',kStreet:'street',kStop:'stop',sPh2:'Search: Tariq Station, Sweileh...',adjust:'You can tap the map to adjust where you got off.',noRes:'No match. Zoom the map yourself and tap your spot.',nowTap:'Now tap where you live',tapHome:'Tap where you live',
+  s1:'Where does your trip start?',s1p:'Search your area or street to zoom in, then tap roughly where you live.',sPh:'Search: Jubeiha, Sweifieh...',mapsLink:'Download free bus maps',follow:'Follow',fMud:['Mudun Lab','A research platform on Jordan’s cities. The results of this survey will be published there.'],fMwc:['Mobility with Confidence','An initiative helping people use public transport, in partnership with Amman Vision.'],kArea:'area',kStreet:'street',kStop:'stop',sPh2:'Search: Tariq Station, Sweileh...',adjust:'You can tap the map to adjust where you got off.',noRes:'No match. Zoom the map yourself and tap your spot.',nowTap:'Now tap where you live',tapHome:'Tap where you live',
   nearT:n=>`${n} line${n>1?'s':''} reach UJ directly from your area`,stopAt:m=>`nearest stop ${m} m`,
   noneT:'No line reaches UJ directly from near you. That is useful to know, and your answer helps us show it.',
   area:'Your area (optional)',areaPh:'e.g. Swaileh, Tabarbour, Hashmi',next:'Next',back:'Back',
@@ -603,10 +608,12 @@ function render(){
   } else if(S.step===7){
     h=`<div class="eyebrow">✓</div><h2>${x.done}</h2>${S.queuedMsg?`<div class="callout warn">${x.queued}</div>`:''}<p>${store.length>=5?x.doneP(store.length):x.doneFew}</p>
        <div class="legend"><span>${x.legend[0]}</span><div class="bar"></div><span>${x.legend[1]}</span></div>
-       <button class="btn" id="showcard">${x.cardBtn}</button>
-       <div id="cardbox" class="stack" hidden><img class="card-img" id="card" alt="${esc(x.share.t)}"><button class="btn dark" id="sharebtn">${x.share.btn}</button><p class="small" id="savehint" hidden>${x.share.saved}</p></div>
-       <a class="btn ghost" href="/field/uj-mobility/#maps" style="display:flex;align-items:center;justify-content:center;text-decoration:none;box-sizing:border-box">${x.mapsLink}</a>
-       <button class="btn ghost" id="again">${x.again}</button>`;
+       <div class="follow">
+         <a class="fcard" href="https://www.instagram.com/mudun.lab/" target="_blank" rel="noopener"><img src="${LOGO.mudun}" alt="" class="fl-mud"><div><b>${x.fMud[0]}</b><span>${x.fMud[1]}</span></div><i>${x.follow}</i></a>
+         <a class="fcard" href="https://www.instagram.com/mobilitywithconfidence/" target="_blank" rel="noopener"><img src="${LOGO.mwc}" alt="" class="fl-mwc"><div><b>${x.fMwc[0]}</b><span>${x.fMwc[1]}</span></div><i>${x.follow}</i></a>
+       </div>
+       <div class="row"><a class="link" href="/field/uj-mobility/#maps">${x.mapsLink}</a></div>
+       <button class="link" id="again">${x.again}</button>`;
   }
   W.innerHTML=`<div class="stack fade">${h}</div>`;
   document.getElementById('sheet').classList.remove('min');
