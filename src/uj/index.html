@@ -527,7 +527,7 @@ function gateBlock(c,x){
   let gates=null,q=x.reachQ;
   if(c.line&&GATE_LINES.B&&lineBy(c.line)){gates=CSTOPS.filter(g=>(GATE_LINES[g[0]]||[]).includes(c.line));q=x.reachLine;}
   else if(c.mode==='taxi'||c.mode==='car'||c.showGates){gates=CSTOPS;}
-  if(!gates)return `<button type="button" class="link" id="showGates">${x.reachMore}</button>`;
+  if(!gates)return (c.mode==='walk'&&dist(here(),UJ)>3000)?'':`<button type="button" class="link" id="showGates">${x.reachMore}</button>`;
   if(!gates.length)return '';
   return `<div><label class="q">${q}</label>${chips('gate',gates.map(g=>[g[0],csName(g)]),null)}</div>`;
 }
@@ -665,7 +665,7 @@ function bind(){
   bindSearch('q','res',it=>{const sh=document.getElementById('sheet').offsetHeight;map.flyTo(it.pt,it.z,{duration:.8});setTimeout(()=>map.panBy([0,sh/2-40],{animate:false}),850);hint(x.nowTap);});
   bindSearch('q2','res2',it=>{const q=onLine(it.pt.slice());if(!q){hint(x.nearLine);return;}reachUJ(q);S.q2='';previewLeg();render();
     requestAnimationFrame(()=>fitVisible(Lf.latLngBounds([here(),S.cur.to]).pad(.35),16));});
-  const other=document.getElementById('other');if(other)other.oninput=e=>{S.cur.other=e.target.value.trim();};
+  const other=document.getElementById('other');if(other)other.oninput=e=>{S.cur.other=e.target.value.replace(/[\u200e\u200f\u202a-\u202e\s]/g,'').replace(/[\u0660-\u0669]/g,d=>d.charCodeAt(0)-0x660).replace(/[\u06f0-\u06f9]/g,d=>d.charCodeAt(0)-0x6f0).toUpperCase();};
   on('chg',()=>{S.cur={mode:null,line:null,other:'',otherOk:false,to:null,toUJ:false,wait:null,dur:null};draftLayer.clearLayers();highlight([]);render();});
   on('showGates',()=>{S.cur.showGates=true;render();});
   on('allLines',()=>{S.cur.all=true;render();});
