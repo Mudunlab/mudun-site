@@ -189,6 +189,8 @@ LOGO.av='/uj/logo-av.png';
 
 const ENDPOINT = "https://script.google.com/macros/s/AKfycbygQ5iEM9r-IIJjv_S0aKRgHlqYUCjCb9hvWYH0k97SPgpxrfgYvpNpCwlDm16XYxQDeA/exec";            // Google Apps Script web-app URL. Empty = demo mode (example data, nothing is sent).
 const UJ = [32.0145, 35.8705];
+// where the visit came from: mudunlab.org/uj?s=fb-civilium → 'fb-civilium'; plain link → 'web'
+const SRC=(()=>{try{const v=new URLSearchParams(location.search).get('s')||'';return v.replace(/[^\w-]/g,'').slice(0,40)||'web';}catch(e){return 'web';}})();
 const GRID = 0.002;             // home is stored snapped to ~200 m
 const NEAR_M = 700;             // a UJ line counts as "near" within this distance
 const SNAP_M = 450;             // a tapped point snaps to a known line's real path within this distance
@@ -499,7 +501,7 @@ async function submit(){
   const rec={role:S.role,lat:+snap(S.home[0]).toFixed(3),lon:+snap(S.home[1]).toFixed(3),area:S.area.trim().slice(0,60),lines_near:S.near.join(' '),
     mode:S.quick?'quick':'drawn',legs:JSON.stringify(legs),chain:chainText(),time:st.total,wait:S.quick?'':st.wait,ride:S.quick?'':st.ride,walk:S.quick?'':st.walk,transfers:st.transfers??'',
     capped:(S.quick?S.qtime>=150:S.legs.some(l=>(l.wait||0)>=45||l.dur>=(l.campus?30:90)))?1:0,
-    cost:S.cost,guess:S.guess,problems:S.problems.join(' '),confidence:S.conf,lang:LANG,source:'booth-uj-2026-11-03',
+    cost:S.cost,guess:S.guess,problems:S.problems.join(' '),confidence:S.conf,lang:LANG,source:SRC,
     gate:gl?gl.gate:'',dest:S.dest?S.dest.k:'',dest_lat:S.dest?+S.dest.pt[0].toFixed(4):'',dest_lon:S.dest?+S.dest.pt[1].toFixed(4):'',campus_mode:cl?cl.mode:'',campus_min:cl?cl.dur:'',app:S.app||'',fix:S.fix.trim().slice(0,240)};
   rec.id=Date.now().toString(36)+Math.random().toString(36).slice(2,8);
   store.push({lat:rec.lat,lon:rec.lon,time:rec.time,chain:rec.chain});
