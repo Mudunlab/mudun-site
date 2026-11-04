@@ -89,6 +89,9 @@ module.exports = function (eleventyConfig) {
   // /uj: standalone interactive trip map for the UJ booth. Copied as-is (no layout, no template processing).
   eleventyConfig.addPassthroughCopy({ "src/uj": "uj" });
   eleventyConfig.ignores.add("src/uj/**");
+  // /app: standalone "ركبت معنا؟" app survey. Copied as-is.
+  eleventyConfig.addPassthroughCopy({ "src/app": "app" });
+  eleventyConfig.ignores.add("src/app/**");
 
   // Research collection — newest first
   eleventyConfig.addCollection("research", function (collectionApi) {

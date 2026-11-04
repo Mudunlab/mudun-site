@@ -1,0 +1,381 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>ركبت معنا؟ | مدن لاب</title>
+<meta name="description" content="رحلة قصيرة عن تطبيق الباص في عمّان. دقيقتين، بدون اسم.">
+<meta name="robots" content="noindex">
+<meta property="og:title" content="ركبت معنا؟ 🚌">
+<meta property="og:description" content="شو نوعك كراكب باص؟ رحلة قصيرة عن تطبيق الباص، دقيقتين وبدون اسم.">
+<meta name="theme-color" content="#f3eee4">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;600;700&family=Archivo:wght@600;800&display=swap">
+<style>
+:root{
+  --limestone:#f3eee4;--paper:#fffdf8;--asphalt:#232323;--ink2:#55524b;--line:#d9cfbd;--soft:#ece5d7;
+  --green:#27B38D;--green-deep:#17795c;--sand:#d9c7a6;--sky:#86C1E0;--rust:#b5482e;--amber:#E0A100;
+  --f-ar:"IBM Plex Sans Arabic","Noto Sans Arabic",Tahoma,sans-serif;--f-num:"Archivo","Helvetica Neue",Arial,sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%}
+body{background:var(--limestone);color:var(--asphalt);font-family:var(--f-ar);-webkit-tap-highlight-color:transparent}
+button{font:inherit;color:inherit;cursor:pointer}
+.wrap{max-width:480px;margin:0 auto;padding:12px 16px 40px;min-height:100svh;display:flex;flex-direction:column}
+
+/* bus-line progress */
+.line{position:relative;height:46px;margin:6px 6px 8px}
+.line .track{position:absolute;inset:auto 0 12px 0;height:6px;border-radius:6px;background:var(--soft)}
+.line .done{position:absolute;bottom:12px;right:0;height:6px;border-radius:6px;background:var(--green);transition:width .5s ease}
+.line .stop{position:absolute;bottom:8px;width:14px;height:14px;margin-right:-7px;border-radius:50%;background:var(--paper);border:3px solid var(--line);transition:border-color .3s}
+.line .stop.on{border-color:var(--green)}
+.line .bus{position:absolute;bottom:16px;margin-right:-20px;line-height:0;transition:right .5s cubic-bezier(.5,1.6,.5,1)}
+.line .bus.bump{animation:bump .5s}
+@keyframes bump{30%{transform:translateY(-6px)}60%{transform:translateY(0)}}
+.stopname{font:600 13px var(--f-ar);color:var(--ink2);text-align:center;min-height:20px}
+
+.screen{flex:1;display:flex;flex-direction:column;animation:in .35s ease}
+@keyframes in{from{opacity:0;transform:translateX(-18px)}to{opacity:1;transform:none}}
+h1{font:700 34px/1.3 var(--f-ar);margin:18px 0 8px}
+h2{font:700 25px/1.4 var(--f-ar);margin:10px 0 6px}
+h3{font:700 17px/1.5 var(--f-ar);margin:20px 0 10px}
+p.sub{font-size:16px;line-height:1.7;color:var(--ink2);margin:0 0 14px}
+.em{color:var(--green-deep)}
+.hint{font-size:13px;color:var(--ink2);margin:-4px 0 10px}
+
+.tiles{display:grid;gap:10px}
+.tile{display:flex;align-items:center;gap:14px;text-align:right;width:100%;padding:14px 16px;border:2px solid var(--line);border-radius:18px;background:var(--paper);transition:transform .12s,border-color .2s,background .2s}
+.tile:active{transform:scale(.98)}
+.tile .e{font-size:32px;line-height:1;flex:none;width:40px;text-align:center}
+.tile b{display:block;font-size:17px}
+.tile span{display:block;font-size:14px;color:var(--ink2);margin-top:2px}
+.tile.sel{border-color:var(--green);background:#e6f5ef}
+
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{padding:9px 14px;border:1.5px solid var(--line);border-radius:999px;background:var(--paper);font-size:15px;transition:all .15s}
+.chip.sel{background:var(--green-deep);border-color:var(--green-deep);color:#fff}
+
+.cta{margin-top:auto;padding-top:22px}
+.btn{display:block;width:100%;padding:16px;border:0;border-radius:16px;background:var(--asphalt);color:#fff;font:700 18px var(--f-ar);transition:opacity .2s,transform .12s}
+.btn:active{transform:scale(.98)}
+.btn[disabled]{opacity:.3;pointer-events:none}
+.btn.green{background:var(--green-deep)}
+.btn.ghost{background:transparent;color:var(--ink2);font-weight:600;font-size:15px;padding:12px}
+
+/* slider */
+.meter{background:var(--paper);border:2px solid var(--line);border-radius:22px;padding:22px 18px 18px;text-align:center;margin-top:8px}
+.meter .big{font-size:60px;line-height:1.1;transition:transform .2s}
+.meter .lbl{font:700 19px/1.5 var(--f-ar);min-height:58px;display:flex;align-items:center;justify-content:center;margin:6px 0 10px}
+.meter .lbl.idle{color:var(--ink2);font-weight:600;font-size:16px}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:10px;border-radius:10px;background:linear-gradient(to left,var(--green) var(--p,50%),var(--soft) var(--p,50%));outline:0;direction:rtl}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:34px;height:34px;border-radius:50%;background:var(--asphalt);border:4px solid var(--paper);box-shadow:0 2px 6px rgba(0,0,0,.25)}
+input[type=range]::-moz-range-thumb{width:28px;height:28px;border-radius:50%;background:var(--asphalt);border:4px solid var(--paper)}
+.ends{display:flex;justify-content:space-between;font-size:13px;color:var(--ink2);margin-top:8px}
+.q2{font:700 17px/1.5 var(--f-ar);margin:0 0 4px}
+
+/* card stacks */
+.deck{position:relative;height:300px;margin:8px 0 14px}
+.card{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px;border-radius:26px;background:var(--paper);border:2px solid var(--line);box-shadow:0 10px 30px rgba(35,35,35,.08);touch-action:pan-y;user-select:none;transition:transform .35s ease,opacity .35s ease}
+.card .e{font-size:66px;line-height:1.1;margin-bottom:14px}
+.card b{font:700 21px/1.55 var(--f-ar)}
+.card .n{position:absolute;top:14px;left:18px;font:600 13px var(--f-num);color:var(--ink2)}
+.card.behind{transform:scale(.94) translateY(14px);opacity:.6}
+.card .stamp{position:absolute;top:22px;padding:4px 12px;border:3px solid;border-radius:10px;font:800 20px var(--f-ar);opacity:0;transform:rotate(-10deg)}
+.card .stamp.yes{right:20px;color:var(--green-deep)}
+.card .stamp.no{left:20px;color:var(--rust);transform:rotate(10deg)}
+.trio{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.trio button,.duo button{padding:14px 6px;border-radius:16px;border:2px solid var(--line);background:var(--paper);font:700 15px/1.3 var(--f-ar)}
+.trio button:active,.duo button:active{transform:scale(.96)}
+.trio .a{background:var(--rust);border-color:var(--rust);color:#fff}
+.trio .b{background:var(--amber);border-color:var(--amber);color:var(--asphalt)}
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.duo .y{background:var(--green-deep);border-color:var(--green-deep);color:#fff}
+
+textarea{width:100%;min-height:110px;padding:14px;border:2px solid var(--line);border-radius:16px;background:var(--paper);font:16px/1.6 var(--f-ar);resize:vertical}
+textarea:focus{outline:0;border-color:var(--green)}
+
+/* result */
+.rcard{position:relative;overflow:hidden;border-radius:28px;background:var(--asphalt);color:#fffdf8;padding:28px 22px 24px;text-align:center;margin-top:8px}
+.rcard:before{content:"";position:absolute;inset:auto -40px -60px auto;width:220px;height:220px;border-radius:50%;background:rgba(39,179,141,.18)}
+.rcard .k{font:600 14px var(--f-ar);color:#d8d1c3}
+.rcard .e{font-size:84px;line-height:1.1;margin:10px 0 4px;position:relative}
+.rcard h1{margin:0 0 8px;color:var(--green);font-size:38px}
+.rcard p{font-size:16px;line-height:1.75;margin:0;color:#ece5d7;position:relative}
+.rcard .brand{margin-top:18px;font:800 13px var(--f-num);letter-spacing:.04em;color:#9b9488;direction:ltr}
+.cmp{margin:14px 0 0;padding:14px 16px;border-radius:16px;background:var(--paper);border:1.5px solid var(--line);font-size:15px;line-height:1.7}
+.cmp b{color:var(--green-deep);font-family:var(--f-num)}
+.fcard{display:grid;grid-template-columns:1fr auto;grid-template-areas:'logo btn' 'txt txt';align-items:center;gap:8px 12px;padding:14px 16px;border:1.5px solid var(--line);border-radius:16px;background:#fff;color:var(--asphalt);text-decoration:none;margin-top:10px}
+.fcard img{grid-area:logo;height:24px;width:auto}.fcard img.fl-mwc{height:32px}
+.fcard div{grid-area:txt;display:flex;flex-direction:column;gap:2px}.fcard b{font-size:15px}.fcard span{font-size:13px;color:var(--ink2);line-height:1.5}
+.fcard i{grid-area:btn;display:inline-flex;align-items:center;gap:7px;font-style:normal;font-weight:700;font-size:14px;background:var(--green-deep);color:#fff;border-radius:999px;padding:10px 18px}
+.logos{display:flex;align-items:center;justify-content:center;gap:22px;margin-top:22px;opacity:.9}
+.logos img{height:26px}.logos img.mwc{height:34px}
+.fine{font-size:12px;color:var(--ink2);text-align:center;line-height:1.7;margin-top:14px}
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--asphalt);color:#fff;padding:10px 18px;border-radius:999px;font-size:14px;opacity:0;transition:opacity .3s;pointer-events:none}
+.toast.on{opacity:1}
+.intro-bus{font-size:96px;line-height:1;margin:30px 0 0;animation:drive 2.4s ease-in-out infinite}
+@keyframes drive{0%,100%{transform:translateX(0)}50%{transform:translateX(-14px)}}
+.pills{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0 4px}
+.pills span{font-size:13px;padding:6px 12px;border-radius:999px;background:var(--paper);border:1px solid var(--line)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="line" id="line" hidden><div class="track"></div><div class="done" id="done"></div><div id="stops"></div><div class="bus" id="bus"><svg viewBox="0 0 44 28" width="40" height="26" aria-hidden="true"><rect x="2" y="3" width="40" height="18" rx="5" fill="#27B38D"/><path d="M2 8a5 5 0 0 1 5-5h3v11H2z" fill="#17795c"/><rect x="12" y="6" width="7" height="6" rx="1.5" fill="#fffdf8"/><rect x="21" y="6" width="7" height="6" rx="1.5" fill="#fffdf8"/><rect x="30" y="6" width="8" height="6" rx="1.5" fill="#fffdf8"/><rect x="2" y="15" width="40" height="2" fill="#17795c"/><circle cx="11" cy="22" r="4" fill="#232323"/><circle cx="33" cy="22" r="4" fill="#232323"/><circle cx="11" cy="22" r="1.6" fill="#d9c7a6"/><circle cx="33" cy="22" r="1.6" fill="#d9c7a6"/></svg></div></div>
+  <div class="stopname" id="stopname"></div>
+  <main id="app"></main>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+/* ============ settings ============ */
+const ENDPOINT="https://script.google.com/macros/s/AKfycbygQ5iEM9r-IIJjv_S0aKRgHlqYUCjCb9hvWYH0k97SPgpxrfgYvpNpCwlDm16XYxQDeA/exec";
+const VERSION=1;
+const SRC=(()=>{try{const v=new URLSearchParams(location.search).get('s')||'';return v.replace(/[^\w-]/g,'').slice(0,40)||'web';}catch(e){return 'web';}})();
+const LOGO={mwc:'/uj/logo-mwc.png',mudun:'/uj/logo-mudun.png'};
+const AR=n=>Number(n).toLocaleString('ar-EG');
+
+/* ============ content ============ */
+const UNIS=['الجامعة الأردنية','الهاشمية','الحسين التقنية','الأميرة سمية','العلوم التطبيقية','البترا','الإسراء','الزيتونة','الشرق الأوسط','عمّان الأهلية','الألمانية الأردنية','البلقاء التطبيقية','العلوم والتكنولوجيا','اليرموك','جامعة أخرى'];
+const FREQ=[['daily','كل يوم'],['week','كم مرة بالأسبوع'],['some','أحياناً'],['rare','نادراً']];
+const MODES=[['ab','باص عمّان'],['brt','الباص السريع'],['coaster','كوستر'],['service','سرفيس'],['gov','باصات المحافظات']];
+const REL=[
+  ['always','💍','علاقة جدية','بفتحه كل ما أركب'],
+  ['some','🔁','علاقة متقطعة','أحياناً بفتحه، أحياناً لأ'],
+  ['quit','💔','انفصلنا','كنت أستخدمه وبطّلت'],
+  ['never','🙈','ما تعرّفنا','ما استخدمته أبداً']];
+const WHY_QUIT=[['eta','المواعيد مش دقيقة'],['ghost','الباص ما بيطلع عالخريطة'],['hard','صعب أو معقّد'],['slow','بطيء أو بيعلّق'],['gmaps','Google Maps بيكفيني'],['data','بياكل نت أو بطارية'],['account','التسجيل والحساب متعب'],['other','غير ذلك']];
+const WHY_NEVER=[['unknown','ما كنت بعرف إنه موجود'],['noneed','بعرف خطي، ما بحتاجه'],['gmaps','Google Maps بيكفيني'],['heard','سمعت إنه مش دقيق'],['phone','الهاتف أو النت'],['other','غير ذلك']];
+const USE=[['live','وين الباص هلأ'],['next','موعد الباص الجاي'],['plan','تخطيط رحلة'],['near','المحطات القريبة'],['card','رصيد البطاقة والشحن'],['qr','تذكرة QR'],['map','خريطة الخطوط']];
+const TRUST=[null,['🙃','ولا ثانية'],['🤨','بشوفه… وبطلع أتأكد بعيوني'],['😐','نص نص'],['🙂','غالباً مزبوط'],['⏱️','بضبط ساعتي عليه']];
+const GOAL=[['time','أعرف موعد الباص'],['plan','أخطط رحلة'],['card','أشحن أو أشوف رصيدي'],['stop','أعرف وين أنزل'],['other','إشي ثاني']];
+const HAPPEN=[
+  ['t_eta','⏳','التطبيق قال ٣ دقايق…<br>وإجا الباص بعد ٢٠'],
+  ['t_ghost','👻','الباص اختفى عن الخريطة،<br>أو ما طلع أصلاً'],
+  ['t_full','🥫','وصل الباص مليان،<br>وأنا ما كان عندي خبر'],
+  ['t_line','🔀','ما عرفت أي خط آخذ'],
+  ['t_stop','📍','ما عرفت وين أنزل'],
+  ['t_fare','💳','ما فهمت رصيدي أو كم الأجرة']];
+const WISH=[
+  ['w_crowd','🧍','تعرف إذا الباص مليان<br>قبل ما يوصل'],
+  ['w_alert','🔔','تنبيه لما الباص يقرّب<br>أو يتأخر'],
+  ['w_stopalert','📍','تنبيه قبل محطتك<br>عشان ما تفوتها'],
+  ['w_plan','🔀','تخطيط رحلة أوضح<br>حتى لو فيها تبديل'],
+  ['w_walk','🚶','اتجاهات المشي<br>لأقرب محطة'],
+  ['w_share','🛡️','تشارك رحلتك المباشرة<br>مع أهلك'],
+  ['w_access','♿','معلومات لذوي الإعاقة<br>(باص منخفض، محطة مهيّأة)'],
+  ['w_report','📣','زر تبلّغ فيه عن مشكلة<br>بالباص أو المحطة'],
+  ['w_offline','📶','يشتغل بدون نت<br>أو برسالة SMS']];
+const FACES=[null,'😫','😣','🙁','😐','🙂','😊','😍'];
+const TYPES={
+  planner:{e:'🗺️',n:'المخطِّط',d:'بتخطط رحلتك قبل ما تطلع من البيت، وبتمشي على كلام التطبيق. التطبيق صاحبك.'},
+  detective:{e:'🕵️',n:'المحقق',d:'بتفتح التطبيق… وبعدين بتطلع عالشارع تتأكد بعيونك. ما بتصدّق إلا اللي بتشوفه.'},
+  ex:{e:'💔',n:'المنفصل',d:'كان بينكم قصة، بس انتهت. وإلك أسبابك، وسمعناها.'},
+  instinct:{e:'🧭',n:'الحدسي',d:'ما بتحتاج تطبيق. بتعرف خطك وموقفك عن ظهر قلب، وبتمشي على إحساسك.'}};
+
+/* ============ state ============ */
+const S={t0:Date.now(),modes:[],why:[],use:[],wants:[],skips:[]};
+const app=document.getElementById('app');
+const $=s=>app.querySelector(s), $$=s=>[...app.querySelectorAll(s)];
+const users=()=>S.rel==='always'||S.rel==='some';
+const ever=()=>S.rel&&S.rel!=='never';
+
+function flow(){
+  const f=['who','rel'];const rel=S.rel||'always';
+  if(rel==='quit'||rel==='never')f.push('why');
+  if(rel==='always'||rel==='some')f.push('use','trust');
+  if(rel!=='never')f.push('happen');
+  f.push('wish');
+  if(rel!=='never')f.push('umux');
+  f.push('wand');
+  return f;
+}
+const NAMES={who:'محطة الركّاب',rel:'محطة العلاقة',why:'محطة الأسباب',use:'محطة الاستخدام',trust:'محطة الثقة',happen:'محطة «صار معك؟»',wish:'محطة الأمنيات',umux:'محطة التقييم',wand:'المحطة الأخيرة'};
+let cur='intro';
+
+function progress(){
+  const line=document.getElementById('line'),f=flow();
+  if(cur==='intro'||cur==='result'){line.hidden=true;document.getElementById('stopname').textContent='';return;}
+  line.hidden=false;
+  const i=f.indexOf(cur),n=f.length,pct=i/(n-1)*100;
+  document.getElementById('stops').innerHTML=f.map((s,k)=>`<div class="stop${k<=i?' on':''}" style="right:${k/(n-1)*100}%"></div>`).join('');
+  document.getElementById('done').style.width=pct+'%';
+  const b=document.getElementById('bus');b.style.right=pct+'%';b.classList.remove('bump');void b.offsetWidth;b.classList.add('bump');
+  document.getElementById('stopname').textContent=`${NAMES[cur]} — ${AR(i+1)} من ${AR(n)}`;
+}
+function go(id){cur=id;window.scrollTo(0,0);R[id]();progress();}
+function next(){const f=flow(),i=f.indexOf(cur);if(i<f.length-1)go(f[i+1]);else finish();}
+function back(){const f=flow(),i=f.indexOf(cur);if(i>0)go(f[i-1]);else go('intro');}
+const backBtn='<button class="btn ghost" onclick="back()">→ رجوع</button>';
+
+function chips(list,key,multi){return `<div class="chips" data-k="${key}" data-m="${multi?1:0}">${list.map(([v,t])=>`<button class="chip${(multi?S[key].includes(v):S[key]===v)?' sel':''}" data-v="${v}">${t}</button>`).join('')}</div>`;}
+function wireChips(onChange){$$('.chips').forEach(box=>{const k=box.dataset.k,m=box.dataset.m==='1';box.addEventListener('click',e=>{const c=e.target.closest('.chip');if(!c)return;const v=c.dataset.v;
+  if(m){const a=S[k];const i=a.indexOf(v);i<0?a.push(v):a.splice(i,1);c.classList.toggle('sel');}
+  else{S[k]=v;box.querySelectorAll('.chip').forEach(x=>x.classList.toggle('sel',x===c));}
+  onChange&&onChange();});});}
+
+/* ============ screens ============ */
+const R={};
+R.intro=()=>{app.innerHTML=`<section class="screen">
+  <div class="intro-bus">🚌</div>
+  <h1>ركبت <span class="em">معنا؟</span></h1>
+  <p class="sub">رحلة قصيرة عن تطبيق الباص في عمّان (Vision City Bus)، وبالآخر بتعرف <b>شو نوعك كراكب</b>.</p>
+  <div class="pills"><span>⏱️ دقيقتين</span><span>🔒 بدون اسم ولا رقم</span><span>📣 رأيك بيوصل</span></div>
+  <div class="cta"><button class="btn green" onclick="go('who')">اركب 🚌</button>
+  <div class="logos"><img src="${LOGO.mwc}" class="mwc" alt="تنقّل بثقة"><img src="${LOGO.mudun}" alt="مدن لاب"></div>
+  <p class="fine">مبادرة «تنقّل بثقة» × مدن لاب. الإجابات تُستخدم لتحسين تجربة النقل العام وتُنشر كنتائج مجمّعة فقط.</p></div></section>`;};
+
+R.who=()=>{app.innerHTML=`<section class="screen">
+  <h2>مين راكب معنا؟</h2>
+  <div class="tiles" id="role">
+    <button class="tile" data-v="student"><span class="e">🎓</span><div><b>طالب جامعة</b></div></button>
+    <button class="tile" data-v="worker"><span class="e">💼</span><div><b>موظف أو بشتغل</b></div></button>
+    <button class="tile" data-v="other"><span class="e">🙋</span><div><b>غير ذلك</b></div></button>
+  </div>
+  <div id="uniBox" ${S.role==='student'?'':'hidden'}><h3>بأي جامعة؟</h3>${chips(UNIS.map(u=>[u,u]),'uni')}</div>
+  <h3>كم مرة بتركب مواصلات عامة؟</h3>${chips(FREQ,'freq')}
+  <h3>شو بتركب؟ <span class="hint">(اختار كل اللي بينطبق)</span></h3>${chips(MODES,'modes',1)}
+  <div class="cta"><button class="btn" id="nx" onclick="next()">يلا 👈</button>${backBtn}</div></section>`;
+  $$('#role .tile').forEach(t=>{t.classList.toggle('sel',t.dataset.v===S.role);t.onclick=()=>{S.role=t.dataset.v;$$('#role .tile').forEach(x=>x.classList.toggle('sel',x===t));$('#uniBox').hidden=S.role!=='student';if(S.role!=='student')S.uni=undefined;chk();};});
+  const chk=()=>{$('#nx').disabled=!(S.role&&S.freq&&(S.role!=='student'||S.uni));};wireChips(chk);chk();};
+
+R.rel=()=>{app.innerHTML=`<section class="screen">
+  <h2>شو وضع علاقتك<br>مع تطبيق الباص؟ 😄</h2>
+  <p class="hint">تطبيق Vision City Bus (عمّان باص)</p>
+  <div class="tiles">${REL.map(([v,e,t,s])=>`<button class="tile${S.rel===v?' sel':''}" data-v="${v}"><span class="e">${e}</span><div><b>${t}</b><span>${s}</span></div></button>`).join('')}</div>
+  <div class="cta">${backBtn}</div></section>`;
+  $$('.tile').forEach(t=>t.onclick=()=>{if(S.rel!==t.dataset.v){S.rel=t.dataset.v;S.why=[];}$$('.tile').forEach(x=>x.classList.toggle('sel',x===t));setTimeout(next,280);});};
+
+R.why=()=>{const q=S.rel==='quit';app.innerHTML=`<section class="screen">
+  <h2>${q?'شو سبب الانفصال؟ 💔':'ليش ما تعرّفتوا؟ 🙈'}</h2><p class="hint">اختار كل اللي بينطبق</p>
+  ${chips(q?WHY_QUIT:WHY_NEVER,'why',1)}
+  <div class="cta"><button class="btn" id="nx" onclick="next()">التالي 👈</button>${backBtn}</div></section>`;
+  const chk=()=>$('#nx').disabled=!S.why.length;wireChips(chk);chk();};
+
+R.use=()=>{app.innerHTML=`<section class="screen">
+  <h2>لما تفتحه، شو بتستخدم فيه؟</h2><p class="hint">اختار كل اللي بينطبق</p>
+  ${chips(USE,'use',1)}
+  <h3>آخر مرة فتحته، لقيت اللي بدك ياه؟</h3>
+  ${chips([['yes','آه 👍'],['partly','نص نص 🤏'],['no','لأ 👎']],'last')}
+  <h3>وشو كنت بدك تعمل؟</h3>${chips(GOAL,'goal')}
+  <div class="cta"><button class="btn" id="nx" onclick="next()">التالي 👈</button>${backBtn}</div></section>`;
+  const chk=()=>$('#nx').disabled=!(S.use.length&&S.last);wireChips(chk);chk();};
+
+function meter(key,max,render){const v=S[key];return `<div class="meter"><div class="big" id="${key}E">${v?render(v)[0]:'🚌'}</div>
+  <div class="lbl${v?'':' idle'}" id="${key}L">${v?render(v)[1]:'حرّك المؤشر 👇'}</div>
+  <input type="range" min="1" max="${max}" step="1" value="${v||Math.ceil(max/2)}" id="${key}R" style="--p:${v?(v-1)/(max-1)*100:50}%">
+  <div class="ends"><span>${render(1)[2]||''}</span><span>${render(max)[2]||''}</span></div></div>`;}
+function wireMeter(key,max,render,chk){const r=$('#'+key+'R');const upd=()=>{const v=+r.value;S[key]=v;r.style.setProperty('--p',(v-1)/(max-1)*100+'%');const [e,l]=render(v);const E=$('#'+key+'E');E.textContent=e;E.style.transform='scale(1.15)';setTimeout(()=>E.style.transform='',160);const L=$('#'+key+'L');L.textContent=l;L.classList.remove('idle');chk&&chk();};r.addEventListener('input',upd);r.addEventListener('change',upd);}
+
+R.trust=()=>{const rt=v=>[TRUST[v][0],TRUST[v][1],v===1?'ولا ثانية':v===5?'ثقة عمياء':''];app.innerHTML=`<section class="screen">
+  <h2>قديش بتثق بمواعيد التطبيق؟</h2><p class="sub">لما يقلك «الباص بعد ٥ دقايق»…</p>
+  ${meter('trust',5,rt)}
+  <div class="cta"><button class="btn" id="nx" onclick="next()">التالي 👈</button>${backBtn}</div></section>`;
+  const chk=()=>$('#nx').disabled=!S.trust;wireMeter('trust',5,rt,chk);chk();};
+
+/* card deck helper */
+function deck(items,key,onDone,mode){let i=items.findIndex(it=>S[it[0]]===undefined);if(i<0)i=0;
+  const box=$('#deck');
+  function draw(){if(i>=items.length){onDone();return;}
+    box.innerHTML=items.slice(i,i+2).reverse().map((it,k,arr)=>{const top=k===arr.length-1;return `<div class="card${top?'':' behind'}"${top?' id="top"':''}>
+      <span class="n">${AR(items.indexOf(it)+1)}/${AR(items.length)}</span>${mode==='swipe'?'<span class="stamp yes">بدّي!</span><span class="stamp no">لأ</span>':''}
+      <div class="e">${it[1]}</div><b>${it[2]}</b></div>`;}).join('');
+    if(mode==='swipe')drag($('#top'));}
+  function answer(v){const it=items[i];S[it[0]]=v;const c=$('#top');if(c){const dir=(v==='often'||v===1)?1:(v==='never'||v===0)?-1:0;c.style.transform=dir?`translateX(${dir*130}%) rotate(${dir*14}deg)`:'translateY(-120%)';c.style.opacity='0';}i++;setTimeout(draw,260);}
+  function drag(c){if(!c)return;let x0=null,dx=0;const ys=c.querySelector('.stamp.yes'),ns=c.querySelector('.stamp.no');
+    c.addEventListener('pointerdown',e=>{x0=e.clientX;c.style.transition='none';c.setPointerCapture(e.pointerId);});
+    c.addEventListener('pointermove',e=>{if(x0===null)return;dx=e.clientX-x0;c.style.transform=`translateX(${dx}px) rotate(${dx/18}deg)`;ys.style.opacity=Math.max(0,dx/90);ns.style.opacity=Math.max(0,-dx/90);});
+    const end=()=>{if(x0===null)return;x0=null;c.style.transition='';if(Math.abs(dx)>80)answer(dx>0?1:0);else{c.style.transform='';ys.style.opacity=0;ns.style.opacity=0;}dx=0;};
+    c.addEventListener('pointerup',end);c.addEventListener('pointercancel',end);}
+  draw();return answer;}
+
+R.happen=()=>{app.innerHTML=`<section class="screen">
+  <h2>صار معك؟ 👀</h2><p class="sub">جاوب بسرعة، أول إشي بيخطر عبالك.</p>
+  <div class="deck" id="deck"></div>
+  <div class="trio"><button class="a" data-v="often">صار معي<br>كتير</button><button class="b" data-v="some">أحياناً</button><button data-v="never">أبداً</button></div>
+  <div class="cta">${backBtn}</div></section>`;
+  HAPPEN.forEach(h=>delete S[h[0]]);
+  const ans=deck(HAPPEN,'happen',next,'tap');$$('.trio button').forEach(b=>b.onclick=()=>ans(b.dataset.v));};
+
+R.wish=()=>{WISH.forEach(w=>delete S[w[0]]);app.innerHTML=`<section class="screen">
+  <h2>لو التطبيق بيعمل هيك… 🤩</h2><p class="sub">اسحب يمين إذا <b>بدّك ياها</b>، ويسار إذا مش مهمة.</p>
+  <div class="deck" id="deck"></div>
+  <div class="duo"><button class="y" data-v="1">💚 بدّي ياها</button><button data-v="0">✕ مش مهمة</button></div>
+  <div class="cta">${backBtn}</div></section>`;
+  const ans=deck(WISH,'wish',topPick,'swipe');$$('.duo button').forEach(b=>b.onclick=()=>ans(+b.dataset.v));};
+function topPick(){const want=WISH.filter(w=>S[w[0]]===1);const pool=want.length?want:WISH;
+  app.innerHTML=`<section class="screen"><h2>ولو وحدة بس؟ ☝️</h2><p class="sub">أهم ميزة بالنسبة إلك:</p>
+  <div class="tiles">${pool.map(w=>`<button class="tile" data-v="${w[0]}"><span class="e">${w[1]}</span><div><b>${w[2].replace('<br>',' ')}</b></div></button>`).join('')}</div>
+  <div class="cta"><button class="btn ghost" onclick="go('wish')">→ ارجع للبطاقات</button></div></section>`;
+  $$('.tile').forEach(t=>t.onclick=()=>{S.top=t.dataset.v;t.classList.add('sel');setTimeout(next,260);});}
+
+R.umux=()=>{const rf=v=>[FACES[v],['','أبداً','لأ','مش كتير','نص نص','نوعاً ما','آه','تماماً'][v],v===1?'مش موافق أبداً':v===7?'موافق تماماً':''];app.innerHTML=`<section class="screen">
+  <h2>آخر سؤالين بسرعة ⚡</h2>
+  <p class="q2">«التطبيق بيلبّي احتياجاتي»</p>${meter('umux1',7,rf)}
+  <p class="q2" style="margin-top:18px">«التطبيق سهل الاستخدام»</p>${meter('umux2',7,rf)}
+  <div class="cta"><button class="btn" id="nx" onclick="next()">التالي 👈</button>${backBtn}</div></section>`;
+  const chk=()=>$('#nx').disabled=!(S.umux1&&S.umux2);wireMeter('umux1',7,rf,chk);wireMeter('umux2',7,rf,chk);chk();};
+
+R.wand=()=>{app.innerHTML=`<section class="screen">
+  <h2>معك عصا سحرية 🪄</h2><p class="sub">لو بدك تغيّر إشي واحد بتجربة الباص أو التطبيق، شو هو؟</p>
+  <textarea id="wand" maxlength="600" placeholder="اكتب اللي بخاطرك… (اختياري)">${S.wand||''}</textarea>
+  <h3>وهاتفك؟</h3>${chips([['android','Android 🤖'],['iphone','iPhone 🍏']],'phone')}
+  <div class="cta"><button class="btn green" id="nx">انزل بالمحطة الأخيرة 🏁</button>${backBtn}</div></section>`;
+  wireChips();$('#wand').oninput=e=>S.wand=e.target.value;$('#nx').onclick=()=>{S.wand=$('#wand').value.trim();finish();};};
+
+/* ============ results & sending ============ */
+function riderType(){if(S.rel==='quit')return 'ex';if(S.rel==='never')return 'instinct';return (S.trust||0)>=4?'planner':'detective';}
+
+const LS={get:k=>{try{return JSON.parse(localStorage.getItem(k))}catch(e){return null}},set:(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+const qGet=()=>LS.get('app_queue')||[],qDrop=id=>LS.set('app_queue',qGet().filter(r=>r.id!==id));
+const inFlight=new Set();
+async function post(rec){if(inFlight.has(rec.id))throw new Error('busy');inFlight.add(rec.id);rec.tries=(rec.tries||0)+1;const ac=new AbortController(),tm=setTimeout(()=>ac.abort(),30000);
+  try{await fetch(ENDPOINT,{method:'POST',mode:'no-cors',keepalive:true,signal:ac.signal,headers:{'Content-Type':'text/plain'},body:JSON.stringify(rec)});}
+  catch(e){const q=qGet(),it=q.find(r=>r.id===rec.id);if(it){it.next=Date.now()+180000;LS.set('app_queue',q);}throw e;}
+  finally{clearTimeout(tm);inFlight.delete(rec.id);}}
+let flushing=false;
+async function flushQueue(){if(flushing||navigator.onLine===false)return;const q=qGet();if(!q.length)return;flushing=true;
+  try{for(const r of q){if(r.next&&Date.now()<r.next)continue;try{await post(r);qDrop(r.id);}catch(e){break;}}}finally{flushing=false;}}
+window.addEventListener('online',flushQueue);document.addEventListener('visibilitychange',()=>{if(!document.hidden)flushQueue();});setInterval(flushQueue,30000);flushQueue();
+
+function finish(){
+  const type=riderType();
+  const rec={survey:'app',v:VERSION,id:Date.now().toString(36)+Math.random().toString(36).slice(2,8),source:SRC,lang:'ar',
+    role:S.role,uni:S.uni||'',freq:S.freq,modes:S.modes.join(','),rel:S.rel,why:S.why.join(','),use:S.use.join(','),
+    trust:S.trust||'',last:S.last||'',goal:S.goal||'',
+    ...Object.fromEntries(HAPPEN.map(h=>[h[0],S[h[0]]||''])),
+    ...Object.fromEntries(WISH.map(w=>[w[0],S[w[0]]===undefined?'':S[w[0]]])),
+    top:S.top||'',umux1:S.umux1||'',umux2:S.umux2||'',wand:(S.wand||'').slice(0,600),phone:S.phone||'',
+    rider_type:type,secs:Math.round((Date.now()-S.t0)/1000)};
+  LS.set('app_queue',qGet().concat([rec]));
+  post(rec).then(()=>qDrop(rec.id)).catch(()=>{});
+  S.type=type;go('result');
+}
+
+async function compare(){try{const ac=new AbortController();setTimeout(()=>ac.abort(),5000);
+  const r=await fetch(ENDPOINT+'?stats=app',{cache:'no-store',signal:ac.signal});const j=await r.json();const a=j.app;if(!a||!a.n||a.n<10)return;
+  const box=document.getElementById('cmp');const same=Math.round(100*(a.types[S.type]||0)/a.n);
+  let h=`من <b>${AR(a.n)}</b> راكب جاوبوا لحد هلأ، <b>${AR(same)}٪</b> طلعوا «${TYPES[S.type].n}» مثلك.`;
+  if(a.lowTrust!=null)h+=`<br><b>${AR(a.lowTrust)}٪</b> من مستخدمي التطبيق ما بيثقوا كتير بمواعيده.`;
+  box.innerHTML=h;box.hidden=false;}catch(e){}}
+
+R.result=()=>{const T=TYPES[S.type];const IG='<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>';
+  app.innerHTML=`<section class="screen">
+  <div class="rcard"><div class="k">نوعك كراكب باص:</div><div class="e">${T.e}</div><h1>${T.n}</h1><p>${T.d}</p><div class="brand">MUDUNLAB.ORG/APP</div></div>
+  <div class="cmp" id="cmp" hidden></div>
+  <p class="sub" style="margin-top:16px">شكراً إنك ركبت معنا 💚 إجاباتك بتنضم لإجابات باقي الركاب، والنتائج رح نوصلها للمعنيين بالنقل العام وننشرها.</p>
+  <button class="btn green" id="share">📤 ابعتها لصاحبك، شو بيطلع؟</button>
+  <a class="fcard" href="https://www.instagram.com/mudun.lab/" target="_blank" rel="noopener"><img src="${LOGO.mudun}" alt=""><div><b>مدن لاب</b><span>بحث وتوعية عن تصميم المدن في الأردن</span></div><i>${IG}تابع</i></a>
+  <a class="fcard" href="https://www.instagram.com/mobilitywithconfidence/" target="_blank" rel="noopener"><img src="${LOGO.mwc}" class="fl-mwc" alt=""><div><b>تنقّل بثقة</b><span>مبادرة لتجربة نقل عام أسهل</span></div><i>${IG}تابع</i></a>
+  <p class="fine">بدك خرائط باصات الجامعة الأردنية؟ <a href="/field/uj-mobility/" style="color:var(--green-deep)">حمّلها مجاناً</a></p></section>`;
+  document.getElementById('share').onclick=async()=>{const url='https://mudunlab.org/app?s=share';const text=`طلعت «${T.n}» ${T.e} بـ«ركبت معنا؟» 🚌 إنت شو بتطلع؟`;
+    try{if(navigator.share){await navigator.share({title:'ركبت معنا؟',text,url});return;}}catch(e){return;}
+    try{await navigator.clipboard.writeText(text+' '+url);toast('انسخ الرابط ✔️');}catch(e){toast(url);}};
+  compare();};
+function toast(t){const el=document.getElementById('toast');el.textContent=t;el.classList.add('on');setTimeout(()=>el.classList.remove('on'),2200);}
+
+go('intro');
+</script>
+</body>
+</html>

@@ -15,6 +15,13 @@
   X-Robots-Tag: noindex, nofollow
   Cache-Control: public, max-age=300
 
+/app
+  X-Robots-Tag: noindex, nofollow
+
+/app/*
+  X-Robots-Tag: noindex, nofollow
+  Cache-Control: public, max-age=300
+
 /uploads/site/*
   Cache-Control: public, max-age=604800
 
