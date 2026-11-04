@@ -13,6 +13,8 @@ why_ar: أسبوع من بيانات التشغيل الفعلية للخط 99 �
 brief_en: |-
   Route 99 is one of the busiest corridors in Amman's Bus Rapid Transit network, running about 17 kilometers between Swaileh and the Jordan Museum. This study used one full week of real operational data, pulled directly from the buses through the city's Intelligent Transportation System, to check whether the service actually delivers on what its frequency promises.
 
+  ![Diagram: buses along a route, some on schedule and some bunched or off-pace](/uploads/route99-cover-preview1.png)
+
   **Why this study matters**
 
   Route 99 gets an overall grade of C on the standard international scale used to evaluate BRT service (TCQSM), which counts as "acceptable" on paper. But that single letter hides a problem: the corridor has plenty of buses, graded at the very top of the scale for frequency, and still delivers an unpredictable ride. Buses don't stay evenly spaced as they move down the route. Some bunch together and others fall behind, so a service that looks strong in the numbers can leave a rider waiting far longer than expected, especially the further they are from the start of the line.
@@ -39,7 +41,7 @@ examines_en:
   - Operating speed and crowding: how fast buses actually move, and how full they get, once real traffic is accounted for
   - A combined performance grade for the corridor, and why that single grade can mislead on its own
 examines_ar: []
-cover: /uploads/route99-cover-preview1.png
+cover: /uploads/route99-cover-photo.jpg
 pdf: /uploads/amman-brt-route-99-operational-performance.pdf
 pdf_lang: en
 slides_en:
