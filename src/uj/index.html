@@ -246,7 +246,12 @@ const T = {
       ['الخطوط والمواعيد',[['peak','الباصات قليلة وقت الذروة'],['nodirect','ما في خط مباشر من منطقتي'],['transfers','لازم أبدّل أكثر من مرة'],['evening','ما في باص بعد المحاضرات المسائية'],['cost','الأجرة غالية علي'],['card','الدفع والبطاقة والشحن']]],
       ['التطبيق والمعلومات',[['appwrong','التطبيق بيعطي مواعيد غلط أو الباص مش ظاهر'],['apphard','التطبيق بطيء أو صعب الاستخدام'],['info','ما بعرف أي خط بيوصلني ووين موقفه']]],
       ['بشكل عام',[['safety','مضايقات أو عدم شعور بالأمان']]]],
-  s6:'آخر ثلاث أسئلة',appQ:'بتستخدم تطبيق Amman Bus؟',APP:[['always','دايماً'],['some','أحياناً'],['quit','نزّلته وبطّلت أستخدمه'],['never','ما بستخدمه']],
+  s6:'أسئلة أخيرة سريعة',
+  infoQ:'بهالرحلة اللي رسمتها، كيف عرفت إمتى رح ييجي الباص؟',INFO:[['app','تتبعته على التطبيق'],['gmaps','Google Maps'],['know','بعرف موعده تقريباً'],['ask','سألت حدا أو جروب'],['none','ما عرفت، رحت واستنيت']],
+  useQ:'شو بتستخدم بالتطبيق؟ (اختار كل اللي بينطبق)',USE:[['card','شحن البطاقة وأشوف رصيدي'],['qr','أدفع بتذكرة QR'],['track','أتتبع الباص على الخريطة'],['eta','أعرف إمتى رح يوصل الباص'],['plan','أخطط رحلتي (Trip Planner)'],['routes','أعرف الخطوط ومساراتها'],['near','ألاقي أقرب محطة'],['fare','أعرف الأجرة'],['notif','التنبيهات والإعلانات'],['safe','«وصلت بأمان»']],
+  issQ:'شو المشاكل اللي بتواجهك بالتطبيق؟ (اختار كل اللي بينطبق)',ISS:[['trackfail','التتبع بيوقف أو الباص بيختفي عن الخريطة'],['noeta','ما في وقت وصول متوقع للباص'],['times','صعب ألاقي مواعيد انطلاق الباصات'],['ghost','مخطِّط الرحلات بيقترح خطوط ما عليها باصات'],['badplan','مخطِّط الرحلات بيعطي طرق غلط أو طويلة'],['pay','الشحن أو الدفع ما بيزبط'],['login','مشاكل بتسجيل الدخول أو رمز التحقق'],['slow','بطيء أو بيعلّق'],['hard','صعب أفهمه أو ألاقي اللي بدي ياه'],['noreply','ما حدا بيرد على الشكاوى'],['ok','ولا مشكلة، شغال منيح']],
+  goneQ:'لو التطبيق اختفى بكرة، شو بيصير برحلتك؟',GONE:[['nothing','ولا إشي، بوصل عادي'],['wait','بستنى أكثر عالموقف'],['late','بتأخر أكثر عن مواعيدي'],['new','ما بعرف أروح لأماكن جديدة'],['taxi','بدوّر على تكسي أو سيارة']],
+  appQ:'بتستخدم تطبيق Amman Bus؟',APP:[['always','دايماً'],['some','أحياناً'],['quit','نزّلته وبطّلت أستخدمه'],['never','ما بستخدمه']],
   fix:'لو في شي واحد يتغيّر ويفرق معك، شو هو؟ (اختياري)',fixPh:'مثلاً: باص كل ١٠ دقايق الصبح من صويلح',
   conf:'قدّيش واثق إنك تقدر تعتمد على المواصلات العامة للجامعة؟',F:['أبداً','قليلاً','نوعاً ما','غالباً','تماماً'],
   send:'أضِف رحلتي للخريطة',sending:'عم نضيف رحلتك...',queued:'النت ضعيف. حفظنا رحلتك وبنرسلها لحالها أول ما يرجع الاتصال.',
@@ -285,7 +290,12 @@ const T = {
       ['Lines and times',[['peak','Too few buses at peak times'],['nodirect','No direct line from my area'],['transfers','I have to change more than once'],['evening','No bus after evening classes'],['cost','The fare is too much for me'],['card','Paying, the card and top-ups']]],
       ['The app and information',[['appwrong','The app shows wrong times or the bus is missing'],['apphard','The app is slow or hard to use'],['info','I don’t know which line to take or where it stops']]],
       ['In general',[['safety','Harassment or not feeling safe']]]],
-  s6:'Three last questions',appQ:'Do you use the Amman Bus app?',APP:[['always','Always'],['some','Sometimes'],['quit','Downloaded it, stopped using it'],['never','I don’t use it']],
+  s6:'A few quick last questions',
+  infoQ:'On the trip you drew, how did you know when the bus would come?',INFO:[['app','Tracked it in the app'],['gmaps','Google Maps'],['know','I roughly know its times'],['ask','Asked someone or a group chat'],['none','I didn’t know, I just went and waited']],
+  useQ:'What do you use the app for? (pick all that apply)',USE:[['card','Top up my card / check balance'],['qr','Pay with a QR ticket'],['track','Track the bus on the map'],['eta','Know when the bus will arrive'],['plan','Plan my trip (Trip Planner)'],['routes','See lines and their routes'],['near','Find the nearest stop'],['fare','Check the fare'],['notif','Notifications and announcements'],['safe','“Arrived Safely”']],
+  issQ:'What problems do you face with the app? (pick all that apply)',ISS:[['trackfail','Tracking freezes or the bus disappears from the map'],['noeta','No estimated arrival time for the bus'],['times','Hard to find bus departure times'],['ghost','Trip planner suggests lines with no buses'],['badplan','Trip planner gives wrong or long routes'],['pay','Top-up or payment fails'],['login','Login or verification-code problems'],['slow','Slow or freezes'],['hard','Hard to understand or find things'],['noreply','No one answers complaints'],['ok','No problems, it works well']],
+  goneQ:'If the app disappeared tomorrow, what would happen to your trip?',GONE:[['nothing','Nothing, I’d get there as usual'],['wait','I’d wait longer at the stop'],['late','I’d be late more often'],['new','I couldn’t go to new places'],['taxi','I’d look for a taxi or a car']],
+  appQ:'Do you use the Amman Bus app?',APP:[['always','Always'],['some','Sometimes'],['quit','Downloaded it, stopped using it'],['never','I don’t use it']],
   fix:'If one thing changed that would make a difference to you, what would it be? (optional)',fixPh:'e.g. a bus every 10 minutes in the morning from Sweileh',
   conf:'How confident are you that you can rely on public transport to UJ?',F:['Not at all','A little','Somewhat','Mostly','Fully'],
   send:'Add my trip to the map',sending:'Adding your trip...',queued:'Weak connection. We saved your trip and will send it as soon as you are back online.',
@@ -305,7 +315,7 @@ const IMG={};['mwc','mudun','av'].forEach(k=>{if(LOGO[k]){const i=new Image();i.
 const lineBy=c=>DATA.lines.find(l=>l.c===c);
 
 /* ================= state ================= */
-const fresh=()=>({step:0,role:null,home:null,area:'',near:[],legs:[],cur:{mode:null,line:null,other:'',otherOk:false,to:null,toUJ:false,wait:null,dur:null},quick:false,qtime:null,cost:null,guess:null,problems:[],conf:null,dest:null,lm:null,lmin:null,app:null,fix:''});
+const fresh=()=>({step:0,role:null,home:null,area:'',near:[],legs:[],cur:{mode:null,line:null,other:'',otherOk:false,to:null,toUJ:false,wait:null,dur:null},quick:false,qtime:null,cost:null,guess:null,problems:[],conf:null,dest:null,lm:null,lmin:null,app:null,fix:'',info:null,appUse:[],appIss:[],appGone:null});
 let S=fresh();
 
 /* ================= map ================= */
@@ -502,7 +512,8 @@ async function submit(){
     mode:S.quick?'quick':'drawn',legs:JSON.stringify(legs),chain:chainText(),time:st.total,wait:S.quick?'':st.wait,ride:S.quick?'':st.ride,walk:S.quick?'':st.walk,transfers:st.transfers??'',
     capped:(S.quick?S.qtime>=150:S.legs.some(l=>(l.wait||0)>=45||l.dur>=(l.campus?30:90)))?1:0,
     cost:S.cost,guess:S.guess,problems:S.problems.join(' '),confidence:S.conf,lang:LANG,source:SRC,
-    gate:gl?gl.gate:'',dest:S.dest?S.dest.k:'',dest_lat:S.dest?+S.dest.pt[0].toFixed(4):'',dest_lon:S.dest?+S.dest.pt[1].toFixed(4):'',campus_mode:cl?cl.mode:'',campus_min:cl?cl.dur:'',app:S.app||'',fix:S.fix.trim().slice(0,240)};
+    gate:gl?gl.gate:'',dest:S.dest?S.dest.k:'',dest_lat:S.dest?+S.dest.pt[0].toFixed(4):'',dest_lon:S.dest?+S.dest.pt[1].toFixed(4):'',campus_mode:cl?cl.mode:'',campus_min:cl?cl.dur:'',app:S.app||'',fix:S.fix.trim().slice(0,240),v:2,
+    bus_info:hasBusTrip()?(S.info||''):'',app_use:['always','some','quit'].includes(S.app)?S.appUse.join(' '):'',app_issues:['always','some','quit'].includes(S.app)?S.appIss.join(' '):'',app_gone:['always','some'].includes(S.app)?(S.appGone||''):''};
   rec.id=Date.now().toString(36)+Math.random().toString(36).slice(2,8);
   store.push({lat:rec.lat,lon:rec.lon,time:rec.time,chain:rec.chain});
   LS.set('uj_done',1);
@@ -533,6 +544,7 @@ function gateBlock(c,x){
   if(!gates.length)return '';
   return `<div><label class="q">${q}</label>${chips('gate',gates.map(g=>[g[0],csName(g)]),null)}</div>`;
 }
+function hasBusTrip(){if(S.quick)return true;return S.legs.some(l=>l.mode&&!['walk','taxi','car'].includes(l.mode));}
 function render(){
   const x=t(); document.documentElement.dir=x.dir; document.documentElement.lang=LANG;
   document.getElementById('lang').textContent=x.lang; document.getElementById('brandtxt').innerHTML=x.brand;
@@ -615,7 +627,12 @@ function render(){
        <p class="small" style="margin:0">${x.pickN(S.problems.length)}</p>
        <div class="row"><button class="btn ghost" id="back">${x.back}</button><button class="btn" id="next" ${S.problems.length?'':'disabled'}>${x.next}</button></div>`;
   } else if(S.step===6){
-    h=`${prog(6)}<h2>${x.s6}</h2><div><label class="q">${x.appQ}</label>${chips('app',x.APP,S.app)}</div>
+    const usedApp=['always','some','quit'].includes(S.app), curApp=['always','some'].includes(S.app);
+    h=`${prog(6)}<h2>${x.s6}</h2>${hasBusTrip()?`<div><label class="q">${x.infoQ}</label>${chips('info',x.INFO,S.info)}</div>`:''}
+       <div><label class="q">${x.appQ}</label>${chips('app',x.APP,S.app)}</div>
+       ${usedApp?`<div><label class="q">${x.useQ}</label>${chips('ause',x.USE,S.appUse,true)}</div>
+       <div><label class="q">${x.issQ}</label>${chips('aiss',x.ISS,S.appIss,true)}</div>`:''}
+       ${curApp?`<div><label class="q">${x.goneQ}</label>${chips('agone',x.GONE,S.appGone)}</div>`:''}
        <div><label class="q">${x.conf}</label><div class="faces">${x.F.map((f,i)=>`<button type="button" class="face" data-g="conf" data-v="${i+1}" aria-pressed="${S.conf===i+1}">${i+1}<span>${f}</span></button>`).join('')}</div></div>
        <div><label class="q" for="fix">${x.fix}</label><textarea id="fix" maxlength="240" rows="2" placeholder="${esc(x.fixPh)}">${esc(S.fix)}</textarea></div>
        <div id="msg"></div>
@@ -650,6 +667,10 @@ function bind(){
     if(g==='conf')S.conf=+v;
     if(g==='prob'){const i=S.problems.indexOf(v);if(i>=0)S.problems.splice(i,1);else S.problems.push(v);}
     if(g==='app')S.app=v;
+    if(g==='info')S.info=v;
+    if(g==='agone')S.appGone=v;
+    if(g==='ause'){const i=S.appUse.indexOf(v);if(i>=0)S.appUse.splice(i,1);else S.appUse.push(v);}
+    if(g==='aiss'){const a=S.appIss;const i=a.indexOf(v);if(i>=0)a.splice(i,1);else{if(v==='ok')a.length=0;else{const k=a.indexOf('ok');if(k>=0)a.splice(k,1);}a.push(v);}}
     if(g==='lm'){S.lm=v;previewCampus();}
     if(g==='lmin')S.lmin=+v;
     if(g==='gate'){const gg=CSTOPS.find(q=>q[0]===v);c.to=[gg[3],gg[4]];c.toUJ=true;c.gate=v;previewLeg();}
